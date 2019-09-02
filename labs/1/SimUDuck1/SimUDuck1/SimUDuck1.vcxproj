@@ -151,6 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="IDanceBehavior.h" />
+    <ClInclude Include="Minuet.h" />
+    <ClInclude Include="NoDance.h" />
     <ClInclude Include="RubberDuck.h" />
     <ClInclude Include="DecoyDuck.h" />
     <ClInclude Include="Duck.h" />
@@ -165,9 +168,12 @@
     <ClInclude Include="Quack.h" />
     <ClInclude Include="RedheadDuck.h" />
     <ClInclude Include="Squeak.h" />
+    <ClInclude Include="Waltz.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CRubberDuck.cpp" />
+    <ClCompile Include="Minuet.cpp" />
+    <ClCompile Include="NoDance.cpp" />
+    <ClCompile Include="RubberDuck.cpp" />
     <ClCompile Include="DecoyDuck.cpp" />
     <ClCompile Include="Duck.cpp" />
     <ClCompile Include="FlyNoWay.cpp" />
@@ -185,6 +191,7 @@
     <ClCompile Include="Quack.cpp" />
     <ClCompile Include="RedheadDuck.cpp" />
     <ClCompile Include="Squeak.cpp" />
+    <ClCompile Include="Waltz.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
