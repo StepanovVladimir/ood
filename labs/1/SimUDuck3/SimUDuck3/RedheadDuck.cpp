@@ -1,17 +1,14 @@
 #include "pch.h"
 #include "RedheadDuck.h"
-#include "Quack.h"
-#include "FlyWithWings.h"
-#include "Minuet.h"
 #include <iostream>
 
 using namespace std;
 
 CRedheadDuck::CRedheadDuck()
 {
-	m_quackBehavior = make_unique<CQuack>();
-	m_flyBehavior = make_unique<CFlyWithWings>();
-	m_danceBehavior = make_unique<CMinuet>();
+	m_quackBehavior = make_unique<QuackBehavior>(Quack);
+	m_flyBehavior = make_unique<FlyBehavior>(FlyWithWings);
+	m_danceBehavior = make_unique<DanceBehavior>(Minuet);
 }
 
 void CRedheadDuck::Display() const

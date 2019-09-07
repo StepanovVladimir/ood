@@ -6,17 +6,17 @@ using namespace std;
 
 void CDuck::PerformQuack() const
 {
-	m_quackStrategy(*m_quackBehavior);
+	(*m_quackBehavior)();
 }
 
-void CDuck::PerformFly() const
+void CDuck::PerformFly()
 {
-	m_flyStrategy(*m_flyBehavior);
+	(*m_flyBehavior)(m_flightsNumber);
 }
 
 void CDuck::PerformDance() const
 {
-	m_danceStrategy(*m_danceBehavior);
+	(*m_danceBehavior)();
 }
 
 void CDuck::Swim() const
@@ -24,7 +24,8 @@ void CDuck::Swim() const
 	cout << "Swim\n";
 }
 
-void CDuck::SetFlyBehavior(unique_ptr<IFlyBehavior> flyBehavior)
+void CDuck::SetFlyBehavior(unique_ptr<FlyBehavior> flyBehavior)
 {
+	m_flightsNumber = 0;
 	m_flyBehavior = move(flyBehavior);
 }

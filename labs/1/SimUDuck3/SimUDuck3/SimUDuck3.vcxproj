@@ -153,45 +153,30 @@
   <ItemGroup>
     <ClInclude Include="DecoyDuck.h" />
     <ClInclude Include="Duck.h" />
-    <ClInclude Include="FlyNoWay.h" />
-    <ClInclude Include="FlyRocketPowered.h" />
-    <ClInclude Include="FlyWithWings.h" />
-    <ClInclude Include="IDanceBehavior.h" />
-    <ClInclude Include="IFlyBehavior.h" />
-    <ClInclude Include="IQuackBehavior.h" />
+    <ClInclude Include="DanceBehavior.h" />
+    <ClInclude Include="FlyBehavior.h" />
+    <ClInclude Include="QuackBehavior.h" />
     <ClInclude Include="MallardDuck.h" />
-    <ClInclude Include="Minuet.h" />
-    <ClInclude Include="MuteQuack.h" />
-    <ClInclude Include="NoDance.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Quack.h" />
     <ClInclude Include="RedheadDuck.h" />
     <ClInclude Include="RubberDuck.h" />
-    <ClInclude Include="Squeak.h" />
-    <ClInclude Include="Waltz.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DanceBehavior.cpp" />
     <ClCompile Include="DecoyDuck.cpp" />
     <ClCompile Include="Duck.cpp" />
-    <ClCompile Include="FlyNoWay.cpp" />
-    <ClCompile Include="FlyRocketPowered.cpp" />
-    <ClCompile Include="FlyWithWings.cpp" />
+    <ClCompile Include="FlyBehavior.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MallardDuck.cpp" />
-    <ClCompile Include="Minuet.cpp" />
-    <ClCompile Include="MuteQuack.cpp" />
-    <ClCompile Include="NoDance.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Quack.cpp" />
+    <ClCompile Include="QuackBehavior.cpp" />
     <ClCompile Include="RedheadDuck.cpp" />
     <ClCompile Include="RubberDuck.cpp" />
-    <ClCompile Include="Squeak.cpp" />
-    <ClCompile Include="Waltz.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,6 @@
 #include "RedheadDuck.h"
 #include "RubberDuck.h"
 #include "DecoyDuck.h"
-#include "FlyRocketPowered.h"
 
 using namespace std;
 
@@ -18,7 +17,7 @@ int main()
 	mallardDuck.Swim();
 	mallardDuck.PerformFly();
 
-	mallardDuck.SetFlyBehavior(make_unique<CFlyRocketPowered>());
+	mallardDuck.SetFlyBehavior(make_unique<FlyBehavior>(FlyRocketPowered));
 
 	mallardDuck.PerformFly();
 	mallardDuck.PerformFly();
