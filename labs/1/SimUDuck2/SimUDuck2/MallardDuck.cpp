@@ -8,10 +8,12 @@
 using namespace std;
 
 CMallardDuck::CMallardDuck()
+	: CDuck(
+		make_unique<CQuack>(), 
+		make_unique<CFlyWithWings>(), 
+		make_unique<CWaltz>()
+	)
 {
-	m_quackBehavior = make_unique<CQuack>();
-	m_flyBehavior = make_unique<CFlyWithWings>();
-	m_danceBehavior = make_unique<CWaltz>();
 }
 
 void CMallardDuck::Display() const

@@ -4,5 +4,5 @@
 
 void CNoDance::Dance() const
 {
-	std::cout << std::endl;
+	std::cout << "No dance\n";
 }

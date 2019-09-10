@@ -4,5 +4,5 @@
 
 void CMuteQuack::Quack() const
 {
-	std::cout << std::endl;
+	std::cout << "Mute\n";
 }

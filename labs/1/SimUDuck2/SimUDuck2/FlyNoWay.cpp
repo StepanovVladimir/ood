@@ -4,5 +4,5 @@
 
 void CFlyNoWay::Fly()
 {
-	std::cout << std::endl;
+	std::cout << "No fly\n";
 }

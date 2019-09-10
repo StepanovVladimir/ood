@@ -16,5 +16,5 @@ void Squeak()
 
 void MuteQuack()
 {
-	cout << endl;
+	cout << "Mute\n";
 }

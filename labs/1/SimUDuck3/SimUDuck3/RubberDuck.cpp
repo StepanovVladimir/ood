@@ -5,10 +5,12 @@
 using namespace std;
 
 CRubberDuck::CRubberDuck()
+	: CDuck(
+		make_unique<QuackBehavior>(Squeak),
+		make_unique<FlyBehavior>(FlyNoWay),
+		make_unique<DanceBehavior>(NoDance)
+	)
 {
-	m_quackBehavior = make_unique<QuackBehavior>(Squeak);
-	m_flyBehavior = make_unique<FlyBehavior>(FlyNoWay);
-	m_danceBehavior = make_unique<DanceBehavior>(NoDance);
 }
 
 void CRubberDuck::Display() const

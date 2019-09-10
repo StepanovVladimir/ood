@@ -18,5 +18,5 @@ void FlyRocketPowered(size_t &flightsNumber)
 
 void FlyNoWay(size_t &flightsNumber)
 {
-	cout << endl;
+	cout << "No fly\n";
 }

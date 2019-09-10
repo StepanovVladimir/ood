@@ -5,5 +5,5 @@
 void CFlyWithWings::Fly()
 {
 	m_flightsNumber++;
-	std::cout << "Fly with wings " << m_flightsNumber << std::endl;
+	std::cout << "Fly with wings " << m_flightsNumber << '\n';
 }

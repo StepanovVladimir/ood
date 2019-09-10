@@ -5,10 +5,12 @@
 using namespace std;
 
 CRedheadDuck::CRedheadDuck()
+	: CDuck(
+		make_unique<QuackBehavior>(Quack),
+		make_unique<FlyBehavior>(FlyWithWings),
+		make_unique<DanceBehavior>(Minuet)
+	)
 {
-	m_quackBehavior = make_unique<QuackBehavior>(Quack);
-	m_flyBehavior = make_unique<FlyBehavior>(FlyWithWings);
-	m_danceBehavior = make_unique<DanceBehavior>(Minuet);
 }
 
 void CRedheadDuck::Display() const

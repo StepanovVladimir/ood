@@ -3,19 +3,24 @@
 #include "RedheadDuck.h"
 #include "RubberDuck.h"
 #include "DecoyDuck.h"
+#include <iostream>
 
 using namespace std;
+
+void PlayWithDuck(CDuck &duck)
+{
+	duck.Display();
+	duck.PerformQuack();
+	duck.PerformFly();
+	duck.PerformDance();
+	duck.PerformSwim();
+}
 
 int main()
 {
 	CMallardDuck mallardDuck;
 
-	mallardDuck.Display();
-	mallardDuck.PerformQuack();
-	mallardDuck.PerformFly();
-	mallardDuck.PerformDance();
-	mallardDuck.Swim();
-	mallardDuck.PerformFly();
+	PlayWithDuck(mallardDuck);
 
 	mallardDuck.SetFlyBehavior(make_unique<FlyBehavior>(FlyRocketPowered));
 
@@ -24,27 +29,17 @@ int main()
 
 	CRedheadDuck redheadDuck;
 
-	redheadDuck.Display();
-	redheadDuck.PerformQuack();
-	redheadDuck.PerformFly();
-	redheadDuck.PerformDance();
-	redheadDuck.Swim();
+	PlayWithDuck(redheadDuck);
 
 	CRubberDuck rubberDuck;
 
-	rubberDuck.Display();
-	rubberDuck.PerformQuack();
-	rubberDuck.PerformFly();
-	rubberDuck.PerformDance();
-	rubberDuck.Swim();
+	PlayWithDuck(rubberDuck);
 
 	CDecoyDuck decoyDuck;
 
-	decoyDuck.Display();
-	decoyDuck.PerformQuack();
-	decoyDuck.PerformFly();
-	decoyDuck.PerformDance();
-	decoyDuck.Swim();
+	PlayWithDuck(decoyDuck);
+
+	cin.get();
 
 	return 0;
 }

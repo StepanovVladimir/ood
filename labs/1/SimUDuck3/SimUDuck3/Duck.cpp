@@ -4,6 +4,14 @@
 
 using namespace std;
 
+CDuck::CDuck(std::unique_ptr<QuackBehavior> quackBehavior, std::unique_ptr<FlyBehavior> flyBehavior,
+	std::unique_ptr<DanceBehavior> danceBehavior)
+{
+	m_quackBehavior = move(quackBehavior);
+	m_flyBehavior = move(flyBehavior);
+	m_danceBehavior = move(danceBehavior);
+}
+
 void CDuck::PerformQuack() const
 {
 	(*m_quackBehavior)();
@@ -19,7 +27,7 @@ void CDuck::PerformDance() const
 	(*m_danceBehavior)();
 }
 
-void CDuck::Swim() const
+void CDuck::PerformSwim() const
 {
 	cout << "Swim\n";
 }

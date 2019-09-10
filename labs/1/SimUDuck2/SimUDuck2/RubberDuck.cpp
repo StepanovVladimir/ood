@@ -8,10 +8,12 @@
 using namespace std;
 
 CRubberDuck::CRubberDuck()
+	: CDuck(
+		make_unique<CSqueak>(), 
+		make_unique<CFlyNoWay>(), 
+		make_unique<CNoDance>()
+	)
 {
-	m_quackBehavior = make_unique<CSqueak>();
-	m_flyBehavior = make_unique<CFlyNoWay>();
-	m_danceBehavior = make_unique<CNoDance>();
 }
 
 void CRubberDuck::Display() const

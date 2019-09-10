@@ -16,5 +16,5 @@ void Minuet()
 
 void NoDance()
 {
-	cout << endl;
+	cout << "No dance\n";
 }

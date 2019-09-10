@@ -5,5 +5,5 @@
 void CFlyRocketPowered::Fly()
 {
 	m_flightsNumber++;
-	std::cout << "Fly rocket powered " << m_flightsNumber << std::endl;
+	std::cout << "Fly rocket powered " << m_flightsNumber << '\n';
 }
