@@ -14,7 +14,7 @@ public:
 	virtual ~CDuck() = default;
 
 	void PerformQuack() const;
-	void PerformFly();
+	void PerformFly() const;
 	void PerformDance() const;
 	void PerformSwim() const;
 
@@ -26,6 +26,4 @@ private:
 	std::function<void()> m_quackBehavior;
 	std::function<void()> m_flyBehavior;
 	std::function<void()> m_danceBehavior;
-
-	size_t m_flightsNumber = 0;
 };

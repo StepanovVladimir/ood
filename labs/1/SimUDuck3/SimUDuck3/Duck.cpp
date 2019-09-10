@@ -17,7 +17,7 @@ void CDuck::PerformQuack() const
 	m_quackBehavior();
 }
 
-void CDuck::PerformFly()
+void CDuck::PerformFly() const
 {
 	m_flyBehavior();
 }
@@ -34,6 +34,5 @@ void CDuck::PerformSwim() const
 
 void CDuck::SetFlyBehavior(const std::function<void()> &flyBehavior)
 {
-	m_flightsNumber = 0;
 	m_flyBehavior = flyBehavior;
 }
