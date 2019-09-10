@@ -5,11 +5,7 @@
 using namespace std;
 
 CDecoyDuck::CDecoyDuck()
-	: CDuck(
-		make_unique<QuackBehavior>(MuteQuack),
-		make_unique<FlyBehavior>(FlyNoWay),
-		make_unique<DanceBehavior>(NoDance)
-	)
+	: CDuck(MuteQuack, FlyNoWay(), NoDance)
 {
 }
 

@@ -5,11 +5,7 @@
 using namespace std;
 
 CMallardDuck::CMallardDuck()
-	: CDuck(
-		make_unique<QuackBehavior>(Quack),
-		make_unique<FlyBehavior>(FlyWithWings),
-		make_unique<DanceBehavior>(Waltz)
-	)
+	: CDuck(Quack, FlyWithWings(), Waltz)
 {
 }
 

@@ -4,19 +4,32 @@
 
 using namespace std;
 
-void FlyWithWings(size_t &flightsNumber)
+std::function<void()> FlyWithWings()
 {
-	flightsNumber++;
-	cout << "Fly with wings " << flightsNumber << endl;
+	size_t flightsNumber = 0;
+
+	return [flightsNumber]() mutable
+	{
+		flightsNumber++;
+		cout << "Fly with wings " << flightsNumber << endl;
+	};
 }
 
-void FlyRocketPowered(size_t &flightsNumber)
+std::function<void()> FlyRocketPowered()
 {
-	flightsNumber++;
-	cout << "Fly rocket powered " << flightsNumber << endl;
+	size_t flightsNumber = 0;
+
+	return[flightsNumber]() mutable
+	{
+		flightsNumber++;
+		cout << "Fly rocket powered " << flightsNumber << endl;
+	};
 }
 
-void FlyNoWay(size_t &flightsNumber)
+std::function<void()> FlyNoWay()
 {
-	cout << "No fly\n";
+	return []()
+	{
+		cout << "No fly\n";
+	};
 }

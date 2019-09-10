@@ -19,27 +19,20 @@ void PlayWithDuck(CDuck &duck)
 int main()
 {
 	CMallardDuck mallardDuck;
-
 	PlayWithDuck(mallardDuck);
 
-	mallardDuck.SetFlyBehavior(make_unique<FlyBehavior>(FlyRocketPowered));
-
+	mallardDuck.SetFlyBehavior(FlyRocketPowered());
 	mallardDuck.PerformFly();
 	mallardDuck.PerformFly();
 
 	CRedheadDuck redheadDuck;
-
 	PlayWithDuck(redheadDuck);
 
 	CRubberDuck rubberDuck;
-
 	PlayWithDuck(rubberDuck);
 
 	CDecoyDuck decoyDuck;
-
 	PlayWithDuck(decoyDuck);
-
-	cin.get();
 
 	return 0;
 }
