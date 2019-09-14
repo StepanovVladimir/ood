@@ -2,7 +2,7 @@
 
 #include "IObserver.h"
 #include "IObservable.h"
-#include <iostream>
+
 template <typename T>
 class CObserver : public IObserver<T>
 {
@@ -31,13 +31,9 @@ public:
 			m_observable = &observable;
 			m_observable->RegisterObserver(*this);
 		}
-		else
-		{
-			std::cout << "nit";
-		}
 	}
 
-	void RemoveFromObservable()
+	void RemoveFromObservable() override
 	{
 		if (m_observable != nullptr)
 		{

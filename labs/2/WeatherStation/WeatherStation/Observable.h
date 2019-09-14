@@ -7,6 +7,16 @@ template <typename T>
 class CObservable : public IObservable<T>
 {
 public:
+	~CObservable()
+	{
+		std::set<ObserverType*> observers = m_observers;
+
+		for (auto &observer : observers)
+		{
+			observer->RemoveFromObservable();
+		}
+	}
+
 	void NotifyObservers() const override
 	{
 		T data = GetData();

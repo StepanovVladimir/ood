@@ -12,7 +12,7 @@ public:
 
 private:
 	void Update(const WeatherInfo &weatherCondition) override;
-	
+
 	CStatistics m_temperatureStatistics;
 	CStatistics m_humidityStatistics;
 	CStatistics m_pressureStatistics;
