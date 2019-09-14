@@ -4,16 +4,11 @@
 
 using namespace std;
 
-CStatisticsDisplay::CStatisticsDisplay(IObservable<WeatherInfo> &observable)
-	: CObserver(observable)
+void CStatisticsDisplay::Update(const WeatherInfo &weatherInfo)
 {
-}
-
-void CStatisticsDisplay::Update(const WeatherInfo &weatherCondition)
-{
-	m_temperatureStatistics.Update(weatherCondition.temperature);
-	m_humidityStatistics.Update(weatherCondition.humidity);
-	m_pressureStatistics.Update(weatherCondition.pressure);
+	m_temperatureStatistics.Update(weatherInfo.temperature);
+	m_humidityStatistics.Update(weatherInfo.humidity);
+	m_pressureStatistics.Update(weatherInfo.pressure);
 
 	cout << "Statistics:\n";
 	cout << "  temperature: " << m_temperatureStatistics.ToString() << endl;

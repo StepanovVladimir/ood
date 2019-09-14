@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IObservable.h"
-#include <set>
+#include <map>
 
 template <typename T>
 class CObservable : public IObservable<T>
@@ -9,22 +9,22 @@ class CObservable : public IObservable<T>
 public:
 	~CObservable()
 	{
-		std::set<ObserverType*> observers = m_observers;
+		std::map<size_t, ObserverType*> observers = m_observers;
 
 		for (auto &observer : observers)
 		{
-			observer->RemoveFromObservable();
+			observer.second->RemoveFromObservable();
 		}
 	}
 
 	void NotifyObservers() const override
 	{
 		T data = GetData();
-		std::set<ObserverType*> observers = m_observers;
+		std::map<size_t, ObserverType*> observers = m_observers;
 
 		for (auto &observer : observers)
 		{
-			observer->Update(data);
+			observer.second->Update(data);
 		}
 	}
 
@@ -34,15 +34,15 @@ protected:
 private:
 	typedef IObserver<T> ObserverType;
 
-	void RegisterObserver(ObserverType &observer) override
+	bool RegisterObserver(ObserverType &observer, size_t priority) override
 	{
-		m_observers.insert(&observer);
+		return m_observers.try_emplace(priority, &observer).second;
 	}
 
-	void RemoveObserver(ObserverType &observer) override
+	void RemoveObserver(size_t priority) override
 	{
-		m_observers.erase(&observer);
+		m_observers.erase(priority);
 	}
 
-	std::set<ObserverType*> m_observers;
+	std::map<size_t, ObserverType*> m_observers;
 };

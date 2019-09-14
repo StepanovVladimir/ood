@@ -163,20 +163,23 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NumberedObserver.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RemovableObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\WeatherStation\CurrentConditionDisplay.cpp" />
-    <ClCompile Include="..\WeatherStation\RemovableObserver.cpp" />
     <ClCompile Include="..\WeatherStation\Statistics.cpp" />
     <ClCompile Include="..\WeatherStation\StatisticsDisplay.cpp" />
     <ClCompile Include="..\WeatherStation\WeatherData.cpp" />
+    <ClCompile Include="NumberedObserver.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RemovableObserver.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

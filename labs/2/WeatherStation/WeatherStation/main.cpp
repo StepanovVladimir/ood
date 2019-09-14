@@ -8,32 +8,35 @@ using namespace std;
 
 int main()
 {
-	CWeatherData wd;
+	CWeatherData weatherData;
 
-	CCurrentConditionDisplay display(wd);
+	CCurrentConditionDisplay display;
+	display.RegisterOnObservable(weatherData, 0);
 
 	CStatisticsDisplay statsDisplay;
-	statsDisplay.RegisterOnObservable(wd);
+	statsDisplay.RegisterOnObservable(weatherData, 1);
 
-	wd.SetData({ 3, 0.7, 760 });
-	wd.SetData({ 4, 0.8, 761 });
+	weatherData.SetData({ 3, 70, 760 });
+	weatherData.SetData({ 4, 80, 761 });
 	cout << "----------------\n";
 
 	statsDisplay.RemoveFromObservable();
 
-	wd.SetData({ 10, 0.8, 761 });
-	wd.SetData({ -10, 0.8, 761 });
+	weatherData.SetData({ 10, 80, 761 });
+	weatherData.SetData({ -10, 80, 761 });
 	cout << "----------------\n";
 
 	{
-		CStatisticsDisplay sd(wd);
-		wd.SetData({ 3, 0.7, 760 });
-		wd.SetData({ 4, 0.8, 761 });
+		CStatisticsDisplay statsDisplay;
+		statsDisplay.RegisterOnObservable(weatherData, 1);
+
+		weatherData.SetData({ 3, 70, 760 });
+		weatherData.SetData({ 4, 80, 761 });
 		cout << "----------------\n";
 	}
 
-	wd.SetData({ 10, 0.8, 761 });
-	wd.SetData({ 10, 0.5, 759 });
+	weatherData.SetData({ 10, 80, 761 });
+	weatherData.SetData({ 10, 50, 759 });
 
 	return 0;
 }

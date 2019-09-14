@@ -4,15 +4,10 @@
 
 using namespace std;
 
-CCurrentConditionDisplay::CCurrentConditionDisplay(IObservable<WeatherInfo> &observable)
-	: CObserver(observable)
-{
-}
-
-void CCurrentConditionDisplay::Update(const WeatherInfo &weatherCondition)
+void CCurrentConditionDisplay::Update(const WeatherInfo &weatherInfo)
 {
 	cout << "Current condition:\n";
-	cout << "  temperature: " << weatherCondition.temperature << endl;
-	cout << "  humidity: " << weatherCondition.humidity << endl;
-	cout << "  pressure: " << weatherCondition.pressure << endl;
+	cout << "  temperature: " << weatherInfo.temperature << endl;
+	cout << "  humidity: " << weatherInfo.humidity << endl;
+	cout << "  pressure: " << weatherInfo.pressure << endl;
 }

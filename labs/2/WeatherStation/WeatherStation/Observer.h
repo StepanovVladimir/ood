@@ -12,36 +12,33 @@ public:
 	{
 	}
 
-	CObserver(IObservable<T> &observable)
-		: m_observable(&observable)
-	{
-		m_observable->RegisterObserver(*this);
-	}
-
 	~CObserver()
 	{
 		RemoveFromObservable();
 	}
 
-	void RegisterOnObservable(IObservable<T> &observable)
+	bool RegisterOnObservable(IObservable<T> &observable, size_t priority)
 	{
-		if (m_observable != &observable)
+		if (observable.RegisterObserver(*this, priority))
 		{
 			RemoveFromObservable();
 			m_observable = &observable;
-			m_observable->RegisterObserver(*this);
+			m_priority = priority;
+			return true;
 		}
+		return false;
 	}
 
 	void RemoveFromObservable() override
 	{
 		if (m_observable != nullptr)
 		{
-			m_observable->RemoveObserver(*this);
+			m_observable->RemoveObserver(m_priority);
 			m_observable = nullptr;
 		}
 	}
 
 private:
 	IObservable<T> *m_observable;
+	size_t m_priority;
 };
