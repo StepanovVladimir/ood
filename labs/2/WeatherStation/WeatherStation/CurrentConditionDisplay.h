@@ -1,17 +1,14 @@
 #pragma once
 
-#include "IObserver.h"
-#include "IObservable.h"
+#include "Observer.h"
 #include "WeatherInfo.h"
 
-class CCurrentConditionDisplay : public IObserver<WeatherInfo>
+class CCurrentConditionDisplay : public CObserver<WeatherInfo>
 {
 public:
+	CCurrentConditionDisplay() = default;
 	CCurrentConditionDisplay(IObservable<WeatherInfo> &observable);
-	~CCurrentConditionDisplay();
 
 private:
 	void Update(const WeatherInfo &weatherCondition) override;
-
-	IObservable<WeatherInfo> &m_observable;
 };

@@ -6,6 +6,13 @@ WeatherInfo CWeatherData::GetData() const
 	return m_info;
 }
 
+void CWeatherData::SetData(const WeatherInfo &info)
+{
+	m_info = info;
+
+	MeasurementsChanged();
+}
+
 double CWeatherData::GetTemperature() const
 {
 	return m_info.temperature;
@@ -24,11 +31,4 @@ double CWeatherData::GetPressure() const
 void CWeatherData::MeasurementsChanged() const
 {
 	NotifyObservers();
-}
-
-void CWeatherData::SetMeasurements(const WeatherInfo &info)
-{
-	m_info = info;
-
-	MeasurementsChanged();
 }

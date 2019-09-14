@@ -5,14 +5,8 @@
 using namespace std;
 
 CStatisticsDisplay::CStatisticsDisplay(IObservable<WeatherInfo> &observable)
-	: m_observable(observable)
+	: CObserver(observable)
 {
-	m_observable.RegisterObserver(*this);
-}
-
-CStatisticsDisplay::~CStatisticsDisplay()
-{
-	m_observable.RemoveObserver(*this);
 }
 
 void CStatisticsDisplay::Update(const WeatherInfo &weatherCondition)

@@ -5,14 +5,8 @@
 using namespace std;
 
 CCurrentConditionDisplay::CCurrentConditionDisplay(IObservable<WeatherInfo> &observable)
-	: m_observable(observable)
+	: CObserver(observable)
 {
-	m_observable.RegisterObserver(*this);
-}
-
-CCurrentConditionDisplay::~CCurrentConditionDisplay()
-{
-	m_observable.RemoveObserver(*this);
 }
 
 void CCurrentConditionDisplay::Update(const WeatherInfo &weatherCondition)
