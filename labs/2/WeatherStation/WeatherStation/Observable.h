@@ -28,7 +28,6 @@ public:
 		}
 	}
 
-protected:
 	virtual T GetData() const = 0;
 
 private:
