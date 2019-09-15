@@ -2,7 +2,6 @@
 
 #include "Observable.h"
 #include "WeatherInfo.h"
-#include <set>
 
 class CWeatherData : public CObservable<WeatherInfo>
 {

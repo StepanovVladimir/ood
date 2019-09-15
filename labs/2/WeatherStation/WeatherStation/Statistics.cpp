@@ -27,7 +27,7 @@ void CStatistics::Update(double value)
 	m_average = m_sum / m_count;
 }
 
-string CStatistics::ToString()
+string CStatistics::ToString() const
 {
 	return "min = " + to_string(m_min) + "; max = " + to_string(m_max) + "; average = " + to_string(m_average);
 }

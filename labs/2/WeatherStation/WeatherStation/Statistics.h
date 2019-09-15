@@ -9,7 +9,7 @@ public:
 
 	void Update(double value);
 
-	std::string ToString();
+	std::string ToString() const;
 
 private:
 	double m_min;
