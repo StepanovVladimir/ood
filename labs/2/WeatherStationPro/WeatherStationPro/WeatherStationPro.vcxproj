@@ -156,12 +156,12 @@
     <ClInclude Include="IObservable.h" />
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="Observable.h" />
-    <ClInclude Include="Observer.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="StatisticsDisplay.h" />
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherInfo.h" />
+    <ClInclude Include="WeatherObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CurrentConditionDisplay.cpp" />
@@ -176,6 +176,7 @@
     <ClCompile Include="Statistics.cpp" />
     <ClCompile Include="StatisticsDisplay.cpp" />
     <ClCompile Include="WeatherData.cpp" />
+    <ClCompile Include="WeatherObserver.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
