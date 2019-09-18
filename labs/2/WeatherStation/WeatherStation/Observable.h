@@ -46,6 +46,7 @@ public:
 		{
 			if (iter->second == &observer)
 			{
+				iter->second->RemoveFromObservable();
 				m_observers.erase(iter);
 				break;
 			}
