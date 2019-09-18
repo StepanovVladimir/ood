@@ -6,13 +6,13 @@ CNumberedObserver::CNumberedObserver(std::ostream &strm, int number)
 {
 }
 
-void CNumberedObserver::Update(const WeatherInfo &weatherInfo, ObservableType observableType)
+void CNumberedObserver::Update(const WeatherInfo &weatherInfo, const IObservable<WeatherInfo> &observable)
 {
-	if (observableType == ObservableType::In)
+	if (m_inObservable == &observable)
 	{
 		m_strm << m_number << "in ";
 	}
-	else
+	if (m_outObservable == &observable)
 	{
 		m_strm << m_number << "out ";
 	}

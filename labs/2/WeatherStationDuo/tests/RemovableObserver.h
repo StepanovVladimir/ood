@@ -1,10 +1,9 @@
 #pragma once
 
-#include "../WeatherStationDuo/Observer.h"
-#include "../WeatherStationDuo/WeatherInfo.h"
+#include "../WeatherStationDuo/WeatherObserver.h"
 
-class CRemovableObserver : public CObserver<WeatherInfo>
+class CRemovableObserver : public CWeatherObserver
 {
 private:
-	void Update(const WeatherInfo &weatherInfo, ObservableType observableType) override;
+	void Update(const WeatherInfo &weatherInfo, const IObservable<WeatherInfo> &observable) override;
 };

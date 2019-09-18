@@ -4,16 +4,17 @@
 
 using namespace std;
 
-void CCurrentConditionDisplay::Update(const WeatherInfo &weatherInfo, ObservableType observableType)
+void CCurrentConditionDisplay::Update(const WeatherInfo &weatherInfo, const IObservable<WeatherInfo> &observable)
 {
-	if (observableType == ObservableType::In)
+	if (m_inObservable == &observable)
 	{
 		cout << "Current condition indoors:\n";
 	}
-	else
+	if (m_outObservable == &observable)
 	{
-		cout << "Current condition out:\n";
+		cout << "Current condition without:\n";
 	}
+
 	cout << "  temperature: " << weatherInfo.temperature << endl;
 	cout << "  humidity: " << weatherInfo.humidity << endl;
 	cout << "  pressure: " << weatherInfo.pressure << endl;

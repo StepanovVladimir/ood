@@ -1,16 +1,15 @@
 #pragma once
 
-#include "../WeatherStationDuo/Observer.h"
-#include "../WeatherStationDuo/WeatherInfo.h"
+#include "../WeatherStationDuo/WeatherObserver.h"
 #include <iostream>
 
-class CNumberedObserver : public CObserver<WeatherInfo>
+class CNumberedObserver : public CWeatherObserver
 {
 public:
 	CNumberedObserver(std::ostream &strm, int number);
 
 private:
-	void Update(const WeatherInfo &weatherInfo, ObservableType observableType) override;
+	void Update(const WeatherInfo &weatherInfo, const IObservable<WeatherInfo> &observable) override;
 
 	std::ostream &m_strm;
 	int m_number;

@@ -6,8 +6,6 @@
 class CWeatherData : public CObservable<WeatherInfo>
 {
 public:
-	CWeatherData(ObservableType observableType);
-
 	WeatherInfo GetData() const override;
 	void SetData(const WeatherInfo &weatherInfo);
 

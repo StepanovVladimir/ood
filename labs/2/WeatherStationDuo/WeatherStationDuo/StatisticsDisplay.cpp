@@ -4,17 +4,17 @@
 
 using namespace std;
 
-void CStatisticsDisplay::Update(const WeatherInfo &weatherInfo, ObservableType observableType)
+void CStatisticsDisplay::Update(const WeatherInfo &weatherInfo, const IObservable<WeatherInfo> &observable)
 {
-	if (observableType == ObservableType::In)
+	if (m_inObservable == &observable)
 	{
 		cout << "Statistics indoors:\n";
 		UpdateStatistics(weatherInfo,
 			m_inTemperatureStatistics, m_inHumidityStatistics, m_inPressureStatistics);
 	}
-	else
+	if (m_outObservable == &observable)
 	{
-		cout << "Statistics out:\n";
+		cout << "Statistics without:\n";
 		UpdateStatistics(weatherInfo,
 			m_outTemperatureStatistics, m_outHumidityStatistics, m_outPressureStatistics);
 	}

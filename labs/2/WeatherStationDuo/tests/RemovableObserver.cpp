@@ -1,14 +1,14 @@
 #include "pch.h"
 #include "RemovableObserver.h"
 
-void CRemovableObserver::Update(const WeatherInfo &weatherInfo, ObservableType observableType)
+void CRemovableObserver::Update(const WeatherInfo &weatherInfo, const IObservable<WeatherInfo> &observable)
 {
-	if (observableType == ObservableType::In)
+	if (m_inObservable == &observable)
 	{
-		RemoveFromInObservable();
+		m_inObservable->RemoveObserver(*this);
 	}
-	else
+	if (m_outObservable == &observable)
 	{
-		RemoveFromOutObservable();
+		m_outObservable->RemoveObserver(*this);
 	}
 }

@@ -1,11 +1,6 @@
 #include "pch.h"
 #include "WeatherData.h"
 
-CWeatherData::CWeatherData(ObservableType observableType)
-	: CObservable(observableType)
-{
-}
-
 WeatherInfo CWeatherData::GetData() const
 {
 	return m_info;

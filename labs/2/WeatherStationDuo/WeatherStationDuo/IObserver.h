@@ -1,6 +1,7 @@
 #pragma once
 
-#include "ObservableType.h"
+template<typename T>
+class IObservable;
 
 template <typename T>
 class IObserver
@@ -8,7 +9,8 @@ class IObserver
 public:
 	virtual ~IObserver() = default;
 
-	virtual void Update(T const& data, ObservableType observableType) = 0;
-	virtual void RemoveFromInObservable() = 0;
-	virtual void RemoveFromOutObservable() = 0;
+	virtual bool RegisterOnObservable(IObservable<T> &observable) = 0;
+	virtual void RemoveFromObservable(const IObservable<T> &observable) = 0;
+
+	virtual void Update(T const& data, const IObservable<T> &observable) = 0;
 };
