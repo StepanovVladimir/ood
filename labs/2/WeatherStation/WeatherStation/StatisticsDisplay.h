@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Observer.h"
-#include "WeatherInfo.h"
+#include "WeatherObserver.h"
 #include "Statistics.h"
 
-class CStatisticsDisplay : public CObserver<WeatherInfo>
+class CStatisticsDisplay : public CWeatherObserver
 {
 private:
 	void Update(const WeatherInfo &weatherInfo) override;

@@ -11,16 +11,16 @@ int main()
 	CWeatherData weatherData;
 
 	CCurrentConditionDisplay display;
-	display.RegisterOnObservable(weatherData, 0);
+	weatherData.RegisterObserver(display, 1);
 
 	CStatisticsDisplay statsDisplay;
-	statsDisplay.RegisterOnObservable(weatherData, 1);
+	weatherData.RegisterObserver(statsDisplay, 2);
 
 	weatherData.SetData({ 3, 70, 760 });
 	weatherData.SetData({ 4, 80, 761 });
 	cout << "----------------\n";
 
-	statsDisplay.RemoveFromObservable();
+	weatherData.RemoveObserver(statsDisplay);
 
 	weatherData.SetData({ 10, 80, 761 });
 	weatherData.SetData({ -10, 80, 761 });
@@ -28,7 +28,7 @@ int main()
 
 	{
 		CStatisticsDisplay statsDisplay;
-		statsDisplay.RegisterOnObservable(weatherData, 1);
+		weatherData.RegisterObserver(statsDisplay, 2);
 
 		weatherData.SetData({ 3, 70, 760 });
 		weatherData.SetData({ 4, 80, 761 });

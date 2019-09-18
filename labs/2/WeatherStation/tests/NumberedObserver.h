@@ -1,10 +1,9 @@
 #pragma once
 
-#include "../WeatherStation/Observer.h"
-#include "../WeatherStation/WeatherInfo.h"
+#include "../WeatherStation/WeatherObserver.h"
 #include <iostream>
 
-class CNumberedObserver : public CObserver<WeatherInfo>
+class CNumberedObserver : public CWeatherObserver
 {
 public:
 	CNumberedObserver(std::ostream &strm, int number);
@@ -15,4 +14,3 @@ private:
 	std::ostream &m_strm;
 	int m_number;
 };
-

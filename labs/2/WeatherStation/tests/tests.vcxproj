@@ -172,6 +172,7 @@
     <ClCompile Include="..\WeatherStation\Statistics.cpp" />
     <ClCompile Include="..\WeatherStation\StatisticsDisplay.cpp" />
     <ClCompile Include="..\WeatherStation\WeatherData.cpp" />
+    <ClCompile Include="..\WeatherStation\WeatherObserver.cpp" />
     <ClCompile Include="NumberedObserver.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

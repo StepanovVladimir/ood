@@ -7,9 +7,11 @@ template <typename T>
 class CObservable : public IObservable<T>
 {
 public:
+	typedef IObserver<T> ObserverType;
+
 	~CObservable()
 	{
-		std::map<size_t, ObserverType*> observers = m_observers;
+		auto observers = m_observers;
 
 		for (auto &observer : observers)
 		{
@@ -17,10 +19,20 @@ public:
 		}
 	}
 
+	bool RegisterObserver(ObserverType &observer, size_t priority) override
+	{
+		if (observer.RegisterOnObservable(*this))
+		{
+			m_observers.emplace(priority, &observer);
+			return true;
+		}
+		return false;
+	}
+
 	void NotifyObservers() const override
 	{
 		T data = GetData();
-		std::map<size_t, ObserverType*> observers = m_observers;
+		auto observers = m_observers;
 
 		for (auto &observer : observers)
 		{
@@ -28,20 +40,20 @@ public:
 		}
 	}
 
+	void RemoveObserver(ObserverType &observer) override
+	{
+		for (auto iter = m_observers.begin(); iter != m_observers.end(); iter++)
+		{
+			if (iter->second == &observer)
+			{
+				m_observers.erase(iter);
+				break;
+			}
+		}
+	}
+
 	virtual T GetData() const = 0;
 
 private:
-	typedef IObserver<T> ObserverType;
-
-	bool RegisterObserver(ObserverType &observer, size_t priority) override
-	{
-		return m_observers.try_emplace(priority, &observer).second;
-	}
-
-	void RemoveObserver(size_t priority) override
-	{
-		m_observers.erase(priority);
-	}
-
-	std::map<size_t, ObserverType*> m_observers;
+	std::multimap<size_t, ObserverType*> m_observers;
 };
