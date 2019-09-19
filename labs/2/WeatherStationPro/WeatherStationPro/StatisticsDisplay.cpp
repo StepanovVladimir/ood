@@ -4,18 +4,33 @@
 
 using namespace std;
 
-void CStatisticsDisplay::Update(const WeatherInfo &weatherInfo)
+void CStatisticsDisplay::Update(double value, EventType eventType)
 {
-	m_temperatureStatistics.Update(weatherInfo.temperature);
-	m_humidityStatistics.Update(weatherInfo.humidity);
-	m_pressureStatistics.Update(weatherInfo.pressure);
-	m_windSpeedStatistics.Update(weatherInfo.windSpeed);
-	m_windDirectionStatistics.Update(weatherInfo.windDirection);
+	switch (eventType)
+	{
+	case EventType::Temperature:
+		m_temperatureStatistics.Update(value);
+		cout << "Temperature statistics: " << m_temperatureStatistics.ToString() << endl;
+		break;
 
-	cout << "Statistics:\n";
-	cout << "  temperature: " << m_temperatureStatistics.ToString() << endl;
-	cout << "  humidity: " << m_humidityStatistics.ToString() << endl;
-	cout << "  pressure: " << m_pressureStatistics.ToString() << endl;
-	cout << "  wind speed: " << m_windSpeedStatistics.ToString() << endl;
-	cout << "  wind direction: " << m_windDirectionStatistics.ToString() << endl;
+	case EventType::Humidity:
+		m_humidityStatistics.Update(value);
+		cout << "Humidity statistics: " << m_humidityStatistics.ToString() << endl;
+		break;
+
+	case EventType::Pressure:
+		m_pressureStatistics.Update(value);
+		cout << "Pressure statistics: " << m_pressureStatistics.ToString() << endl;
+		break;
+
+	case EventType::WindSpeed:
+		m_windSpeedStatistics.Update(value);
+		cout << "Wind speed statistics: " << m_windSpeedStatistics.ToString() << endl;
+		break;
+
+	case EventType::WindDirection:
+		m_windDirectionStatistics.Update(value);
+		cout << "Wind direction statistics: " << m_windDirectionStatistics.ToString() << endl;
+		break;
+	}
 }

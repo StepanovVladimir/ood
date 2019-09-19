@@ -7,7 +7,7 @@
 class CStatisticsDisplay : public CWeatherObserver
 {
 private:
-	void Update(const WeatherInfo &weatherInfo) override;
+	void Update(double value, EventType eventType) override;
 
 	CStatistics m_temperatureStatistics;
 	CStatistics m_humidityStatistics;

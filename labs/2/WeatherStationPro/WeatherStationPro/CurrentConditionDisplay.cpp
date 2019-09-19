@@ -4,12 +4,28 @@
 
 using namespace std;
 
-void CCurrentConditionDisplay::Update(const WeatherInfo &weatherInfo)
+void CCurrentConditionDisplay::Update(double value, EventType eventType)
 {
-	cout << "Current condition:\n";
-	cout << "  temperature: " << weatherInfo.temperature << endl;
-	cout << "  humidity: " << weatherInfo.humidity << endl;
-	cout << "  pressure: " << weatherInfo.pressure << endl;
-	cout << "  wind speed: " << weatherInfo.windSpeed << endl;
-	cout << "  wind direction: " << weatherInfo.windDirection << endl;
+	switch (eventType)
+	{
+	case EventType::Temperature:
+		cout << "Current temperature: " << value << endl;
+		break;
+
+	case EventType::Humidity:
+		cout << "Current humidity: " << value << endl;
+		break;
+
+	case EventType::Pressure:
+		cout << "Current pressure: " << value << endl;
+		break;
+
+	case EventType::WindSpeed:
+		cout << "Current wind speed: " << value << endl;
+		break;
+
+	case EventType::WindDirection:
+		cout << "Current wind direction: " << value << endl;
+		break;
+	}
 }

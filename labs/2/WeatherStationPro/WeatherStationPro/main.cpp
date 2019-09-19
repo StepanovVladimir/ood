@@ -11,32 +11,20 @@ int main()
 	CWeatherData weatherData;
 
 	CCurrentConditionDisplay display;
-	weatherData.RegisterObserver(display, 0);
+	weatherData.RegisterObserver(display, 0, EventType::Temperature);
+	weatherData.RegisterObserver(display, 0, EventType::Pressure);
 
 	CStatisticsDisplay statsDisplay;
-	weatherData.RegisterObserver(statsDisplay, 1);
+	weatherData.RegisterObserver(statsDisplay, 1, EventType::WindDirection);
 
-	weatherData.SetData({ 3, 70, 760, 5, 0 });
-	weatherData.SetData({ 4, 80, 761, 4, 270 });
+	weatherData.SetData({ 3, 70, 760, 5, 180 });
+	weatherData.SetData({ 4, 80, 760, 4, 270 });
 	cout << "----------------\n";
 
-	weatherData.RemoveObserver(statsDisplay);
+	weatherData.RemoveObserver(display);
 
 	weatherData.SetData({ 10, 80, 761, 6, 180 });
 	weatherData.SetData({ -10, 80, 761, 5, 100 });
-	cout << "----------------\n";
-
-	{
-		CStatisticsDisplay statsDisplay;
-		weatherData.RegisterObserver(statsDisplay, 1);
-
-		weatherData.SetData({ 3, 70, 760, 3, 270 });
-		weatherData.SetData({ 4, 80, 761, 4, 180 });
-		cout << "----------------\n";
-	}
-
-	weatherData.SetData({ 10, 80, 761, 3, 200 });
-	weatherData.SetData({ 10, 50, 759, 3, 150 });
 
 	return 0;
 }

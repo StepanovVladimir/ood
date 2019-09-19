@@ -1,5 +1,7 @@
 #pragma once
 
+#include "EventType.h"
+
 template<typename T>
 class IObservable;
 
@@ -9,8 +11,8 @@ class IObserver
 public:
 	virtual ~IObserver() = default;
 
-	virtual bool RegisterOnObservable(IObservable<T> &observable) = 0;
-	virtual void RemoveFromObservable() = 0;
+	virtual bool RegisterOnEvent(IObservable<T> &observable, EventType eventType) = 0;
+	virtual void RemoveFromEvent(EventType eventType) = 0;
 
-	virtual void Update(T const& data) = 0;
+	virtual void Update(double value, EventType eventType) = 0;
 };

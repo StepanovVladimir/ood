@@ -5,5 +5,5 @@
 class CCurrentConditionDisplay : public CWeatherObserver
 {
 private:
-	void Update(const WeatherInfo &weatherInfo) override;
+	void Update(double value, EventType eventType) override;
 };

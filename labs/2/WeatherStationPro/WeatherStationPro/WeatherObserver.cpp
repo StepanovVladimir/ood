@@ -14,17 +14,27 @@ CWeatherObserver::~CWeatherObserver()
 	}
 }
 
-bool CWeatherObserver::RegisterOnObservable(IObservable<WeatherInfo> &observable)
+bool CWeatherObserver::RegisterOnEvent(IObservable<WeatherInfo> &observable, EventType eventType)
 {
 	if (m_observable == nullptr)
 	{
 		m_observable = &observable;
+		m_eventTypes.insert(eventType);
+		return true;
+	}
+	if (m_observable == &observable && m_eventTypes.find(eventType) == m_eventTypes.end())
+	{
+		m_eventTypes.insert(eventType);
 		return true;
 	}
 	return false;
 }
 
-void CWeatherObserver::RemoveFromObservable()
+void CWeatherObserver::RemoveFromEvent(EventType eventType)
 {
-	m_observable = nullptr;
+	m_eventTypes.erase(eventType);
+	if (m_eventTypes.empty())
+	{
+		m_observable = nullptr;
+	}
 }
