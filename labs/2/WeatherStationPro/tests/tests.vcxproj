@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{7B1C621B-4783-4BE0-9602-8F0D185A20B3}</ProjectGuid>
+    <ProjectGuid>{8E349DEC-10CB-4790-8765-0D1A15F9A794}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
@@ -163,17 +163,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NumberedObserverIn.h" />
-    <ClInclude Include="NumberedObserverOut.h" />
+    <ClInclude Include="NumberedObserver.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\WeatherStationProDuo\WeatherDataIn.cpp" />
-    <ClCompile Include="..\WeatherStationProDuo\WeatherDataOut.cpp" />
-    <ClCompile Include="..\WeatherStationProDuo\WeatherObserverIn.cpp" />
-    <ClCompile Include="..\WeatherStationProDuo\WeatherObserverOut.cpp" />
-    <ClCompile Include="NumberedObserverIn.cpp" />
-    <ClCompile Include="NumberedObserverOut.cpp" />
+    <ClCompile Include="..\WeatherStationPro\WeatherData.cpp" />
+    <ClCompile Include="..\WeatherStationPro\WeatherObserver.cpp" />
+    <ClCompile Include="NumberedObserver.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
