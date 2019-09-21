@@ -68,6 +68,15 @@
     <ClInclude Include="FruitTea.h">
       <Filter>Beverages\Teas</Filter>
     </ClInclude>
+    <ClInclude Include="Cream.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Chocolate.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Liquor.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Beverage.cpp">
@@ -122,6 +131,15 @@
     </ClCompile>
     <ClCompile Include="FruitTea.cpp">
       <Filter>Beverages\Teas</Filter>
+    </ClCompile>
+    <ClCompile Include="Cream.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="Chocolate.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="Liquor.cpp">
+      <Filter>Condiments</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

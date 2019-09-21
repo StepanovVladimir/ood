@@ -154,6 +154,8 @@
     <ClInclude Include="Beverage.h" />
     <ClInclude Include="BlackTea.h" />
     <ClInclude Include="Cappuccino.h" />
+    <ClInclude Include="Chocolate.h" />
+    <ClInclude Include="Cream.h" />
     <ClInclude Include="FruitTea.h" />
     <ClInclude Include="ChocolateCrumbs.h" />
     <ClInclude Include="Cinnamon.h" />
@@ -166,6 +168,7 @@
     <ClInclude Include="IceCubes.h" />
     <ClInclude Include="Latte.h" />
     <ClInclude Include="Lemon.h" />
+    <ClInclude Include="Liquor.h" />
     <ClInclude Include="Milkshake.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Syrup.h" />
@@ -175,6 +178,8 @@
     <ClCompile Include="Beverage.cpp" />
     <ClCompile Include="BlackTea.cpp" />
     <ClCompile Include="Cappuccino.cpp" />
+    <ClCompile Include="Chocolate.cpp" />
+    <ClCompile Include="Cream.cpp" />
     <ClCompile Include="FruitTea.cpp" />
     <ClCompile Include="ChocolateCrumbs.cpp" />
     <ClCompile Include="Cinnamon.cpp" />
@@ -186,6 +191,7 @@
     <ClCompile Include="IceCubes.cpp" />
     <ClCompile Include="Latte.cpp" />
     <ClCompile Include="Lemon.cpp" />
+    <ClCompile Include="Liquor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Milkshake.cpp" />
     <ClCompile Include="pch.cpp">

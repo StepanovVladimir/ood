@@ -6,11 +6,14 @@
 #include "GreenTea.h"
 #include "HerbalTea.h"
 #include "Milkshake.h"
+#include "Chocolate.h"
 #include "ChocolateCrumbs.h"
 #include "Cinnamon.h"
 #include "CoconutFlakes.h"
+#include "Cream.h"
 #include "IceCubes.h"
 #include "Lemon.h"
+#include "Liquor.h"
 #include "Syrup.h"
 #include <iostream>
 #include <functional>
@@ -42,14 +45,15 @@ int main()
 	unique_ptr<IBeverage> latte =
 		make_unique<CLatte>(CLatte::Portion::Double)
 		<< DecorateWith<CCinnamon>()
-		<< DecorateWith<CLemon>(2)
-		<< DecorateWith<CIceCubes>(2, CIceCubes::Type::Dry)
+		<< DecorateWith<CLiquor>(CLiquor::Type::Walnut)
+		<< DecorateWith<CCream>()
 		<< DecorateWith<CChocolateCrumbs>(2);
 	cout << latte->GetDescription() << " costs " << latte->GetCost() << endl;
 
 	unique_ptr<IBeverage> milkshake =
 		make_unique<CMilkshake>(CMilkshake::Portion::Medium)
 		<< DecorateWith<CSyrup>(CSyrup::Type::Maple)
-		<< DecorateWith<CCoconutFlakes>(8);
+		<< DecorateWith<CCoconutFlakes>(8)
+		<< DecorateWith<CChocolate>();
 	cout << milkshake->GetDescription() << " costs " << milkshake->GetCost() << endl;
 }
