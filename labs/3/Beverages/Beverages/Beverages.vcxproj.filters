@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Beverages">
+      <UniqueIdentifier>{57551fc3-e582-4be0-a6d4-a5e0c48d6227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Beverages\Coffees">
+      <UniqueIdentifier>{e4da01c5-e8a3-4aba-9c0c-fdc6e0b72471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Beverages\Teas">
+      <UniqueIdentifier>{afc8c6d0-37cb-4089-8425-7bbbe2a93fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Condiments">
+      <UniqueIdentifier>{b51281a9-3d8d-447b-954d-1bde8b656cb4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Beverage.h">
+      <Filter>Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="Milkshake.h">
+      <Filter>Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="ChocolateCrumbs.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Cinnamon.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="CoconutFlakes.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="CondimentDecorator.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="IceCubes.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Lemon.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Syrup.h">
+      <Filter>Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Latte.h">
+      <Filter>Beverages\Coffees</Filter>
+    </ClInclude>
+    <ClInclude Include="Cappuccino.h">
+      <Filter>Beverages\Coffees</Filter>
+    </ClInclude>
+    <ClInclude Include="Coffee.h">
+      <Filter>Beverages\Coffees</Filter>
+    </ClInclude>
+    <ClInclude Include="Tea.h">
+      <Filter>Beverages\Teas</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackTea.h">
+      <Filter>Beverages\Teas</Filter>
+    </ClInclude>
+    <ClInclude Include="IBeverage.h" />
+    <ClInclude Include="GreenTea.h">
+      <Filter>Beverages\Teas</Filter>
+    </ClInclude>
+    <ClInclude Include="HerbalTea.h">
+      <Filter>Beverages\Teas</Filter>
+    </ClInclude>
+    <ClInclude Include="FruitTea.h">
+      <Filter>Beverages\Teas</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Beverage.cpp">
+      <Filter>Beverages</Filter>
+    </ClCompile>
+    <ClCompile Include="Milkshake.cpp">
+      <Filter>Beverages</Filter>
+    </ClCompile>
+    <ClCompile Include="ChocolateCrumbs.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="Cinnamon.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="CoconutFlakes.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="CondimentDecorator.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="IceCubes.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="Lemon.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="Syrup.cpp">
+      <Filter>Condiments</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Latte.cpp">
+      <Filter>Beverages\Coffees</Filter>
+    </ClCompile>
+    <ClCompile Include="Cappuccino.cpp">
+      <Filter>Beverages\Coffees</Filter>
+    </ClCompile>
+    <ClCompile Include="Coffee.cpp">
+      <Filter>Beverages\Coffees</Filter>
+    </ClCompile>
+    <ClCompile Include="Tea.cpp">
+      <Filter>Beverages\Teas</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackTea.cpp">
+      <Filter>Beverages\Teas</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenTea.cpp">
+      <Filter>Beverages\Teas</Filter>
+    </ClCompile>
+    <ClCompile Include="HerbalTea.cpp">
+      <Filter>Beverages\Teas</Filter>
+    </ClCompile>
+    <ClCompile Include="FruitTea.cpp">
+      <Filter>Beverages\Teas</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
