@@ -5,7 +5,7 @@
 
 using namespace std;
 
-CDecryptingInputStream::CDecryptingInputStream(IInputDataStreamPtr &&strm, unsigned key)
+CDecryptingInputStream::CDecryptingInputStream(IInputDataStreamPtr &&strm, int key)
 	: CInputStreamDecorator(move(strm))
 {
 	array<uint8_t, 256> encryptTable;

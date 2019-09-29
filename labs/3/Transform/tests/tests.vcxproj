@@ -177,6 +177,7 @@
     <ClCompile Include="..\Transform\MemoryOutputStream.cpp" />
     <ClCompile Include="..\Transform\OutputStreamDecorator.cpp" />
     <ClCompile Include="compressDecompressTests.cpp" />
+    <ClCompile Include="encryptDecryptTests.cpp" />
     <ClCompile Include="outputStreamsTests.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

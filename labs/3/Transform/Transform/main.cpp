@@ -9,32 +9,43 @@
 
 using namespace std;
 
+const string ENCRYPT = "--encrypt";
+const string DECRYPT = "--decrypt";
+const string COMPRESS = "--compress";
+const string DECOMPRESS = "--decompress";
+
 int main(int argc, char *argv[])
 {
+	if (argc < 3)
 	{
-		IInputDataStreamPtr inStrm = make_unique<CFileInputStream>("input.dat");
-		IOutputDataStreamPtr outStrm = make_unique<CFileOutputStream>("output.dat")
-			<< DecorateWith<CCompressingOutputStream>()
-			<< DecorateWith<CEncryptingOutputStream>(100500)
-			<< DecorateWith<CEncryptingOutputStream>(3);
+		cout << "Too few command arguments, enter input and output file names" << endl;
+		return 1;
+	}
 
-		while (!inStrm->IsEOF())
+
+
+	for (int i = 1; i < argc - 2; )
+	{
+		try
 		{
-			uint8_t byte = inStrm->ReadByte();
-			outStrm->WriteByte(byte);
+			if (argv[i] == ENCRYPT)
+			{
+				i++;
+				int key = stoi("3");
+			}
+		}
+		catch (const invalid_argument&)
+		{
+			return false;
+		}
+		catch (const out_of_range&)
+		{
+			return false;
 		}
 	}
-	{
-		IInputDataStreamPtr inStrm = make_unique<CFileInputStream>("output.dat")
-			<< DecorateWith<CDecompressingInputStream>()
-			<< DecorateWith<CDecryptingInputStream>(100500)
-			<< DecorateWith<CDecryptingInputStream>(3);
-		IOutputDataStreamPtr outStrm = make_unique<CFileOutputStream>("input.dat.restored");
 
-		while (!inStrm->IsEOF())
-		{
-			uint8_t byte = inStrm->ReadByte();
-			outStrm->WriteByte(byte);
-		}
-	}
+	string inFileName = argv[argc - 2];
+	string outFileName = argv[argc - 1];
+	
+	return 0;
 }

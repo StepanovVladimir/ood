@@ -5,7 +5,7 @@
 
 using namespace std;
 
-CEncryptingOutputStream::CEncryptingOutputStream(IOutputDataStreamPtr &&strm, unsigned key)
+CEncryptingOutputStream::CEncryptingOutputStream(IOutputDataStreamPtr &&strm, int key)
 	: COutputStreamDecorator(move(strm))
 {
 	for (size_t i = 0; i < 256; i++)

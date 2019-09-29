@@ -6,7 +6,7 @@
 class CEncryptingOutputStream : public COutputStreamDecorator
 {
 public:
-	CEncryptingOutputStream(IOutputDataStreamPtr &&strm, unsigned key);
+	CEncryptingOutputStream(IOutputDataStreamPtr &&strm, int key);
 
 	void WriteByte(uint8_t data) override;
 

@@ -6,7 +6,7 @@
 class CDecryptingInputStream : public CInputStreamDecorator
 {
 public:
-	CDecryptingInputStream(IInputDataStreamPtr &&strm, unsigned key);
+	CDecryptingInputStream(IInputDataStreamPtr &&strm, int key);
 
 	bool IsEOF() const override;
 	uint8_t ReadByte() override;
