@@ -5,7 +5,7 @@
 class CChocolate : public CCondimentDecorator
 {
 public:
-	unsigned MAX_QUANTITY = 5;
+	static const unsigned MAX_QUANTITY = 5;
 
 	CChocolate(IBeveragePtr &&beverage, unsigned quantity = 1);
 
