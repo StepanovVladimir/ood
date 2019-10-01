@@ -5,7 +5,7 @@ using namespace std;
 
 CFileInputStream::CFileInputStream(const std::string &fileName)
 {
-	m_stream.open(fileName);
+	m_stream.open(fileName, ios::binary);
 	if (!m_stream.is_open())
 	{
 		throw ios_base::failure("Failed to open file " + fileName);

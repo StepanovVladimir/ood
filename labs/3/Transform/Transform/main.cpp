@@ -101,7 +101,7 @@ IOutputDataStreamPtr GetDecoratedOutputStream(const string fileName, const vecto
 IInputDataStreamPtr GetDecoratedInputStream(const string fileName, const vector<InputOption> &inputOptions)
 {
 	IInputDataStreamPtr inStrm = make_unique<CFileInputStream>(fileName);
-	for (int i = 0; i < inputOptions.size(); i++)
+	for (size_t i = 0; i < inputOptions.size(); i++)
 	{
 		if (inputOptions[i].option == InputOption::Decrypt)
 		{
