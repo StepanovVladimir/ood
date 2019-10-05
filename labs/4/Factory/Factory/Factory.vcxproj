@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Designer.h" />
     <ClInclude Include="Ellipse.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Designer.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="main.cpp" />

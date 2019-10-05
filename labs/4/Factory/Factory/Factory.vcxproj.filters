@@ -29,6 +29,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PictureDraft.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Canvas.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ellipse.cpp">
@@ -51,5 +52,6 @@
     <ClCompile Include="Painter.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="PictureDraft.cpp" />
+    <ClCompile Include="Canvas.cpp" />
   </ItemGroup>
 </Project>

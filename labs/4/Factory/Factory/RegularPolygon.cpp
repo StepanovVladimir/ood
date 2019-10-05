@@ -60,7 +60,7 @@ void CRegularPolygon::InitializeVertices()
 	{
 		Point vertex;
 		vertex.x = m_center.x + m_radius * sin(i * angleBetweenVertices);
-		vertex.y = m_center.y + m_radius * cos(i * angleBetweenVertices);
+		vertex.y = m_center.y - m_radius * cos(i * angleBetweenVertices);
 		m_vertices.push_back(vertex);
 	}
 }

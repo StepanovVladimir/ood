@@ -6,7 +6,7 @@
 class CRegularPolygon : public CShape
 {
 public:
-	CRegularPolygon(int8_t vertexCount, const Point& center, double radius, Color color);
+	CRegularPolygon(int8_t vertexCount, const Point& center, double radius, Color color = Color::Black);
 
 	void Draw(ICanvas& canvas) const override;
 

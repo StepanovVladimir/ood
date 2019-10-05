@@ -5,7 +5,7 @@
 class CRectangle : public CShape
 {
 public:
-	CRectangle(const Point& leftTop, const Point& rightBottom, Color color);
+	CRectangle(const Point& leftTop, const Point& rightBottom, Color color = Color::Black);
 
 	void Draw(ICanvas& canvas) const override;
 
