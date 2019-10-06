@@ -14,9 +14,10 @@ public:
 	CPictureDraft& operator=(const CPictureDraft&) = delete;
 	CPictureDraft& operator=(CPictureDraft&&) = default;
 
+	const CShape& operator[](size_t index) const;
+
 	bool IsEmpty() const;
 	size_t GetShapesCount() const;
-	const CShape& GetShapeAt(size_t index) const;
 	void AddShape(std::unique_ptr<CShape>&& shape);
 
 private:

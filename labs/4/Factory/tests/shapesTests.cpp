@@ -8,11 +8,6 @@
 
 using namespace std;
 
-bool operator==(const Point& p1, const Point& p2)
-{
-	return p1.x == p2.x && p1.y == p2.y;
-}
-
 TEST_CASE("Rectangle tests")
 {
 	CHECK_THROWS_AS(CRectangle({ 4, 3 }, { 2, 6 }), runtime_error);
@@ -118,15 +113,10 @@ TEST_CASE("Regular polygon tests")
 {
 	CRegularPolygon regularPolygon(4, { 10, 10 }, 5, Color::Yellow);
 
-	CHECK(regularPolygon.GetVertexCount() == 4);
+	CHECK(regularPolygon.GetVerticesCount() == 4);
 	CHECK(regularPolygon.GetCenter() == Point{ 10, 10 });
 	CHECK(regularPolygon.GetRadius() == 5);
 	CHECK(regularPolygon.GetColor() == Color::Yellow);
-}
-
-bool RealNumbersIsEqual(double num1, double num2)
-{
-	return num1 - FLT_EPSILON < num2 && num1 + FLT_EPSILON > num2;
 }
 
 TEST_CASE("Draw regular polygon tests")
@@ -140,24 +130,18 @@ TEST_CASE("Draw regular polygon tests")
 	CHECK(lines.size() == 4);
 
 	CHECK(lines[0].from == Point{ 10, 5 });
-	CHECK(RealNumbersIsEqual(lines[0].to.x, 15));
-	CHECK(RealNumbersIsEqual(lines[0].to.y, 10));
+	CHECK(lines[0].to == Point{ 15, 10 });
 	CHECK(lines[0].color == Color::Yellow);
 
-	CHECK(RealNumbersIsEqual(lines[1].from.x, 15));
-	CHECK(RealNumbersIsEqual(lines[1].from.y, 10));
-	CHECK(RealNumbersIsEqual(lines[1].to.x, 10));
-	CHECK(RealNumbersIsEqual(lines[1].to.y, 15));
+	CHECK(lines[1].from == Point{ 15, 10 });
+	CHECK(lines[1].to == Point{ 10, 15 });
 	CHECK(lines[1].color == Color::Yellow);
 
-	CHECK(RealNumbersIsEqual(lines[2].from.x, 10));
-	CHECK(RealNumbersIsEqual(lines[2].from.y, 15));
-	CHECK(RealNumbersIsEqual(lines[2].to.x, 5));
-	CHECK(RealNumbersIsEqual(lines[2].to.y, 10));
+	CHECK(lines[2].from == Point{ 10, 15 });
+	CHECK(lines[2].to == Point{ 5, 10 });
 	CHECK(lines[2].color == Color::Yellow);
 
-	CHECK(RealNumbersIsEqual(lines[3].from.x, 5));
-	CHECK(RealNumbersIsEqual(lines[3].from.y, 10));
+	CHECK(lines[3].from == Point{ 5, 10 });
 	CHECK(lines[3].to == Point{ 10, 5 });
 	CHECK(lines[3].color == Color::Yellow);
 }

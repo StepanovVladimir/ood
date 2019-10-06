@@ -42,6 +42,8 @@
     <ClCompile Include="MockCanvas.cpp">
       <Filter>Mock</Filter>
     </ClCompile>
+    <ClCompile Include="pictureDraftTests.cpp" />
+    <ClCompile Include="painterTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockCanvas.h">

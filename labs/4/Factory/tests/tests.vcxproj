@@ -172,6 +172,8 @@
     <ClCompile Include="..\Factory\Shape.cpp" />
     <ClCompile Include="..\Factory\Triangle.cpp" />
     <ClCompile Include="MockCanvas.cpp" />
+    <ClCompile Include="painterTests.cpp" />
+    <ClCompile Include="pictureDraftTests.cpp" />
     <ClCompile Include="shapesTests.cpp" />
   </ItemGroup>
   <ItemGroup>
