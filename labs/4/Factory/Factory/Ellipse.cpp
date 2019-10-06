@@ -8,7 +8,7 @@ CEllipse::CEllipse(const Point& center, double horizontalRadius, double vertical
 {
 	if (horizontalRadius < 0 || verticalRadius < 0)
 	{
-		throw std::runtime_error("Cannot create a ellipse, the radius cannot be negative");
+		throw std::invalid_argument("Cannot create a ellipse, the radius cannot be negative");
 	}
 	m_horizontalRadius = horizontalRadius;
 	m_verticalRadius = verticalRadius;

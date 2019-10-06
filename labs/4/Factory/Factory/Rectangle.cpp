@@ -7,7 +7,7 @@ CRectangle::CRectangle(const Point& leftTop, const Point& rightBottom, Color col
 {
 	if (leftTop.x > rightBottom.x || leftTop.y > rightBottom.y)
 	{
-		throw std::runtime_error("Cannot create a rectangle, invalid location of left top and right bottom vertices");
+		throw std::invalid_argument("Cannot create a rectangle, invalid location of left top and right bottom vertices");
 	}
 	m_leftTop = leftTop;
 	m_rightBottom = rightBottom;

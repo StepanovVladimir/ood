@@ -6,6 +6,7 @@
 #include "../Factory/Ellipse.h"
 #include "../Factory/RegularPolygon.h"
 #include "MockCanvas.h"
+#include "testsUtils.h"
 
 using namespace std;
 

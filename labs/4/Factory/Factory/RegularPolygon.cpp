@@ -9,11 +9,11 @@ CRegularPolygon::CRegularPolygon(int8_t verticesCount, const Point& center, doub
 {
 	if (verticesCount < 3)
 	{
-		throw std::runtime_error("Cannot create a regular polygon, the number of vertices must be at least three");
+		throw std::invalid_argument("Cannot create a regular polygon, the number of vertices must be at least three");
 	}
 	if (radius < 0)
 	{
-		throw std::runtime_error("Cannot create a regular polygon, the radius cannot be negative");
+		throw std::invalid_argument("Cannot create a regular polygon, the radius cannot be negative");
 	}
 	m_radius = radius;
 	InitializeVertices(verticesCount);

@@ -33,5 +33,3 @@ private:
 	std::vector<Line> m_lines;
 	std::vector<Ellipse> m_ellipses;
 };
-
-bool operator==(const Point& p1, const Point& p2);

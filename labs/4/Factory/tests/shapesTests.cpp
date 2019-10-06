@@ -5,13 +5,14 @@
 #include "../Factory/Ellipse.h"
 #include "../Factory/RegularPolygon.h"
 #include "MockCanvas.h"
+#include "testsUtils.h"
 
 using namespace std;
 
 TEST_CASE("Rectangle tests")
 {
-	CHECK_THROWS_AS(CRectangle({ 4, 3 }, { 2, 6 }), runtime_error);
-	CHECK_THROWS_AS(CRectangle({ 2, 6 }, { 4, 3 }), runtime_error);
+	CHECK_THROWS_AS(CRectangle({ 4, 3 }, { 2, 6 }), invalid_argument);
+	CHECK_THROWS_AS(CRectangle({ 2, 6 }, { 4, 3 }), invalid_argument);
 
 	CRectangle rectangle({ 2, 3 }, { 4, 6 }, Color::Blue);
 
@@ -82,8 +83,8 @@ TEST_CASE("Draw triangle tests")
 
 TEST_CASE("Ellipse tests")
 {
-	CHECK_THROWS_AS(CEllipse({ 5, 6 }, -3, 2), runtime_error);
-	CHECK_THROWS_AS(CEllipse({ 5, 6 }, 3, -2), runtime_error);
+	CHECK_THROWS_AS(CEllipse({ 5, 6 }, -3, 2), invalid_argument);
+	CHECK_THROWS_AS(CEllipse({ 5, 6 }, 3, -2), invalid_argument);
 
 	CEllipse ellipse({ 5, 6 }, 3, 2, Color::Red);
 
@@ -111,6 +112,9 @@ TEST_CASE("Draw ellipse tests")
 
 TEST_CASE("Regular polygon tests")
 {
+	CHECK_THROWS_AS(CRegularPolygon(2, { 10, 10 }, 5), invalid_argument);
+	CHECK_THROWS_AS(CRegularPolygon(3, { 10, 10 }, -5), invalid_argument);
+
 	CRegularPolygon regularPolygon(4, { 10, 10 }, 5, Color::Yellow);
 
 	CHECK(regularPolygon.GetVerticesCount() == 4);
