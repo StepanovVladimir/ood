@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-struct IShapeFactory
+class IShapeFactory
 {
 public:
 	virtual ~IShapeFactory() = default;

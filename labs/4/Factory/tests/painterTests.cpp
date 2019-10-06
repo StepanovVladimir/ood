@@ -20,7 +20,7 @@ TEST_CASE("Painter tests")
 	CMockCanvas canvas;
 
 	CPainter painter;
-	painter.DraftPicture(pictureDraft, canvas);
+	painter.DrawPicture(pictureDraft, canvas);
 
 	auto& lines = canvas.GetLines();
 	auto& ellipses = canvas.GetEllipses();
@@ -70,7 +70,7 @@ TEST_CASE("Painter tests")
 		CHECK(ellipses[0].color == Color::Red);
 	}
 
-	SECTION("Check regularPolygon")
+	SECTION("Check regular polygon")
 	{
 		CHECK(lines[7].from == Point{ 10, 5 });
 		CHECK(lines[7].to == Point{ 15, 10 });
