@@ -15,15 +15,15 @@ public:
 
 	struct Ellipse
 	{
-		Point center;
-		double horizontalRadius;
-		double verticalRadius;
+		Point leftTop;
+		double width;
+		double height;
 		Color color;
 	};
 
 	void SetColor(Color color) override;
 	void DrawLine(const Point& from, const Point& to) override;
-	void DrawEllipse(const Point& center, double horizontalRadius, double verticalRadius) override;
+	void DrawEllipse(const Point& leftTop, double width, double height) override;
 
 	const std::vector<Line>& GetLines() const;
 	const std::vector<Ellipse>& GetEllipses() const;

@@ -2,7 +2,7 @@
 
 #include "PictureDraft.h"
 #include "IShapeFactory.h"
-#include <iosfwd>
+#include <iostream>
 
 class CDesigner
 {

@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Client.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Designer.h" />
     <ClInclude Include="Ellipse.h" />
@@ -169,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="Designer.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="main.cpp" />

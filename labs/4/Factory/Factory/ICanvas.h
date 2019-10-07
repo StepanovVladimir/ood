@@ -10,5 +10,5 @@ public:
 
 	virtual void SetColor(Color color) = 0;
 	virtual void DrawLine(const Point& from, const Point& to) = 0;
-	virtual void DrawEllipse(const Point& center, double horizontalRadius, double verticalRadius) = 0;
+	virtual void DrawEllipse(const Point& leftTop, double width, double height) = 0;
 };

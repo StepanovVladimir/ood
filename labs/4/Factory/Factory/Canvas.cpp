@@ -14,10 +14,10 @@ void CCanvas::DrawLine(const Point& from, const Point& to)
 	cout << ColorToString() << " line from (" << from.x << ", " << from.y << ") to (" << to.x << ", " << to.y << ")\n";
 }
 
-void CCanvas::DrawEllipse(const Point& center, double horizontalRadius, double verticalRadius)
+void CCanvas::DrawEllipse(const Point& leftTop, double width, double height)
 {
-	cout << ColorToString() << " ellipse with: center: (" << center.x << ", " << center.y << "); horizontal radius: "
-		<< horizontalRadius << "; vertical radius: " << verticalRadius << endl;
+	cout << ColorToString() << " ellipse with: left top point: (" << leftTop.x << ", " << leftTop.y << "); width: "
+		<< width << "; height: " << height << endl;
 }
 
 string CCanvas::ColorToString() const

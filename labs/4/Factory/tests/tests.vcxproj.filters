@@ -42,7 +42,6 @@
     <ClCompile Include="MockCanvas.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="pictureDraftTests.cpp" />
     <ClCompile Include="painterTests.cpp" />
     <ClCompile Include="factoryTests.cpp" />
     <ClCompile Include="..\Factory\ShapeFactory.cpp">
@@ -51,12 +50,30 @@
     <ClCompile Include="testsUtils.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="designerTests.cpp" />
+    <ClCompile Include="MockShapeFactory.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MockShape.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="draftTests.cpp" />
+    <ClCompile Include="clientTests.cpp" />
+    <ClCompile Include="..\Factory\Client.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockCanvas.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="testsUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MockShape.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MockShapeFactory.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

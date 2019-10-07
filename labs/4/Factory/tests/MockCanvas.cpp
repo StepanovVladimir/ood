@@ -12,9 +12,9 @@ void CMockCanvas::DrawLine(const Point& from, const Point& to)
 	m_lines.push_back({ from, to, m_color });
 }
 
-void CMockCanvas::DrawEllipse(const Point& center, double horizontalRadius, double verticalRadius)
+void CMockCanvas::DrawEllipse(const Point& leftTop, double width, double height)
 {
-	m_ellipses.push_back({ center, horizontalRadius, verticalRadius, m_color });
+	m_ellipses.push_back({ leftTop, width, height, m_color });
 }
 
 const vector<CMockCanvas::Line>& CMockCanvas::GetLines() const

@@ -1,18 +1,14 @@
 ﻿#include "pch.h"
-#include "ShapeFactory.h"
-#include "Designer.h"
+#include "Client.h"
 #include "Canvas.h"
-#include "Painter.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-	CShapeFactory shapeFactory;
-	CDesigner designer(shapeFactory);
-	CPictureDraft pictureDraft = designer.CreateDraft(cin);
+	CClient client;
+	client.CreatePictureDraft(cin);
 	CCanvas canvas;
-	CPainter painter;
-	painter.DrawPicture(pictureDraft, canvas);
+	client.DrawPicture(canvas);
 }

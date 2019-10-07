@@ -65,9 +65,9 @@ TEST_CASE("Painter tests")
 	
 	SECTION("Check ellipse")
 	{
-		CHECK(ellipses[0].center == Point{ 5, 6 });
-		CHECK(ellipses[0].horizontalRadius == 3);
-		CHECK(ellipses[0].verticalRadius == 2);
+		CHECK(ellipses[0].leftTop == Point{ 2, 4 });
+		CHECK(ellipses[0].width == 6);
+		CHECK(ellipses[0].height == 4);
 		CHECK(ellipses[0].color == Color::Red);
 	}
 

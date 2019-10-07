@@ -163,6 +163,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Factory\Client.cpp" />
     <ClCompile Include="..\Factory\Designer.cpp" />
     <ClCompile Include="..\Factory\Ellipse.cpp" />
     <ClCompile Include="..\Factory\Painter.cpp" />
@@ -172,15 +173,21 @@
     <ClCompile Include="..\Factory\Shape.cpp" />
     <ClCompile Include="..\Factory\ShapeFactory.cpp" />
     <ClCompile Include="..\Factory\Triangle.cpp" />
+    <ClCompile Include="clientTests.cpp" />
+    <ClCompile Include="designerTests.cpp" />
     <ClCompile Include="factoryTests.cpp" />
     <ClCompile Include="MockCanvas.cpp" />
+    <ClCompile Include="MockShape.cpp" />
+    <ClCompile Include="MockShapeFactory.cpp" />
     <ClCompile Include="painterTests.cpp" />
-    <ClCompile Include="pictureDraftTests.cpp" />
+    <ClCompile Include="draftTests.cpp" />
     <ClCompile Include="shapesTests.cpp" />
     <ClCompile Include="testsUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockCanvas.h" />
+    <ClInclude Include="MockShape.h" />
+    <ClInclude Include="MockShapeFactory.h" />
     <ClInclude Include="testsUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

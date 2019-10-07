@@ -86,18 +86,18 @@ unique_ptr<CShape> CShapeFactory::CreateEllipse(istream& strm) const
 
 unique_ptr<CShape> CShapeFactory::CreateRegularPolygon(istream& strm) const
 {
-	int8_t verticesCount;
+	short verticesCount;
 	Point center;
 	double radius;
 	string color;
 	strm >> verticesCount >> center.x >> center.y >> radius >> color;
 
-	if (!strm)
+	if (!strm || verticesCount > 100)
 	{
 		throw invalid_argument("Invalid arguments to create a regular polygon");
 	}
 
-	return make_unique<CRegularPolygon>(verticesCount, center, radius, StringToColor(color));
+	return make_unique<CRegularPolygon>((int8_t)verticesCount, center, radius, StringToColor(color));
 }
 
 Color CShapeFactory::StringToColor(const std::string& str) const
