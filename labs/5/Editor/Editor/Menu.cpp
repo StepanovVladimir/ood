@@ -5,6 +5,12 @@
 
 using namespace std;
 
+CMenu::CMenu(istream& inStrm, ostream& outStrm)
+	: m_inStrm(inStrm)
+	, m_outStrm(outStrm)
+{
+}
+
 void CMenu::AddItem(const string& shortcut, const string& description, const Command& command)
 {
 	m_items.emplace_back(shortcut, description, command);
@@ -15,17 +21,17 @@ void CMenu::Run()
 	ShowInstructions();
 
 	string command;
-	while ((cout << ">") && getline(cin, command) && ExecuteCommand(command))
+	while (getline(m_inStrm, command) && ExecuteCommand(command))
 	{
 	}
 }
 
 void CMenu::ShowInstructions() const
 {
-	cout << "Commands list:\n";
+	m_outStrm << "Commands list:\n";
 	for (auto& item : m_items)
 	{
-		cout << "  " << item.shortcut << ": " << item.description << "\n";
+		m_outStrm << "  " << item.shortcut << ": " << item.description << "\n";
 	}
 }
 
@@ -51,7 +57,7 @@ bool CMenu::ExecuteCommand(const string& command)
 	}
 	else
 	{
-		cout << "Unknown command\n";
+		m_outStrm << "Unknown command\n";
 	}
 	return !m_exit;
 }

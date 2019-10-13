@@ -4,6 +4,28 @@
 
 using namespace std;
 
+shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text,
+	optional<size_t> position)
+{
+	//m_history.AddAndExecuteCommand(make_unique<CChangeStringCommand>(m_items, text));
+	return nullptr;
+}
+
+size_t CDocument::GetItemsCount() const
+{
+	return 0;
+}
+
+/*CConstDocumentItem CDocument::GetItem(size_t index) const
+{
+	return CConstDocumentItem();
+}
+
+CDocumentItem CDocument::GetItem(size_t index)
+{
+	return CDocumentItem();
+}*/
+
 string CDocument::GetTitle() const
 {
 	return m_title;

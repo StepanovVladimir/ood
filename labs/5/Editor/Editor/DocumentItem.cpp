@@ -3,12 +3,22 @@
 
 using namespace std;
 
+CDocumentItem::CDocumentItem(shared_ptr<IParagraph> paragraph)
+	: CConstDocumentItem(paragraph)
+{
+}
+
+CDocumentItem::CDocumentItem(shared_ptr<IImage> image)
+	: CConstDocumentItem(image)
+{
+}
+
 shared_ptr<IParagraph> CDocumentItem::GetParagraph()
 {
-	return shared_ptr<IParagraph>();
+	return m_paragraph;
 }
 
 shared_ptr<IImage> CDocumentItem::GetImage()
 {
-	return shared_ptr<IImage>();
+	return m_image;
 }

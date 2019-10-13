@@ -2,13 +2,11 @@
 
 #include "Menu.h"
 #include "IDocument.h"
-#include <iosfwd>
-#include <string>
 
 class CEditor
 {
 public:
-	CEditor();
+	CEditor(std::istream& inStrm = std::cin, std::ostream& outStrm = std::cout);
 	
 	void Start();
 
@@ -16,10 +14,11 @@ private:
 	typedef void (CEditor::*MenuHandler)(std::istream& in);
 
 	CMenu m_menu;
+	std::ostream& m_outStrm;
 	std::unique_ptr<IDocument> m_document;
 
 	void AddMenuItem(const std::string& shortcut, const std::string& description, MenuHandler handler);
-	
+
 	void SetTitle(std::istream& in);
 	void List(std::istream&);
 	void Undo(std::istream&);

@@ -17,13 +17,21 @@ void CHistory::AddAndExecuteCommand(ICommandPtr&& command)
 		try
 		{
 			command->Execute();
-			m_commands.back() = move(command);
-			m_nextCommandIndex++;
 		}
 		catch (...)
 		{
 			m_commands.pop_back();
 			throw;
+		}
+
+		m_commands.back() = move(command);
+		if (m_commands.size() <= 10)
+		{
+			m_nextCommandIndex++;
+		}
+		else
+		{
+			m_commands.pop_front();
 		}
 	}
 }

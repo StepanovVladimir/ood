@@ -10,6 +10,8 @@ class CMenu
 public:
 	using Command = std::function<void(std::istream& args)>;
 	
+	CMenu(std::istream& inStrm = std::cin, std::ostream& outStrm = std::cout);
+
 	void AddItem(const std::string& shortcut, const std::string& description, const Command& command);
 	void Run();
 	void ShowInstructions() const;
@@ -30,6 +32,8 @@ private:
 		Command command;
 	};
 
+	std::istream& m_inStrm;
+	std::ostream& m_outStrm;
 	std::vector<Item> m_items;
 	bool m_exit = false;
 

@@ -4,8 +4,10 @@
 
 using namespace std;
 
-CEditor::CEditor()
-	: m_document(make_unique<CDocument>())
+CEditor::CEditor(istream& inStrm, ostream& outStrm)
+	: m_menu(inStrm, outStrm)
+	, m_outStrm(outStrm)
+	, m_document(make_unique<CDocument>())
 {
 	m_menu.AddItem("help", "Help", [this](istream&) { m_menu.ShowInstructions(); });
 	m_menu.AddItem("exit", "Exit", [this](istream&) { m_menu.Exit(); });
@@ -42,9 +44,9 @@ void CEditor::SetTitle(istream& in)
 
 void CEditor::List(istream&)
 {
-	cout << "-------------" << endl;
-	cout << m_document->GetTitle() << endl;
-	cout << "-------------" << endl;
+	m_outStrm << "-------------" << endl;
+	m_outStrm << m_document->GetTitle() << endl;
+	m_outStrm << "-------------" << endl;
 }
 
 void CEditor::Undo(istream&)
@@ -55,7 +57,7 @@ void CEditor::Undo(istream&)
 	}
 	else
 	{
-		cout << "Can't undo" << endl;
+		m_outStrm << "Can't undo" << endl;
 	}
 }
 
@@ -67,6 +69,6 @@ void CEditor::Redo(istream&)
 	}
 	else
 	{
-		cout << "Can't redo" << endl;
+		m_outStrm << "Can't redo" << endl;
 	}
 }
