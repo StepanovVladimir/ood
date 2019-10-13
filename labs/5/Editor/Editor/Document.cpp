@@ -1,12 +1,14 @@
 #include "pch.h"
 #include "Document.h"
 #include "ChangeStringCommand.h"
+#include "Paragraph.h"
 
 using namespace std;
 
 shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text,
 	optional<size_t> position)
 {
+	CDocumentItem documentItem(make_shared<CParagraph>(text));
 	//m_history.AddAndExecuteCommand(make_unique<CChangeStringCommand>(m_items, text));
 	return nullptr;
 }

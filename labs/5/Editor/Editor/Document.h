@@ -2,7 +2,7 @@
 
 #include "IDocument.h"
 #include "History.h"
-#include <vector>
+#include <list>
 
 class CDocument : public IDocument
 {
@@ -25,6 +25,6 @@ public:
 
 private:
 	std::string m_title;
-	std::vector<CDocumentItem> m_items;
+	std::list<CDocumentItem> m_items;
 	CHistory m_history;
 };
