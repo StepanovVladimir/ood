@@ -20,19 +20,15 @@ TEST_CASE("Menu tests")
 
 	getline(result, str);
 	CHECK(str == "Commands list:");
-
 	getline(result, str);
 	CHECK(str == "  help: Help");
-
 	getline(result, str);
 	CHECK(str == "  exit: Exit");
 
 	getline(result, str);
 	CHECK(str == "Commands list:");
-
 	getline(result, str);
 	CHECK(str == "  help: Help");
-
 	getline(result, str);
 	CHECK(str == "  exit: Exit");
 
