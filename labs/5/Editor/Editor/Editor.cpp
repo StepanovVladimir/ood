@@ -12,6 +12,7 @@ CEditor::CEditor(istream& inStrm, ostream& outStrm)
 	m_menu.AddItem("help", "Help", [this](istream&) { m_menu.ShowInstructions(); });
 	m_menu.AddItem("exit", "Exit", [this](istream&) { m_menu.Exit(); });
 
+	AddMenuItem("insertParagraph", "Inserts paragraph. Args: <position>|end <text>", &CEditor::InsertParagraph);
 	AddMenuItem("setTitle", "Changes title. Args: <new title>", &CEditor::SetTitle);
 	AddMenuItem("list", "Show document", &CEditor::List);
 	AddMenuItem("undo", "Undo command", &CEditor::Undo);
@@ -26,6 +27,49 @@ void CEditor::Start()
 void CEditor::AddMenuItem(const string& shortcut, const string& description, MenuHandler handler)
 {
 	m_menu.AddItem(shortcut, description, bind(handler, this, placeholders::_1));
+}
+
+void CEditor::InsertParagraph(istream& in)
+{
+	string strPosition;
+	optional<size_t> position;
+
+	in >> strPosition;
+	if (!in)
+	{
+		m_outStrm << "Not specified position of the document\n";
+		return;
+	}
+
+	if (strPosition != "end")
+	{
+		try
+		{
+			position = stoul(strPosition);
+		}
+		catch (...)
+		{
+			m_outStrm << "Not specified position of the document\n";
+			return;
+		}
+	}
+
+	string head;
+	string tail;
+	if (in >> head)
+	{
+		getline(in, tail);
+	}
+	string text = head + tail;
+	
+	try
+	{
+		m_document->InsertParagraph(text, position);
+	}
+	catch (runtime_error& exc)
+	{
+		m_outStrm << exc.what();
+	}
 }
 
 void CEditor::SetTitle(istream& in)
@@ -46,6 +90,10 @@ void CEditor::List(istream&)
 {
 	m_outStrm << "-------------" << endl;
 	m_outStrm << m_document->GetTitle() << endl;
+	for (CDocumentItem& item : *m_document)
+	{
+		m_outStrm << item.GetParagraph()->GetText() << endl;
+	}
 	m_outStrm << "-------------" << endl;
 }
 

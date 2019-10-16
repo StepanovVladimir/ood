@@ -8,6 +8,10 @@ CInsertItemCommand::CInsertItemCommand(list<CDocumentItem>& target, const CDocum
 	, m_item(item)
 	, m_position(position)
 {
+	if (m_position != nullopt && m_position.value() > m_target.size())
+	{
+		throw runtime_error("The item number exceeds the number of items in the document");
+	}
 }
 
 void CInsertItemCommand::DoExecute()
@@ -18,7 +22,7 @@ void CInsertItemCommand::DoExecute()
 	}
 	else
 	{
-
+		m_target.insert(GetIterator(), m_item);
 	}
 }
 
@@ -28,4 +32,18 @@ void CInsertItemCommand::DoUnexecute()
 	{
 		m_target.pop_back();
 	}
+	else
+	{
+		m_target.erase(GetIterator());
+	}
+}
+
+list<CDocumentItem>::iterator CInsertItemCommand::GetIterator()
+{
+	auto iter = m_target.begin();
+	for (size_t i = 0; i < m_position; i++)
+	{
+		iter++;
+	}
+	return iter;
 }

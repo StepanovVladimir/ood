@@ -39,6 +39,9 @@
     <ClInclude Include="ChangeStringCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
+    <ClInclude Include="InsertItemCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DocumentItem.cpp">
@@ -60,6 +63,9 @@
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="ChangeStringCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertItemCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>

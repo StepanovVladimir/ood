@@ -2,7 +2,6 @@
 
 #include "IDocument.h"
 #include "History.h"
-#include <list>
 
 class CDocument : public IDocument
 {
@@ -12,8 +11,10 @@ public:
 
 	size_t GetItemsCount() const override;
 
-	/*CConstDocumentItem GetItem(size_t index) const override;
-	CDocumentItem GetItem(size_t index) override;*/
+	std::list<CDocumentItem>::const_iterator begin() const override;
+	std::list<CDocumentItem>::iterator begin() override;
+	std::list<CDocumentItem>::const_iterator end() const override;
+	std::list<CDocumentItem>::iterator end() override;
 
 	std::string GetTitle() const override;
 	void SetTitle(const std::string& title) override;

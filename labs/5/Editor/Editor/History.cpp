@@ -25,7 +25,7 @@ void CHistory::AddAndExecuteCommand(ICommandPtr&& command)
 		}
 
 		m_commands.back() = move(command);
-		if (m_commands.size() <= 10)
+		if (m_nextCommandIndex < 10)
 		{
 			m_nextCommandIndex++;
 		}

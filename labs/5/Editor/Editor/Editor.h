@@ -19,6 +19,7 @@ private:
 
 	void AddMenuItem(const std::string& shortcut, const std::string& description, MenuHandler handler);
 
+	void InsertParagraph(std::istream& in);
 	void SetTitle(std::istream& in);
 	void List(std::istream&);
 	void Undo(std::istream&);

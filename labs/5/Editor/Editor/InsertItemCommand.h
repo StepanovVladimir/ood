@@ -18,4 +18,6 @@ private:
 	std::list<CDocumentItem>& m_target;
 	CDocumentItem m_item;
 	std::optional<size_t> m_position;
+
+	std::list<CDocumentItem>::iterator GetIterator();
 };

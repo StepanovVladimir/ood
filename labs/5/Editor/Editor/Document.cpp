@@ -1,32 +1,44 @@
 #include "pch.h"
 #include "Document.h"
-#include "ChangeStringCommand.h"
 #include "Paragraph.h"
+#include "ChangeStringCommand.h"
+#include "InsertItemCommand.h"
 
 using namespace std;
 
 shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text,
 	optional<size_t> position)
 {
-	CDocumentItem documentItem(make_shared<CParagraph>(text));
-	//m_history.AddAndExecuteCommand(make_unique<CChangeStringCommand>(m_items, text));
-	return nullptr;
+	shared_ptr<CParagraph> paragraph = make_shared<CParagraph>(text);
+	CDocumentItem item(paragraph);
+	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_items, item, position));
+	return paragraph;
 }
 
 size_t CDocument::GetItemsCount() const
 {
-	return 0;
+	return m_items.size();
 }
 
-/*CConstDocumentItem CDocument::GetItem(size_t index) const
+list<CDocumentItem>::const_iterator CDocument::begin() const
 {
-	return CConstDocumentItem();
+	return m_items.begin();
 }
 
-CDocumentItem CDocument::GetItem(size_t index)
+list<CDocumentItem>::iterator CDocument::begin()
 {
-	return CDocumentItem();
-}*/
+	return m_items.begin();
+}
+
+list<CDocumentItem>::const_iterator CDocument::end() const
+{
+	return m_items.end();
+}
+
+list<CDocumentItem>::iterator CDocument::end()
+{
+	return m_items.end();
+}
 
 string CDocument::GetTitle() const
 {

@@ -3,6 +3,7 @@
 #include "IParagraph.h"
 #include "IImage.h"
 #include "DocumentItem.h"
+#include <list>
 #include <optional>
 
 class IDocument
@@ -17,8 +18,10 @@ public:
 
 	virtual size_t GetItemsCount() const = 0;
 
-	/*virtual CConstDocumentItem GetItem(size_t index) const = 0;
-	virtual CDocumentItem GetItem(size_t index) = 0;*/
+	virtual std::list<CDocumentItem>::const_iterator begin() const = 0;
+	virtual std::list<CDocumentItem>::iterator begin() = 0;
+	virtual std::list<CDocumentItem>::const_iterator end() const = 0;
+	virtual std::list<CDocumentItem>::iterator end() = 0;
 
 	//virtual void DeleteItem(size_t index) = 0;
 
