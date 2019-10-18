@@ -1,6 +1,8 @@
 ﻿#define CATCH_CONFIG_MAIN
 #include "../../../../catch2/catch.hpp"
 #include "../Editor/ChangeStringCommand.h"
+#include "../Editor/InsertItemCommand.h"
+#include "../Editor/Paragraph.h"
 
 using namespace std;
 
@@ -21,4 +23,44 @@ TEST_CASE("Change string command tests")
 
 	command.Unexecute();
 	CHECK(str == "first");
+}
+
+TEST_CASE("Insert item command tests")
+{
+	list<CDocumentItem> items;
+	CDocumentItem item1(make_shared<CParagraph>("first"));
+
+	CHECK_THROWS_AS(CInsertItemCommand(items, item1, 1), runtime_error);
+
+	CInsertItemCommand command1(items, item1, nullopt);
+	CHECK(items.empty());
+
+	command1.Execute();
+	CHECK(items.size() == 1);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+
+	command1.Unexecute();
+	CHECK(items.empty());
+
+	CDocumentItem item2(make_shared<CParagraph>("second"));
+	CInsertItemCommand command2(items, item2, 0);
+
+	command2.Execute();
+	CHECK(items.size() == 1);
+	CHECK(items.begin()->GetParagraph()->GetText() == "second");
+
+	CDocumentItem item3(make_shared<CParagraph>("third"));
+	CInsertItemCommand command3(items, item3, 0);
+
+	command3.Execute();
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "third");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+
+	command3.Unexecute();
+	CHECK(items.size() == 1);
+	CHECK(items.begin()->GetParagraph()->GetText() == "second");
+
+	command2.Unexecute();
+	CHECK(items.empty());
 }

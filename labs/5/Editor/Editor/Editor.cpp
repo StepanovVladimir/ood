@@ -89,10 +89,12 @@ void CEditor::SetTitle(istream& in)
 void CEditor::List(istream&)
 {
 	m_outStrm << "-------------" << endl;
-	m_outStrm << m_document->GetTitle() << endl;
+	m_outStrm << "Title: " << m_document->GetTitle() << endl;
+	size_t i = 0;
 	for (CDocumentItem& item : *m_document)
 	{
-		m_outStrm << item.GetParagraph()->GetText() << endl;
+		m_outStrm << i << ". Paragraph: " << item.GetParagraph()->GetText() << endl;
+		i++;
 	}
 	m_outStrm << "-------------" << endl;
 }
