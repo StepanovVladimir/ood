@@ -3,6 +3,7 @@
 #include "Paragraph.h"
 #include "ChangeStringCommand.h"
 #include "InsertItemCommand.h"
+#include "DeleteItemCommand.h"
 
 using namespace std;
 
@@ -38,6 +39,11 @@ list<CDocumentItem>::const_iterator CDocument::end() const
 list<CDocumentItem>::iterator CDocument::end()
 {
 	return m_items.end();
+}
+
+void CDocument::DeleteItem(size_t index)
+{
+	m_history.AddAndExecuteCommand(make_unique<CDeleteItemCommand>(m_items, index));
 }
 
 string CDocument::GetTitle() const

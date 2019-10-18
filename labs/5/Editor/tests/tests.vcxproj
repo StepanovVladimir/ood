@@ -170,6 +170,7 @@
     <ClCompile Include="..\Editor\AbstractCommand.cpp" />
     <ClCompile Include="..\Editor\ChangeStringCommand.cpp" />
     <ClCompile Include="..\Editor\ConstDocumentItem.cpp" />
+    <ClCompile Include="..\Editor\DeleteItemCommand.cpp" />
     <ClCompile Include="..\Editor\Document.cpp" />
     <ClCompile Include="..\Editor\DocumentItem.cpp" />
     <ClCompile Include="..\Editor\Editor.cpp" />

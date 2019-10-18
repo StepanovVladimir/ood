@@ -28,6 +28,8 @@ TEST_CASE("Editor tests")
 	getline(result, str);
 	CHECK(str == "  list: Show document");
 	getline(result, str);
+	CHECK(str == "  deleteItem: Deletes document item. Args: <position>");
+	getline(result, str);
 	CHECK(str == "  undo: Undo command");
 	getline(result, str);
 	CHECK(str == "  redo: Redo undone command");
@@ -67,6 +69,7 @@ TEST_CASE("Editor set title tests")
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
+	getline(result, str);
 
 	getline(result, str);
 	CHECK(str == "-------------");
@@ -94,7 +97,7 @@ TEST_CASE("Editor set title tests")
 
 TEST_CASE("Editor insert paragraph tests")
 {
-	istringstream inStrm("insertParagraph end word1 word2\ninsertParagraph 0 word3\nlist\nexit");
+	istringstream inStrm("insertParagraph\ninsertParagraph word\ninsertParagraph end word1 word2\ninsertParagraph 0 word3\nlist\nexit");
 	ostringstream outStrm;
 	CEditor editor(inStrm, outStrm);
 
@@ -111,6 +114,12 @@ TEST_CASE("Editor insert paragraph tests")
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
+	getline(result, str);
+
+	getline(result, str);
+	CHECK(str == "Not specified position of the document");
+	getline(result, str);
+	CHECK(str == "Not specified position of the document");
 
 	getline(result, str);
 	CHECK(str == "-------------");
@@ -119,10 +128,43 @@ TEST_CASE("Editor insert paragraph tests")
 
 	getline(result, str);
 	CHECK(str == "0. Paragraph: word3");
-
 	getline(result, str);
 	CHECK(str == "1. Paragraph: word1 word2");
 
+	getline(result, str);
+	CHECK(str == "-------------");
+}
+
+TEST_CASE("Editor delete item tests")
+{
+	istringstream inStrm("insertParagraph end word\ndeleteItem\ndeleteItem abc\ndeleteItem 0\nlist\nexit");
+	ostringstream outStrm;
+	CEditor editor(inStrm, outStrm);
+
+	editor.Start();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+
+	getline(result, str);
+	CHECK(str == "Not specified position of the document");
+	getline(result, str);
+	CHECK(str == "Not specified position of the document");
+
+	getline(result, str);
+	CHECK(str == "-------------");
+	getline(result, str);
+	CHECK(str == "Title: ");
 	getline(result, str);
 	CHECK(str == "-------------");
 }

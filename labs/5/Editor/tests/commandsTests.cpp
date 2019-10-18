@@ -2,6 +2,7 @@
 #include "../../../../catch2/catch.hpp"
 #include "../Editor/ChangeStringCommand.h"
 #include "../Editor/InsertItemCommand.h"
+#include "../Editor/DeleteItemCommand.h"
 #include "../Editor/Paragraph.h"
 
 using namespace std;
@@ -63,4 +64,38 @@ TEST_CASE("Insert item command tests")
 
 	command2.Unexecute();
 	CHECK(items.empty());
+}
+
+TEST_CASE("Delete item command tests")
+{
+	list<CDocumentItem> items;
+
+	CHECK_THROWS_AS(CDeleteItemCommand(items, 0), runtime_error);
+
+	items.push_back(CDocumentItem(make_shared<CParagraph>("first")));
+	items.push_back(CDocumentItem(make_shared<CParagraph>("second")));
+
+	CDeleteItemCommand command1(items, 0);
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+
+	command1.Execute();
+	CHECK(items.size() == 1);
+	CHECK(items.begin()->GetParagraph()->GetText() == "second");
+
+	command1.Unexecute();
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+	
+	CDeleteItemCommand command2(items, 1);
+	command2.Execute();
+	CHECK(items.size() == 1);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+
+	command2.Unexecute();
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
 }

@@ -22,6 +22,7 @@ private:
 	void InsertParagraph(std::istream& in);
 	void SetTitle(std::istream& in);
 	void List(std::istream&);
+	void DeleteItem(std::istream& in);
 	void Undo(std::istream&);
 	void Redo(std::istream&);
 };

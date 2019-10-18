@@ -15,6 +15,7 @@ CEditor::CEditor(istream& inStrm, ostream& outStrm)
 	AddMenuItem("insertParagraph", "Inserts paragraph. Args: <position>|end <text>", &CEditor::InsertParagraph);
 	AddMenuItem("setTitle", "Changes title. Args: <new title>", &CEditor::SetTitle);
 	AddMenuItem("list", "Show document", &CEditor::List);
+	AddMenuItem("deleteItem", "Deletes document item. Args: <position>", &CEditor::DeleteItem);
 	AddMenuItem("undo", "Undo command", &CEditor::Undo);
 	AddMenuItem("redo", "Redo undone command", &CEditor::Redo);
 }
@@ -68,7 +69,7 @@ void CEditor::InsertParagraph(istream& in)
 	}
 	catch (runtime_error& exc)
 	{
-		m_outStrm << exc.what();
+		m_outStrm << exc.what() << endl;
 	}
 }
 
@@ -97,6 +98,38 @@ void CEditor::List(istream&)
 		i++;
 	}
 	m_outStrm << "-------------" << endl;
+}
+
+void CEditor::DeleteItem(istream& in)
+{
+	string strPosition;
+	size_t index;
+
+	in >> strPosition;
+	if (!in)
+	{
+		m_outStrm << "Not specified position of the document\n";
+		return;
+	}
+
+	try
+	{
+		index = stoul(strPosition);
+	}
+	catch (...)
+	{
+		m_outStrm << "Not specified position of the document\n";
+		return;
+	}
+
+	try
+	{
+		m_document->DeleteItem(index);
+	}
+	catch (runtime_error& exc)
+	{
+		m_outStrm << exc.what() << endl;
+	}
 }
 
 void CEditor::Undo(istream&)
