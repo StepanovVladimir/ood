@@ -2,6 +2,7 @@
 #include "../../../../catch2/catch.hpp"
 #include "../Editor/ChangeStringCommand.h"
 #include "../Editor/InsertItemCommand.h"
+#include "../Editor/ReplaceParagraphTextCommand.h"
 #include "../Editor/DeleteItemCommand.h"
 #include "../Editor/Paragraph.h"
 
@@ -64,6 +65,42 @@ TEST_CASE("Insert item command tests")
 
 	command2.Unexecute();
 	CHECK(items.empty());
+}
+
+TEST_CASE("Replace paragraph text command tests")
+{
+	list<CDocumentItem> items;
+
+	CHECK_THROWS_AS(CReplaceParagraphTextCommand(items, "first", 0), runtime_error);
+
+	items.push_back(CDocumentItem(make_shared<CParagraph>("first")));
+	items.push_back(CDocumentItem(make_shared<CParagraph>("second")));
+
+	CReplaceParagraphTextCommand command1(items, "third", 0);
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+
+	command1.Execute();
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "third");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+
+	command1.Unexecute();
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+
+	CReplaceParagraphTextCommand command2(items, "fourth", 1);
+	command2.Execute();
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "fourth");
+
+	command2.Unexecute();
+	CHECK(items.size() == 2);
+	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
 }
 
 TEST_CASE("Delete item command tests")

@@ -7,7 +7,8 @@ class CParagraph : public IParagraph
 public:
 	CParagraph(const std::string& text);
 
-	std::string GetText() const override;
+	const std::string& GetText() const override;
+	std::string& GetText() override;
 	void SetText(const std::string& text) override;
 
 private:

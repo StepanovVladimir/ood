@@ -3,6 +3,7 @@
 #include "Paragraph.h"
 #include "ChangeStringCommand.h"
 #include "InsertItemCommand.h"
+#include "ReplaceParagraphTextCommand.h"
 #include "DeleteItemCommand.h"
 
 using namespace std;
@@ -11,8 +12,10 @@ shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text,
 	optional<size_t> position)
 {
 	shared_ptr<CParagraph> paragraph = make_shared<CParagraph>(text);
-	CDocumentItem item(paragraph);
+	CDocumentItem item(make_shared<CParagraph>(text));
+
 	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_items, item, position));
+	
 	return paragraph;
 }
 
@@ -39,6 +42,11 @@ list<CDocumentItem>::const_iterator CDocument::end() const
 list<CDocumentItem>::iterator CDocument::end()
 {
 	return m_items.end();
+}
+
+void CDocument::ReplaceText(const std::string& text, size_t index)
+{
+	m_history.AddAndExecuteCommand(make_unique<CReplaceParagraphTextCommand>(m_items, text, index));
 }
 
 void CDocument::DeleteItem(size_t index)

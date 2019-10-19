@@ -45,6 +45,9 @@
     <ClInclude Include="DeleteItemCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
+    <ClInclude Include="ReplaceParagraphTextCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DocumentItem.cpp">
@@ -72,6 +75,9 @@
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="DeleteItemCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplaceParagraphTextCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>

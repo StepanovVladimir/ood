@@ -46,5 +46,8 @@
     <ClCompile Include="..\Editor\DeleteItemCommand.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\Editor\ReplaceParagraphTextCommand.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

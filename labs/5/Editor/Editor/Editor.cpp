@@ -15,6 +15,7 @@ CEditor::CEditor(istream& inStrm, ostream& outStrm)
 	AddMenuItem("insertParagraph", "Inserts paragraph. Args: <position>|end <text>", &CEditor::InsertParagraph);
 	AddMenuItem("setTitle", "Changes title. Args: <new title>", &CEditor::SetTitle);
 	AddMenuItem("list", "Show document", &CEditor::List);
+	AddMenuItem("replaceText", "Replaces text of paragraph. Args: <position> <text>", &CEditor::ReplaceText);
 	AddMenuItem("deleteItem", "Deletes document item. Args: <position>", &CEditor::DeleteItem);
 	AddMenuItem("undo", "Undo command", &CEditor::Undo);
 	AddMenuItem("redo", "Redo undone command", &CEditor::Redo);
@@ -98,6 +99,46 @@ void CEditor::List(istream&)
 		i++;
 	}
 	m_outStrm << "-------------" << endl;
+}
+
+void CEditor::ReplaceText(std::istream& in)
+{
+	string strPosition;
+	size_t index;
+
+	in >> strPosition;
+	if (!in)
+	{
+		m_outStrm << "Not specified position of the document\n";
+		return;
+	}
+
+	try
+	{
+		index = stoul(strPosition);
+	}
+	catch (...)
+	{
+		m_outStrm << "Not specified position of the document\n";
+		return;
+	}
+
+	string head;
+	string tail;
+	if (in >> head)
+	{
+		getline(in, tail);
+	}
+	string text = head + tail;
+
+	try
+	{
+		m_document->ReplaceText(text, index);
+	}
+	catch (runtime_error& exc)
+	{
+		m_outStrm << exc.what() << endl;
+	}
 }
 
 void CEditor::DeleteItem(istream& in)

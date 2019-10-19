@@ -28,6 +28,8 @@ TEST_CASE("Editor tests")
 	getline(result, str);
 	CHECK(str == "  list: Show document");
 	getline(result, str);
+	CHECK(str == "  replaceText: Replaces text of paragraph. Args: <position> <text>");
+	getline(result, str);
 	CHECK(str == "  deleteItem: Deletes document item. Args: <position>");
 	getline(result, str);
 	CHECK(str == "  undo: Undo command");
@@ -61,6 +63,7 @@ TEST_CASE("Editor set title tests")
 	istringstream result(outStrm.str());
 	string str;
 
+	getline(result, str);
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
@@ -115,6 +118,7 @@ TEST_CASE("Editor insert paragraph tests")
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
+	getline(result, str);
 
 	getline(result, str);
 	CHECK(str == "Not specified position of the document");
@@ -135,6 +139,43 @@ TEST_CASE("Editor insert paragraph tests")
 	CHECK(str == "-------------");
 }
 
+TEST_CASE("Editor replace text of paragraph tests")
+{
+	istringstream inStrm("insertParagraph end word1\nreplaceText\nreplaceText word2\nreplaceText 0 word2\nlist\nexit");
+	ostringstream outStrm;
+	CEditor editor(inStrm, outStrm);
+
+	editor.Start();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+
+	getline(result, str);
+	CHECK(str == "Not specified position of the document");
+	getline(result, str);
+	CHECK(str == "Not specified position of the document");
+
+	getline(result, str);
+	CHECK(str == "-------------");
+	getline(result, str);
+	CHECK(str == "Title: ");
+	getline(result, str);
+	CHECK(str == "0. Paragraph: word2");
+	getline(result, str);
+	CHECK(str == "-------------");
+}
+
 TEST_CASE("Editor delete item tests")
 {
 	istringstream inStrm("insertParagraph end word\ndeleteItem\ndeleteItem abc\ndeleteItem 0\nlist\nexit");
@@ -146,6 +187,7 @@ TEST_CASE("Editor delete item tests")
 	istringstream result(outStrm.str());
 	string str;
 
+	getline(result, str);
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);

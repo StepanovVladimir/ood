@@ -23,6 +23,7 @@ public:
 	virtual std::list<CDocumentItem>::const_iterator end() const = 0;
 	virtual std::list<CDocumentItem>::iterator end() = 0;
 
+	virtual void ReplaceText(const std::string& text, size_t index) = 0;
 	virtual void DeleteItem(size_t index) = 0;
 
 	virtual std::string GetTitle() const = 0;
