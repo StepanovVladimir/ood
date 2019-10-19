@@ -5,6 +5,7 @@
 #include "InsertItemCommand.h"
 #include "ReplaceParagraphTextCommand.h"
 #include "DeleteItemCommand.h"
+#include <fstream>
 
 using namespace std;
 
@@ -82,4 +83,22 @@ bool CDocument::CanRedo() const
 void CDocument::Redo()
 {
 	m_history.Redo();
+}
+
+void CDocument::Save(const string& path) const
+{
+	ofstream fOut(path + ".html");
+	fOut << "<!DOCTYPE html>\n";
+	fOut << "<html>\n";
+	fOut << "  <head>\n";
+	fOut << "    <title>" + m_title + "</title>\n";
+	fOut << "  </head>\n";
+	fOut << "  <body>\n";
+	fOut << "    <h1>" + m_title + "</h1>\n";
+	for (auto item : m_items)
+	{
+		fOut << "    <p>" + item.GetParagraph()->GetText() + "</p>\n";
+	}
+	fOut << "  </body>\n";
+	fOut << "</html>\n";
 }

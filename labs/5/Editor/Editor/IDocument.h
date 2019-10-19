@@ -34,5 +34,5 @@ public:
 	virtual bool CanRedo() const = 0;
 	virtual void Redo() = 0;
 
-	//virtual void Save(const std::string& path) const = 0;
+	virtual void Save(const std::string& path) const = 0;
 };

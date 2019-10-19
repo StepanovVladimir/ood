@@ -27,6 +27,8 @@ public:
 	bool CanRedo() const override;
 	void Redo() override;
 
+	void Save(const std::string& path) const override;
+
 private:
 	std::string m_title;
 	std::list<CDocumentItem> m_items;

@@ -15,10 +15,11 @@ CEditor::CEditor(istream& inStrm, ostream& outStrm)
 	AddMenuItem("insertParagraph", "Inserts paragraph. Args: <position>|end <text>", &CEditor::InsertParagraph);
 	AddMenuItem("setTitle", "Changes title. Args: <new title>", &CEditor::SetTitle);
 	AddMenuItem("list", "Show document", &CEditor::List);
-	AddMenuItem("replaceText", "Replaces text of paragraph. Args: <position> <text>", &CEditor::ReplaceText);
+	AddMenuItem("replaceText", "Replaces text of paragraph. Args: <position> <new text>", &CEditor::ReplaceText);
 	AddMenuItem("deleteItem", "Deletes document item. Args: <position>", &CEditor::DeleteItem);
 	AddMenuItem("undo", "Undo command", &CEditor::Undo);
 	AddMenuItem("redo", "Redo undone command", &CEditor::Redo);
+	AddMenuItem("save", "Saves document. Args: <path>", &CEditor::Save);
 }
 
 void CEditor::Start()
@@ -93,7 +94,7 @@ void CEditor::List(istream&)
 	m_outStrm << "-------------" << endl;
 	m_outStrm << "Title: " << m_document->GetTitle() << endl;
 	size_t i = 0;
-	for (CDocumentItem& item : *m_document)
+	for (auto item : *m_document)
 	{
 		m_outStrm << i << ". Paragraph: " << item.GetParagraph()->GetText() << endl;
 		i++;
@@ -195,4 +196,17 @@ void CEditor::Redo(istream&)
 	{
 		m_outStrm << "Can't redo" << endl;
 	}
+}
+
+void CEditor::Save(istream& in)
+{
+	string head;
+	string tail;
+	if (in >> head)
+	{
+		getline(in, tail);
+	}
+	string path = head + tail;
+
+	m_document->Save(path);
 }

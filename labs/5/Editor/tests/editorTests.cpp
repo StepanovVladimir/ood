@@ -1,6 +1,7 @@
 #include "../../../../catch2/catch.hpp"
 #include "../Editor/Editor.h"
 #include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -28,13 +29,15 @@ TEST_CASE("Editor tests")
 	getline(result, str);
 	CHECK(str == "  list: Show document");
 	getline(result, str);
-	CHECK(str == "  replaceText: Replaces text of paragraph. Args: <position> <text>");
+	CHECK(str == "  replaceText: Replaces text of paragraph. Args: <position> <new text>");
 	getline(result, str);
 	CHECK(str == "  deleteItem: Deletes document item. Args: <position>");
 	getline(result, str);
 	CHECK(str == "  undo: Undo command");
 	getline(result, str);
 	CHECK(str == "  redo: Redo undone command");
+	getline(result, str);
+	CHECK(str == "  save: Saves document. Args: <path>");
 
 	getline(result, str);
 	CHECK(str == "-------------");
@@ -63,6 +66,7 @@ TEST_CASE("Editor set title tests")
 	istringstream result(outStrm.str());
 	string str;
 
+	getline(result, str);
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
@@ -119,6 +123,7 @@ TEST_CASE("Editor insert paragraph tests")
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
+	getline(result, str);
 
 	getline(result, str);
 	CHECK(str == "Not specified position of the document");
@@ -150,6 +155,7 @@ TEST_CASE("Editor replace text of paragraph tests")
 	istringstream result(outStrm.str());
 	string str;
 
+	getline(result, str);
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
@@ -197,6 +203,7 @@ TEST_CASE("Editor delete item tests")
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
+	getline(result, str);
 
 	getline(result, str);
 	CHECK(str == "Not specified position of the document");
@@ -209,4 +216,35 @@ TEST_CASE("Editor delete item tests")
 	CHECK(str == "Title: ");
 	getline(result, str);
 	CHECK(str == "-------------");
+}
+
+TEST_CASE("Editor save tests")
+{
+	istringstream inStrm("save index\nexit");
+	ostringstream outStrm;
+	CEditor editor(inStrm, outStrm);
+
+	editor.Start();
+
+	ifstream fOut("index.html");
+	string str;
+
+	getline(fOut, str);
+	CHECK("<!DOCTYPE html>");
+	getline(fOut, str);
+	CHECK("<html>");
+	getline(fOut, str);
+	CHECK("  <head>");
+	getline(fOut, str);
+	CHECK("    <title></title>");
+	getline(fOut, str);
+	CHECK("  </head>");
+	getline(fOut, str);
+	CHECK("  <body>");
+	getline(fOut, str);
+	CHECK("    <h1></h1>");
+	getline(fOut, str);
+	CHECK("  </body>");
+	getline(fOut, str);
+	CHECK("</html>");
 }

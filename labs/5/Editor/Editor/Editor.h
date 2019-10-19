@@ -26,4 +26,5 @@ private:
 	void DeleteItem(std::istream& in);
 	void Undo(std::istream&);
 	void Redo(std::istream&);
+	void Save(std::istream& in);
 };
