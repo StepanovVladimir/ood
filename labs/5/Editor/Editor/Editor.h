@@ -27,4 +27,7 @@ private:
 	void Undo(std::istream&);
 	void Redo(std::istream&);
 	void Save(std::istream& in);
+
+	size_t ReadUnsigned(std::istream& in) const;
+	size_t StringToUnsigned(const std::string& str) const;
 };

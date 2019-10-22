@@ -3,33 +3,22 @@
 
 using namespace std;
 
-CReplaceParagraphTextCommand::CReplaceParagraphTextCommand(list<CDocumentItem>& target, const string& newText, size_t index)
+CReplaceParagraphTextCommand::CReplaceParagraphTextCommand(shared_ptr<IParagraph> target, const string& newText)
 	: m_target(target)
 	, m_newText(newText)
-	, m_index(index)
 {
-	if (m_index >= m_target.size())
-	{
-		throw runtime_error("The item number exceeds the number of items in the document");
-	}
 }
 
 void CReplaceParagraphTextCommand::DoExecute()
 {
-	m_newText.swap(GetIterator()->GetParagraph()->GetText());
+	string tmpStr = m_target->GetText();
+	m_newText.swap(tmpStr);
+	m_target->SetText(tmpStr);
 }
 
 void CReplaceParagraphTextCommand::DoUnexecute()
 {
-	m_newText.swap(GetIterator()->GetParagraph()->GetText());
-}
-
-list<CDocumentItem>::iterator CReplaceParagraphTextCommand::GetIterator()
-{
-	auto iter = m_target.begin();
-	for (size_t i = 0; i < m_index; i++)
-	{
-		iter++;
-	}
-	return iter;
+	string tmpStr = m_target->GetText();
+	m_newText.swap(tmpStr);
+	m_target->SetText(tmpStr);
 }

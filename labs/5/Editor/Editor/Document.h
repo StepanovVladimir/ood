@@ -2,6 +2,7 @@
 
 #include "IDocument.h"
 #include "History.h"
+#include <vector>
 
 class CDocument : public IDocument
 {
@@ -11,10 +12,8 @@ public:
 
 	size_t GetItemsCount() const override;
 
-	std::list<CDocumentItem>::const_iterator begin() const override;
-	std::list<CDocumentItem>::iterator begin() override;
-	std::list<CDocumentItem>::const_iterator end() const override;
-	std::list<CDocumentItem>::iterator end() override;
+	CConstDocumentItem GetItem(size_t index) const override;
+	CDocumentItem GetItem(size_t index) override;
 
 	void ReplaceText(const std::string& text, size_t index) override;
 	void DeleteItem(size_t index) override;
@@ -31,6 +30,8 @@ public:
 
 private:
 	std::string m_title;
-	std::list<CDocumentItem> m_items;
+	std::vector<CDocumentItem> m_items;
 	CHistory m_history;
+
+	std::string EncodeToHtml(const std::string& str) const;
 };

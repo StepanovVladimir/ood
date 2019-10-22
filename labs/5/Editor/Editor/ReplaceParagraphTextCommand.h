@@ -2,21 +2,18 @@
 
 #include "AbstractCommand.h"
 #include "DocumentItem.h"
-#include <list>
+#include <vector>
 
 class CReplaceParagraphTextCommand : public CAbstractCommand
 {
 public:
-	CReplaceParagraphTextCommand(std::list<CDocumentItem>& target, const std::string& newText, size_t index);
+	CReplaceParagraphTextCommand(std::shared_ptr<IParagraph> target, const std::string& newText);
 
 protected:
 	void DoExecute() override;
 	void DoUnexecute() override;
 
 private:
-	std::list<CDocumentItem>& m_target;
+	std::shared_ptr<IParagraph> m_target;
 	std::string m_newText;
-	size_t m_index;
-
-	std::list<CDocumentItem>::iterator GetIterator();
 };

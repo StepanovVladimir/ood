@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CDeleteItemCommand::CDeleteItemCommand(list<CDocumentItem>& target, size_t index)
+CDeleteItemCommand::CDeleteItemCommand(vector<CDocumentItem>& target, size_t index)
 	: m_target(target)
 	, m_index(index)
 	, m_item(GetDocumentItem())
@@ -12,12 +12,12 @@ CDeleteItemCommand::CDeleteItemCommand(list<CDocumentItem>& target, size_t index
 
 void CDeleteItemCommand::DoExecute()
 {
-	m_target.erase(GetIterator());
+	m_target.erase(m_target.begin() + m_index);
 }
 
 void CDeleteItemCommand::DoUnexecute()
 {
-	m_target.insert(GetIterator(), m_item);
+	m_target.insert(m_target.begin() + m_index, m_item);
 }
 
 CDocumentItem CDeleteItemCommand::GetDocumentItem()
@@ -26,15 +26,5 @@ CDocumentItem CDeleteItemCommand::GetDocumentItem()
 	{
 		throw runtime_error("The item number exceeds the number of items in the document");
 	}
-	return *GetIterator();
-}
-
-list<CDocumentItem>::iterator CDeleteItemCommand::GetIterator()
-{
-	auto iter = m_target.begin();
-	for (size_t i = 0; i < m_index; i++)
-	{
-		iter++;
-	}
-	return iter;
+	return m_target[m_index];
 }

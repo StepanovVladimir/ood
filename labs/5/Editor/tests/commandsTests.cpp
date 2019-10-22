@@ -29,7 +29,7 @@ TEST_CASE("Change string command tests")
 
 TEST_CASE("Insert item command tests")
 {
-	list<CDocumentItem> items;
+	vector<CDocumentItem> items;
 	CDocumentItem item1(make_shared<CParagraph>("first"));
 
 	CHECK_THROWS_AS(CInsertItemCommand(items, item1, 1), runtime_error);
@@ -39,7 +39,7 @@ TEST_CASE("Insert item command tests")
 
 	command1.Execute();
 	CHECK(items.size() == 1);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK(items[0].GetParagraph()->GetText() == "first");
 
 	command1.Unexecute();
 	CHECK(items.empty());
@@ -49,19 +49,19 @@ TEST_CASE("Insert item command tests")
 
 	command2.Execute();
 	CHECK(items.size() == 1);
-	CHECK(items.begin()->GetParagraph()->GetText() == "second");
+	CHECK(items[0].GetParagraph()->GetText() == "second");
 
 	CDocumentItem item3(make_shared<CParagraph>("third"));
 	CInsertItemCommand command3(items, item3, 0);
 
 	command3.Execute();
 	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "third");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+	CHECK(items[0].GetParagraph()->GetText() == "third");
+	CHECK(items[1].GetParagraph()->GetText() == "second");
 
 	command3.Unexecute();
 	CHECK(items.size() == 1);
-	CHECK(items.begin()->GetParagraph()->GetText() == "second");
+	CHECK(items[0].GetParagraph()->GetText() == "second");
 
 	command2.Unexecute();
 	CHECK(items.empty());
@@ -69,43 +69,19 @@ TEST_CASE("Insert item command tests")
 
 TEST_CASE("Replace paragraph text command tests")
 {
-	list<CDocumentItem> items;
+	shared_ptr<IParagraph> paragraph = make_shared<CParagraph>("first");
+	CReplaceParagraphTextCommand command(paragraph, "second");
+	
+	command.Execute();
+	CHECK(paragraph->GetText() == "second");
 
-	CHECK_THROWS_AS(CReplaceParagraphTextCommand(items, "first", 0), runtime_error);
-
-	items.push_back(CDocumentItem(make_shared<CParagraph>("first")));
-	items.push_back(CDocumentItem(make_shared<CParagraph>("second")));
-
-	CReplaceParagraphTextCommand command1(items, "third", 0);
-	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
-
-	command1.Execute();
-	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "third");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
-
-	command1.Unexecute();
-	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
-
-	CReplaceParagraphTextCommand command2(items, "fourth", 1);
-	command2.Execute();
-	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "fourth");
-
-	command2.Unexecute();
-	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+	command.Unexecute();
+	CHECK(paragraph->GetText() == "first");
 }
 
 TEST_CASE("Delete item command tests")
 {
-	list<CDocumentItem> items;
+	vector<CDocumentItem> items;
 
 	CHECK_THROWS_AS(CDeleteItemCommand(items, 0), runtime_error);
 
@@ -114,25 +90,25 @@ TEST_CASE("Delete item command tests")
 
 	CDeleteItemCommand command1(items, 0);
 	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+	CHECK(items[0].GetParagraph()->GetText() == "first");
+	CHECK(items[1].GetParagraph()->GetText() == "second");
 
 	command1.Execute();
 	CHECK(items.size() == 1);
-	CHECK(items.begin()->GetParagraph()->GetText() == "second");
+	CHECK(items[0].GetParagraph()->GetText() == "second");
 
 	command1.Unexecute();
 	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+	CHECK(items[0].GetParagraph()->GetText() == "first");
+	CHECK(items[1].GetParagraph()->GetText() == "second");
 	
 	CDeleteItemCommand command2(items, 1);
 	command2.Execute();
 	CHECK(items.size() == 1);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
+	CHECK(items[0].GetParagraph()->GetText() == "first");
 
 	command2.Unexecute();
 	CHECK(items.size() == 2);
-	CHECK(items.begin()->GetParagraph()->GetText() == "first");
-	CHECK((++items.begin())->GetParagraph()->GetText() == "second");
+	CHECK(items[0].GetParagraph()->GetText() == "first");
+	CHECK(items[1].GetParagraph()->GetText() == "second");
 }

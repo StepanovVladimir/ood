@@ -35,8 +35,6 @@ void CEditor::AddMenuItem(const string& shortcut, const string& description, Men
 void CEditor::InsertParagraph(istream& in)
 {
 	string strPosition;
-	optional<size_t> position;
-
 	in >> strPosition;
 	if (!in)
 	{
@@ -44,29 +42,22 @@ void CEditor::InsertParagraph(istream& in)
 		return;
 	}
 
-	if (strPosition != "end")
-	{
-		try
-		{
-			position = stoul(strPosition);
-		}
-		catch (...)
-		{
-			m_outStrm << "Not specified position of the document\n";
-			return;
-		}
-	}
-
-	string head;
-	string tail;
-	if (in >> head)
-	{
-		getline(in, tail);
-	}
-	string text = head + tail;
-	
 	try
 	{
+		optional<size_t> position;
+		if (strPosition != "end")
+		{
+			position = StringToUnsigned(strPosition);
+		}
+
+		string head;
+		string tail;
+		if (in >> head)
+		{
+			getline(in, tail);
+		}
+		string text = head + tail;
+
 		m_document->InsertParagraph(text, position);
 	}
 	catch (runtime_error& exc)
@@ -93,47 +84,27 @@ void CEditor::List(istream&)
 {
 	m_outStrm << "-------------" << endl;
 	m_outStrm << "Title: " << m_document->GetTitle() << endl;
-	size_t i = 0;
-	for (auto item : *m_document)
+	for (size_t i = 0; i < m_document->GetItemsCount(); i++)
 	{
-		m_outStrm << i << ". Paragraph: " << item.GetParagraph()->GetText() << endl;
-		i++;
+		m_outStrm << i << ". Paragraph: " << m_document->GetItem(i).GetParagraph()->GetText() << endl;
 	}
 	m_outStrm << "-------------" << endl;
 }
 
 void CEditor::ReplaceText(std::istream& in)
 {
-	string strPosition;
-	size_t index;
-
-	in >> strPosition;
-	if (!in)
-	{
-		m_outStrm << "Not specified position of the document\n";
-		return;
-	}
-
 	try
 	{
-		index = stoul(strPosition);
-	}
-	catch (...)
-	{
-		m_outStrm << "Not specified position of the document\n";
-		return;
-	}
+		size_t index = ReadUnsigned(in);
 
-	string head;
-	string tail;
-	if (in >> head)
-	{
-		getline(in, tail);
-	}
-	string text = head + tail;
+		string head;
+		string tail;
+		if (in >> head)
+		{
+			getline(in, tail);
+		}
+		string text = head + tail;
 
-	try
-	{
 		m_document->ReplaceText(text, index);
 	}
 	catch (runtime_error& exc)
@@ -144,28 +115,9 @@ void CEditor::ReplaceText(std::istream& in)
 
 void CEditor::DeleteItem(istream& in)
 {
-	string strPosition;
-	size_t index;
-
-	in >> strPosition;
-	if (!in)
-	{
-		m_outStrm << "Not specified position of the document\n";
-		return;
-	}
-
 	try
 	{
-		index = stoul(strPosition);
-	}
-	catch (...)
-	{
-		m_outStrm << "Not specified position of the document\n";
-		return;
-	}
-
-	try
-	{
+		size_t index = ReadUnsigned(in);
 		m_document->DeleteItem(index);
 	}
 	catch (runtime_error& exc)
@@ -208,5 +160,45 @@ void CEditor::Save(istream& in)
 	}
 	string path = head + tail;
 
-	m_document->Save(path);
+	try
+	{
+		m_document->Save(path);
+	}
+	catch (runtime_error& exc)
+	{
+		m_outStrm << exc.what() << endl;;
+	}
+}
+
+size_t CEditor::ReadUnsigned(istream& in) const
+{
+	string str;
+	in >> str;
+
+	if (!in)
+	{
+		throw runtime_error("Not specified position of the document");
+	}
+
+	return StringToUnsigned(str);
+}
+
+size_t CEditor::StringToUnsigned(const std::string& str) const
+{
+	int result;
+	try
+	{
+		result = stoi(str);
+	}
+	catch (...)
+	{
+		throw runtime_error("Not specified position of the document");
+	}
+
+	if (result < 0)
+	{
+		throw runtime_error("Position cannot be a negative number");
+	}
+
+	return (size_t)result;
 }

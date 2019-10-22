@@ -25,29 +25,23 @@ size_t CDocument::GetItemsCount() const
 	return m_items.size();
 }
 
-list<CDocumentItem>::const_iterator CDocument::begin() const
+CConstDocumentItem CDocument::GetItem(size_t index) const
 {
-	return m_items.begin();
+	return m_items[index];
 }
 
-list<CDocumentItem>::iterator CDocument::begin()
+CDocumentItem CDocument::GetItem(size_t index)
 {
-	return m_items.begin();
-}
-
-list<CDocumentItem>::const_iterator CDocument::end() const
-{
-	return m_items.end();
-}
-
-list<CDocumentItem>::iterator CDocument::end()
-{
-	return m_items.end();
+	return m_items[index];
 }
 
 void CDocument::ReplaceText(const std::string& text, size_t index)
 {
-	m_history.AddAndExecuteCommand(make_unique<CReplaceParagraphTextCommand>(m_items, text, index));
+	if (index >= m_items.size())
+	{
+		throw runtime_error("The item number exceeds the number of items in the document");
+	}
+	m_history.AddAndExecuteCommand(make_unique<CReplaceParagraphTextCommand>(m_items[index].GetParagraph(), text));
 }
 
 void CDocument::DeleteItem(size_t index)
@@ -88,17 +82,57 @@ void CDocument::Redo()
 void CDocument::Save(const string& path) const
 {
 	ofstream fOut(path + ".html");
+
+	if (!fOut.is_open())
+	{
+		throw runtime_error("There is no such path");
+	}
+
+	string htmlTitle = EncodeToHtml(m_title);
 	fOut << "<!DOCTYPE html>\n";
 	fOut << "<html>\n";
 	fOut << "  <head>\n";
-	fOut << "    <title>" + m_title + "</title>\n";
+	fOut << "    <title>" + htmlTitle + "</title>\n";
 	fOut << "  </head>\n";
 	fOut << "  <body>\n";
-	fOut << "    <h1>" + m_title + "</h1>\n";
+	fOut << "    <h1>" + htmlTitle + "</h1>\n";
 	for (auto item : m_items)
 	{
-		fOut << "    <p>" + item.GetParagraph()->GetText() + "</p>\n";
+		fOut << "    <p>" + EncodeToHtml(item.GetParagraph()->GetText()) + "</p>\n";
 	}
 	fOut << "  </body>\n";
 	fOut << "</html>\n";
+}
+
+string CDocument::EncodeToHtml(const string& str) const
+{
+	string result;
+	for (size_t i = 0; i < str.size(); i++)
+	{
+		if (str[i] == '"')
+		{
+			result += "&quot;";
+		}
+		else if (str[i] == '\'')
+		{
+			result += "&apos;";
+		}
+		else if (str[i] == '<')
+		{
+			result += "&lt;";
+		}
+		else if (str[i] == '>')
+		{
+			result += "&gt;";
+		}
+		else if (str[i] == '&')
+		{
+			result += "&amp;";
+		}
+		else
+		{
+			result += str[i];
+		}
+	}
+	return result;
 }

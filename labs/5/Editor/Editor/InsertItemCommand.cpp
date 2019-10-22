@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CInsertItemCommand::CInsertItemCommand(list<CDocumentItem>& target, const CDocumentItem& item, optional<size_t> position)
+CInsertItemCommand::CInsertItemCommand(vector<CDocumentItem>& target, const CDocumentItem& item, optional<size_t> position)
 	: m_target(target)
 	, m_item(item)
 	, m_position(position)
@@ -22,7 +22,7 @@ void CInsertItemCommand::DoExecute()
 	}
 	else
 	{
-		m_target.insert(GetIterator(), m_item);
+		m_target.insert(m_target.begin() + m_position.value(), m_item);
 	}
 }
 
@@ -34,16 +34,6 @@ void CInsertItemCommand::DoUnexecute()
 	}
 	else
 	{
-		m_target.erase(GetIterator());
+		m_target.erase(m_target.begin() + m_position.value());
 	}
-}
-
-list<CDocumentItem>::iterator CInsertItemCommand::GetIterator()
-{
-	auto iter = m_target.begin();
-	for (size_t i = 0; i < m_position; i++)
-	{
-		iter++;
-	}
-	return iter;
 }
