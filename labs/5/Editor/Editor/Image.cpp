@@ -4,7 +4,6 @@
 
 using namespace std;
 
-const string CImage::IMAGES_DIRECTORY = "Resources";
 size_t CImage::m_count = 1;
 
 CImage::CImage(const string& path, int width, int height)
@@ -23,8 +22,8 @@ CImage::CImage(const string& path, int width, int height)
 		throw runtime_error("Unknown file extension");
 	}
 
-	filesystem::create_directory(IMAGES_DIRECTORY);
-	m_path = IMAGES_DIRECTORY + '/' + to_string(m_count) + fileExtension;
+	m_path = to_string(m_count) + fileExtension;
+	filesystem::remove(m_path);
 	filesystem::copy_file(path, m_path);
 	m_count++;
 }

@@ -8,6 +8,7 @@
 #include "ResizeImageCommand.h"
 #include "DeleteItemCommand.h"
 #include <fstream>
+#include <filesystem>
 
 using namespace std;
 
@@ -102,7 +103,7 @@ void CDocument::Redo()
 
 void CDocument::Save(const string& path) const
 {
-	ofstream fOut(path + ".html");
+	ofstream fOut(path + "/index.html");
 
 	if (!fOut.is_open())
 	{
@@ -119,7 +120,22 @@ void CDocument::Save(const string& path) const
 	fOut << "    <h1>" + htmlTitle + "</h1>\n";
 	for (auto item : m_items)
 	{
-		fOut << "    <p>" + EncodeToHtml(item.GetParagraph()->GetText()) + "</p>\n";
+		shared_ptr<IImage> image = item.GetImage();
+		if (image == nullptr)
+		{
+			fOut << "    <p>" + EncodeToHtml(item.GetParagraph()->GetText()) + "</p>\n";
+		}
+		else
+		{
+			string pathToImages = path + "/images/";
+			filesystem::create_directory(pathToImages);
+			
+			string pathToImage = pathToImages + image->GetPath();
+			filesystem::remove(pathToImage);
+			filesystem::copy_file(image->GetPath(), pathToImage);
+
+			fOut << "    <img src=\"images/" << image->GetPath() << "\" width=\"" << image->GetWidth() << "\" height=\"" << image->GetHeight() << "\">\n";
+		}
 	}
 	fOut << "  </body>\n";
 	fOut << "</html>\n";

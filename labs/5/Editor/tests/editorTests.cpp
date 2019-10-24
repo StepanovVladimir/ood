@@ -185,7 +185,7 @@ TEST_CASE("Editor insert image tests")
 	getline(result, str);
 	CHECK(str == "Title: ");
 	getline(result, str);
-	CHECK(str == "0. Image: 20 15 Resources/5.jpg");
+	CHECK(str == "0. Image: 20 15 7.jpg");
 	getline(result, str);
 	CHECK(str == "-------------");
 }
@@ -260,7 +260,7 @@ TEST_CASE("Editor resize image tests")
 	getline(result, str);
 	CHECK(str == "Title: ");
 	getline(result, str);
-	CHECK(str == "0. Image: 300 200 Resources/6.jpg");
+	CHECK(str == "0. Image: 300 200 8.jpg");
 	getline(result, str);
 	CHECK(str == "-------------");
 }
@@ -305,31 +305,31 @@ TEST_CASE("Editor delete item tests")
 
 TEST_CASE("Editor save tests")
 {
-	istringstream inStrm("save index\nexit");
+	istringstream inStrm("save TestResults\nexit");
 	ostringstream outStrm;
 	CEditor editor(inStrm, outStrm);
 
 	editor.Start();
 
-	ifstream fOut("index.html");
+	ifstream fIn("TestResults/index.html");
 	string str;
 
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("<!DOCTYPE html>");
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("<html>");
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("  <head>");
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("    <title></title>");
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("  </head>");
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("  <body>");
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("    <h1></h1>");
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("  </body>");
-	getline(fOut, str);
+	getline(fIn, str);
 	CHECK("</html>");
 }

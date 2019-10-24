@@ -16,8 +16,6 @@ public:
 	void Resize(int width, int height) override;
 
 private:
-	static const std::string IMAGES_DIRECTORY;
-
 	static size_t m_count;
 
 	std::string m_path;
