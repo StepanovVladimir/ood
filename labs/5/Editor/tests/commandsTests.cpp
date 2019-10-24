@@ -3,8 +3,10 @@
 #include "../Editor/ChangeStringCommand.h"
 #include "../Editor/InsertItemCommand.h"
 #include "../Editor/ReplaceTextCommand.h"
+#include "../Editor/ResizeImageCommand.h"
 #include "../Editor/DeleteItemCommand.h"
 #include "../Editor/Paragraph.h"
+#include "../Editor/Image.h"
 
 using namespace std;
 
@@ -77,6 +79,20 @@ TEST_CASE("Replace paragraph text command tests")
 
 	command.Unexecute();
 	CHECK(paragraph->GetText() == "first");
+}
+
+TEST_CASE("Resize image command tests")
+{
+	shared_ptr<IImage> image = make_shared<CImage>("TestResources/fox.jpg", 200, 150);
+	CResizeImageCommand command(image, 300, 200);
+
+	command.Execute();
+	CHECK(image->GetWidth() == 300);
+	CHECK(image->GetHeight() == 200);
+
+	command.Unexecute();
+	CHECK(image->GetWidth() == 200);
+	CHECK(image->GetHeight() == 150);
 }
 
 TEST_CASE("Delete item command tests")

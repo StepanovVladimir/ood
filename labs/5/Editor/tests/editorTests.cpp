@@ -142,12 +142,50 @@ TEST_CASE("Editor insert paragraph tests")
 	CHECK(str == "-------------");
 	getline(result, str);
 	CHECK(str == "Title: ");
-
 	getline(result, str);
 	CHECK(str == "0. Paragraph: word3");
 	getline(result, str);
 	CHECK(str == "1. Paragraph: word1 word2");
+	getline(result, str);
+	CHECK(str == "-------------");
+}
 
+TEST_CASE("Editor insert image tests")
+{
+	istringstream inStrm("insertImage 0 TestResources/fox.jpg\ninsertImage 0 5 a TestResources/fox.jpg\ninsertImage 0 20 15 TestResources/fox.jpg\nlist\nexit");
+	ostringstream outStrm;
+	CEditor editor(inStrm, outStrm);
+
+	editor.Start();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+
+	getline(result, str);
+	CHECK(str == "Not specified sizes of image");
+	getline(result, str);
+	CHECK(str == "Not specified sizes of image");
+
+	getline(result, str);
+	CHECK(str == "-------------");
+	getline(result, str);
+	CHECK(str == "Title: ");
+	getline(result, str);
+	CHECK(str == "0. Image: 20 15 Resources/5.jpg");
 	getline(result, str);
 	CHECK(str == "-------------");
 }
@@ -188,6 +226,41 @@ TEST_CASE("Editor replace text of paragraph tests")
 	CHECK(str == "Title: ");
 	getline(result, str);
 	CHECK(str == "0. Paragraph: word2");
+	getline(result, str);
+	CHECK(str == "-------------");
+}
+
+TEST_CASE("Editor resize image tests")
+{
+	istringstream inStrm("insertImage 0 200 150 TestResources/fox.jpg\nresizeImage 0 300 200\nlist\nexit");
+	ostringstream outStrm;
+	CEditor editor(inStrm, outStrm);
+
+	editor.Start();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+
+	getline(result, str);
+	CHECK(str == "-------------");
+	getline(result, str);
+	CHECK(str == "Title: ");
+	getline(result, str);
+	CHECK(str == "0. Image: 300 200 Resources/6.jpg");
 	getline(result, str);
 	CHECK(str == "-------------");
 }

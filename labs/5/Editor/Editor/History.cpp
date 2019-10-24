@@ -12,19 +12,8 @@ void CHistory::AddAndExecuteCommand(ICommandPtr&& command)
 	}
 	else
 	{
-		m_commands.emplace_back(nullptr);
-
-		try
-		{
-			command->Execute();
-		}
-		catch (...)
-		{
-			m_commands.pop_back();
-			throw;
-		}
-
-		m_commands.back() = move(command);
+		command->Execute();
+		m_commands.emplace_back(move(command));
 		if (m_nextCommandIndex < 10)
 		{
 			m_nextCommandIndex++;

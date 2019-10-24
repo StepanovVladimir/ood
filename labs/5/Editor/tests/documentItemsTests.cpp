@@ -29,7 +29,7 @@ TEST_CASE("Image tests")
 	{
 		CImage image1("TestResources/fox.jpg", 200, 150);
 
-		CHECK(image1.GetPath() == "Resources/1.jpg");
+		CHECK(image1.GetPath() == "Resources/2.jpg");
 		CHECK(image1.GetWidth() == 200);
 		CHECK(image1.GetHeight() == 150);
 
@@ -42,14 +42,14 @@ TEST_CASE("Image tests")
 
 		CImage image2("TestResources/fox.jpg", 200, 150);
 
-		CHECK(image2.GetPath() == "Resources/2.jpg");
+		CHECK(image2.GetPath() == "Resources/3.jpg");
 		CHECK(filesystem::exists(image2.GetPath()));
 	}
 
 	SECTION("Check delete images")
 	{
-		CHECK_FALSE(filesystem::exists("Resources/1.jpg"));
 		CHECK_FALSE(filesystem::exists("Resources/2.jpg"));
+		CHECK_FALSE(filesystem::exists("Resources/3.jpg"));
 	}
 }
 

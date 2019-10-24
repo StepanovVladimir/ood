@@ -47,6 +47,17 @@ TEST_CASE("Document insert paragraph tests")
 	CHECK(document.GetItem(1).GetParagraph()->GetText() == "first");
 }
 
+TEST_CASE("Document insert image tests")
+{
+	CDocument document;
+	document.InsertImage("TestResources/fox.jpg", 200, 150);
+
+	CHECK(document.GetItemsCount() == 1);
+	CHECK(document.GetItem(0).GetImage()->GetPath() == "Resources/4.jpg");
+	CHECK(document.GetItem(0).GetImage()->GetWidth() == 200);
+	CHECK(document.GetItem(0).GetImage()->GetHeight() == 150);
+}
+
 TEST_CASE("Document replace text of paragraph tests")
 {
 	CDocument document;
