@@ -175,10 +175,12 @@
     <ClCompile Include="..\Editor\DocumentItem.cpp" />
     <ClCompile Include="..\Editor\Editor.cpp" />
     <ClCompile Include="..\Editor\History.cpp" />
+    <ClCompile Include="..\Editor\Image.cpp" />
     <ClCompile Include="..\Editor\InsertItemCommand.cpp" />
     <ClCompile Include="..\Editor\Menu.cpp" />
     <ClCompile Include="..\Editor\Paragraph.cpp" />
-    <ClCompile Include="..\Editor\ReplaceParagraphTextCommand.cpp" />
+    <ClCompile Include="..\Editor\ReplaceTextCommand.cpp" />
+    <ClCompile Include="..\Editor\ResizeImageCommand.cpp" />
     <ClCompile Include="commandsTests.cpp" />
     <ClCompile Include="documentItemsTests.cpp" />
     <ClCompile Include="documentTests.cpp" />

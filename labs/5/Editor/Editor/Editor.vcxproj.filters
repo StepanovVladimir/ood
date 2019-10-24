@@ -45,7 +45,13 @@
     <ClInclude Include="DeleteItemCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="ReplaceParagraphTextCommand.h">
+    <ClInclude Include="Image.h">
+      <Filter>DocumentItems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplaceTextCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizeImageCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,7 +83,13 @@
     <ClCompile Include="DeleteItemCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
-    <ClCompile Include="ReplaceParagraphTextCommand.cpp">
+    <ClCompile Include="Image.cpp">
+      <Filter>DocumentItems</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplaceTextCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizeImageCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>

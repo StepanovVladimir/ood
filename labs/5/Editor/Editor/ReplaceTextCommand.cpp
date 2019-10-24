@@ -1,22 +1,22 @@
 #include "pch.h"
-#include "ReplaceParagraphTextCommand.h"
+#include "ReplaceTextCommand.h"
 
 using namespace std;
 
-CReplaceParagraphTextCommand::CReplaceParagraphTextCommand(shared_ptr<IParagraph> target, const string& newText)
+CReplaceTextCommand::CReplaceTextCommand(shared_ptr<IParagraph> target, const string& newText)
 	: m_target(target)
 	, m_newText(newText)
 {
 }
 
-void CReplaceParagraphTextCommand::DoExecute()
+void CReplaceTextCommand::DoExecute()
 {
 	string tmpStr = m_target->GetText();
 	m_newText.swap(tmpStr);
 	m_target->SetText(tmpStr);
 }
 
-void CReplaceParagraphTextCommand::DoUnexecute()
+void CReplaceTextCommand::DoUnexecute()
 {
 	string tmpStr = m_target->GetText();
 	m_newText.swap(tmpStr);

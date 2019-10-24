@@ -2,7 +2,7 @@
 #include "../../../../catch2/catch.hpp"
 #include "../Editor/ChangeStringCommand.h"
 #include "../Editor/InsertItemCommand.h"
-#include "../Editor/ReplaceParagraphTextCommand.h"
+#include "../Editor/ReplaceTextCommand.h"
 #include "../Editor/DeleteItemCommand.h"
 #include "../Editor/Paragraph.h"
 
@@ -70,7 +70,7 @@ TEST_CASE("Insert item command tests")
 TEST_CASE("Replace paragraph text command tests")
 {
 	shared_ptr<IParagraph> paragraph = make_shared<CParagraph>("first");
-	CReplaceParagraphTextCommand command(paragraph, "second");
+	CReplaceTextCommand command(paragraph, "second");
 	
 	command.Execute();
 	CHECK(paragraph->GetText() == "second");

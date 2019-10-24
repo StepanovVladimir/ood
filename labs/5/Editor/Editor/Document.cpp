@@ -1,23 +1,27 @@
 #include "pch.h"
 #include "Document.h"
 #include "Paragraph.h"
+#include "Image.h"
 #include "ChangeStringCommand.h"
 #include "InsertItemCommand.h"
-#include "ReplaceParagraphTextCommand.h"
+#include "ReplaceTextCommand.h"
+#include "ResizeImageCommand.h"
 #include "DeleteItemCommand.h"
 #include <fstream>
 
 using namespace std;
 
-shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text,
-	optional<size_t> position)
+void CDocument::InsertParagraph(const string& text, optional<size_t> position)
 {
-	shared_ptr<CParagraph> paragraph = make_shared<CParagraph>(text);
 	CDocumentItem item(make_shared<CParagraph>(text));
-
 	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_items, item, position));
-	
-	return paragraph;
+}
+
+void CDocument::InsertImage(const string& path, int width, int height,
+	std::optional<size_t> position)
+{
+	CDocumentItem item(make_unique<CImage>(path, width, height));
+	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_items, item, position));
 }
 
 size_t CDocument::GetItemsCount() const
@@ -41,7 +45,24 @@ void CDocument::ReplaceText(const std::string& text, size_t index)
 	{
 		throw runtime_error("The item number exceeds the number of items in the document");
 	}
-	m_history.AddAndExecuteCommand(make_unique<CReplaceParagraphTextCommand>(m_items[index].GetParagraph(), text));
+	if (m_items[index].GetParagraph() == nullptr)
+	{
+		throw runtime_error("The item is not a paragraph");
+	}
+	m_history.AddAndExecuteCommand(make_unique<CReplaceTextCommand>(m_items[index].GetParagraph(), text));
+}
+
+void CDocument::ResizeImage(int width, int height, size_t index)
+{
+	if (index >= m_items.size())
+	{
+		throw runtime_error("The item number exceeds the number of items in the document");
+	}
+	if (m_items[index].GetImage() == nullptr)
+	{
+		throw runtime_error("The item is not a image");
+	}
+	m_history.AddAndExecuteCommand(make_unique<CResizeImageCommand>(m_items[index].GetImage(), width, height));
 }
 
 void CDocument::DeleteItem(size_t index)

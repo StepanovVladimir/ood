@@ -7,7 +7,9 @@
 class CDocument : public IDocument
 {
 public:
-	std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
+	void InsertParagraph(const std::string& text,
+		std::optional<size_t> position = std::nullopt) override;
+	void InsertImage(const std::string& path, int width, int height,
 		std::optional<size_t> position = std::nullopt) override;
 
 	size_t GetItemsCount() const override;
@@ -16,6 +18,8 @@ public:
 	CDocumentItem GetItem(size_t index) override;
 
 	void ReplaceText(const std::string& text, size_t index) override;
+	void ResizeImage(int width, int height, size_t index) override;
+
 	void DeleteItem(size_t index) override;
 
 	std::string GetTitle() const override;

@@ -9,6 +9,7 @@ class CInsertItemCommand : public CAbstractCommand
 {
 public:
 	CInsertItemCommand(std::vector<CDocumentItem>& target, const CDocumentItem& item, std::optional<size_t> position);
+	CInsertItemCommand(std::vector<CDocumentItem>& target, int width, int height, std::optional<size_t> position);
 
 protected:
 	void DoExecute() override;

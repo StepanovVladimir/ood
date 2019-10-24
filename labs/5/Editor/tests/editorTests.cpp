@@ -25,11 +25,15 @@ TEST_CASE("Editor tests")
 	getline(result, str);
 	CHECK(str == "  insertParagraph: Inserts paragraph. Args: <position>|end <text>");
 	getline(result, str);
-	CHECK(str == "  setTitle: Changes title. Args: <new title>");
+	CHECK(str == "  insertImage: Inserts image. Args: <position>|end <width> <height> <path>");
+	getline(result, str);
+	CHECK(str == "  setTitle: Changes title. Args: <title>");
 	getline(result, str);
 	CHECK(str == "  list: Show document");
 	getline(result, str);
-	CHECK(str == "  replaceText: Replaces text of paragraph. Args: <position> <new text>");
+	CHECK(str == "  replaceText: Replaces text of paragraph. Args: <position> <text>");
+	getline(result, str);
+	CHECK(str == "  resizeImage: Resizes image. Args: <position> <width> <height>");
 	getline(result, str);
 	CHECK(str == "  deleteItem: Deletes document item. Args: <position>");
 	getline(result, str);
@@ -66,6 +70,8 @@ TEST_CASE("Editor set title tests")
 	istringstream result(outStrm.str());
 	string str;
 
+	getline(result, str);
+	getline(result, str);
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
@@ -124,6 +130,8 @@ TEST_CASE("Editor insert paragraph tests")
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
+	getline(result, str);
+	getline(result, str);
 
 	getline(result, str);
 	CHECK(str == "Not specified position of the document");
@@ -166,6 +174,8 @@ TEST_CASE("Editor replace text of paragraph tests")
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);
+	getline(result, str);
+	getline(result, str);
 
 	getline(result, str);
 	CHECK(str == "Not specified position of the document");
@@ -193,6 +203,8 @@ TEST_CASE("Editor delete item tests")
 	istringstream result(outStrm.str());
 	string str;
 
+	getline(result, str);
+	getline(result, str);
 	getline(result, str);
 	getline(result, str);
 	getline(result, str);

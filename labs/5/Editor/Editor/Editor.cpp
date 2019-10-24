@@ -13,9 +13,11 @@ CEditor::CEditor(istream& inStrm, ostream& outStrm)
 	m_menu.AddItem("exit", "Exit", [this](istream&) { m_menu.Exit(); });
 
 	AddMenuItem("insertParagraph", "Inserts paragraph. Args: <position>|end <text>", &CEditor::InsertParagraph);
-	AddMenuItem("setTitle", "Changes title. Args: <new title>", &CEditor::SetTitle);
+	AddMenuItem("insertImage", "Inserts image. Args: <position>|end <width> <height> <path>", &CEditor::InsertImage);
+	AddMenuItem("setTitle", "Changes title. Args: <title>", &CEditor::SetTitle);
 	AddMenuItem("list", "Show document", &CEditor::List);
-	AddMenuItem("replaceText", "Replaces text of paragraph. Args: <position> <new text>", &CEditor::ReplaceText);
+	AddMenuItem("replaceText", "Replaces text of paragraph. Args: <position> <text>", &CEditor::ReplaceText);
+	AddMenuItem("resizeImage", "Resizes image. Args: <position> <width> <height>", &CEditor::ResizeImage);
 	AddMenuItem("deleteItem", "Deletes document item. Args: <position>", &CEditor::DeleteItem);
 	AddMenuItem("undo", "Undo command", &CEditor::Undo);
 	AddMenuItem("redo", "Redo undone command", &CEditor::Redo);
@@ -34,31 +36,31 @@ void CEditor::AddMenuItem(const string& shortcut, const string& description, Men
 
 void CEditor::InsertParagraph(istream& in)
 {
-	string strPosition;
-	in >> strPosition;
-	if (!in)
-	{
-		m_outStrm << "Not specified position of the document\n";
-		return;
-	}
-
 	try
 	{
-		optional<size_t> position;
-		if (strPosition != "end")
-		{
-			position = StringToUnsigned(strPosition);
-		}
-
-		string head;
-		string tail;
-		if (in >> head)
-		{
-			getline(in, tail);
-		}
-		string text = head + tail;
-
+		optional<size_t> position = ReadOptionalPosition(in);
+		string text = ReadLine(in);
 		m_document->InsertParagraph(text, position);
+	}
+	catch (runtime_error& exc)
+	{
+		m_outStrm << exc.what() << endl;
+	}
+}
+
+void CEditor::InsertImage(istream& in)
+{
+	try
+	{
+		optional<size_t> position = ReadOptionalPosition(in);
+
+		int width;
+		int height;
+		ReadSizes(in, width, height);
+
+		string path = ReadLine(in);
+
+		m_document->InsertImage(path, width, height, position);
 	}
 	catch (runtime_error& exc)
 	{
@@ -68,15 +70,7 @@ void CEditor::InsertParagraph(istream& in)
 
 void CEditor::SetTitle(istream& in)
 {
-	string head;
-	string tail;
-
-	if (in >> head)
-	{
-		getline(in, tail);
-	}
-	string title = head + tail;
-
+	string title = ReadLine(in);
 	m_document->SetTitle(title);
 }
 
@@ -86,26 +80,44 @@ void CEditor::List(istream&)
 	m_outStrm << "Title: " << m_document->GetTitle() << endl;
 	for (size_t i = 0; i < m_document->GetItemsCount(); i++)
 	{
-		m_outStrm << i << ". Paragraph: " << m_document->GetItem(i).GetParagraph()->GetText() << endl;
+		shared_ptr<IImage> image = m_document->GetItem(i).GetImage();
+		if (image == nullptr)
+		{
+			m_outStrm << i << ". Paragraph: " << m_document->GetItem(i).GetParagraph()->GetText() << endl;
+		}
+		else
+		{
+			m_outStrm << i << ". Image: " << image->GetWidth() << ' ' << image->GetHeight() << ' ' << image->GetPath() << endl;
+		}
 	}
 	m_outStrm << "-------------" << endl;
 }
 
-void CEditor::ReplaceText(std::istream& in)
+void CEditor::ReplaceText(istream& in)
 {
 	try
 	{
-		size_t index = ReadUnsigned(in);
-
-		string head;
-		string tail;
-		if (in >> head)
-		{
-			getline(in, tail);
-		}
-		string text = head + tail;
-
+		size_t index = ReadPosition(in);
+		string text = ReadLine(in);
 		m_document->ReplaceText(text, index);
+	}
+	catch (runtime_error& exc)
+	{
+		m_outStrm << exc.what() << endl;
+	}
+}
+
+void CEditor::ResizeImage(istream& in)
+{
+	try
+	{
+		size_t index = ReadPosition(in);
+
+		int width;
+		int height;
+		ReadSizes(in, width, height);
+
+		m_document->ResizeImage(width, height, index);
 	}
 	catch (runtime_error& exc)
 	{
@@ -117,7 +129,7 @@ void CEditor::DeleteItem(istream& in)
 {
 	try
 	{
-		size_t index = ReadUnsigned(in);
+		size_t index = ReadPosition(in);
 		m_document->DeleteItem(index);
 	}
 	catch (runtime_error& exc)
@@ -152,14 +164,7 @@ void CEditor::Redo(istream&)
 
 void CEditor::Save(istream& in)
 {
-	string head;
-	string tail;
-	if (in >> head)
-	{
-		getline(in, tail);
-	}
-	string path = head + tail;
-
+	string path = ReadLine(in);
 	try
 	{
 		m_document->Save(path);
@@ -170,7 +175,45 @@ void CEditor::Save(istream& in)
 	}
 }
 
-size_t CEditor::ReadUnsigned(istream& in) const
+string CEditor::ReadLine(istream& in) const
+{
+	string head;
+	string tail;
+	if (in >> head)
+	{
+		getline(in, tail);
+	}
+	return head + tail;
+}
+
+void CEditor::ReadSizes(istream& in, int& width, int& height) const
+{
+	string str1;
+	string str2;
+	in >> str1 >> str2;
+
+	if (!in)
+	{
+		throw runtime_error("Not specified sizes of image");
+	}
+
+	int tmpWidth;
+	int tmpHeight;
+	try
+	{
+		tmpWidth = stoi(str1);
+		tmpHeight = stoi(str2);
+	}
+	catch (...)
+	{
+		throw runtime_error("Not specified sizes of image");
+	}
+
+	width = tmpWidth;
+	height = tmpHeight;
+}
+
+size_t CEditor::ReadPosition(istream& in) const
 {
 	string str;
 	in >> str;
@@ -183,7 +226,26 @@ size_t CEditor::ReadUnsigned(istream& in) const
 	return StringToUnsigned(str);
 }
 
-size_t CEditor::StringToUnsigned(const std::string& str) const
+optional<size_t> CEditor::ReadOptionalPosition(istream& in) const
+{
+	string str;
+	in >> str;
+
+	if (!in)
+	{
+		throw runtime_error("Not specified position of the document");
+	}
+
+	optional<size_t> position;
+	if (str != "end")
+	{
+		position = StringToUnsigned(str);
+	}
+
+	return position;
+}
+
+size_t CEditor::StringToUnsigned(const string& str) const
 {
 	int result;
 	try

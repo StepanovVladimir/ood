@@ -166,12 +166,14 @@
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IImage.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="InsertItemCommand.h" />
     <ClInclude Include="IParagraph.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Paragraph.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="ReplaceParagraphTextCommand.h" />
+    <ClInclude Include="ReplaceTextCommand.h" />
+    <ClInclude Include="ResizeImageCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractCommand.cpp" />
@@ -182,6 +184,7 @@
     <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="History.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="InsertItemCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -192,7 +195,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ReplaceParagraphTextCommand.cpp" />
+    <ClCompile Include="ReplaceTextCommand.cpp" />
+    <ClCompile Include="ResizeImageCommand.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

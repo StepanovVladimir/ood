@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "InsertItemCommand.h"
+#include "Paragraph.h"
 
 using namespace std;
 
