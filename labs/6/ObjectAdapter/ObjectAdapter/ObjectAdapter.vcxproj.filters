@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="graphics_lib\Canvas.cpp">
+      <Filter>graphics_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="modern_graphics_lib\ModernGraphicsRenderer.cpp">
+      <Filter>modern_graphics_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="shape_drawing_lib\CanvasPainter.cpp">
+      <Filter>shape_drawing_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="shape_drawing_lib\Rectangle.cpp">
+      <Filter>shape_drawing_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="shape_drawing_lib\Triangle.cpp">
+      <Filter>shape_drawing_lib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="graphics_lib">
+      <UniqueIdentifier>{14738c00-13fa-41d9-a629-050ab5d579b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shape_drawing_lib">
+      <UniqueIdentifier>{bf3cd1b7-00aa-4e02-ad9a-c14ed415fe87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modern_graphics_lib">
+      <UniqueIdentifier>{0a093c98-c038-4612-8521-12e5ed4d6567}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="graphics_lib\Canvas.h">
+      <Filter>graphics_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics_lib\ICanvas.h">
+      <Filter>graphics_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="modern_graphics_lib\ModernGraphicsRenderer.h">
+      <Filter>modern_graphics_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="modern_graphics_lib\Point.h">
+      <Filter>modern_graphics_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="shape_drawing_lib\CanvasPainter.h">
+      <Filter>shape_drawing_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="shape_drawing_lib\ICanvasDrawable.h">
+      <Filter>shape_drawing_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="shape_drawing_lib\Point.h">
+      <Filter>shape_drawing_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="shape_drawing_lib\Rectangle.h">
+      <Filter>shape_drawing_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="shape_drawing_lib\Triangle.h">
+      <Filter>shape_drawing_lib</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
