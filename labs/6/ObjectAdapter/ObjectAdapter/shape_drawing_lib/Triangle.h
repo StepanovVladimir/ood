@@ -13,6 +13,8 @@ namespace shape_drawing_lib
 		void Draw(graphics_lib::ICanvas& canvas) const override;
 
 	private:
-
+		Point m_p1;
+		Point m_p2;
+		Point m_p3;
 	};
 }

@@ -3,6 +3,7 @@
 #include "shape_drawing_lib/Rectangle.h"
 #include "shape_drawing_lib/CanvasPainter.h"
 #include "modern_graphics_lib/ModernGraphicsRenderer.h"
+#include "GraphicsAdapter.h"
 #include <string>
 
 using namespace std;
@@ -17,6 +18,8 @@ namespace app
 		CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
 		CRectangle rectangle({ 30, 40 }, 18, 24);
 
+		painter.Draw(triangle);
+		painter.Draw(rectangle);
 	}
 
 	void PaintPictureOnCanvas()
@@ -29,7 +32,11 @@ namespace app
 	void PaintPictureOnModernGraphicsRenderer()
 	{
 		CModernGraphicsRenderer renderer(cout);
+		CGraphicsAdapter adapter(renderer);
+		CCanvasPainter painter(adapter);
 
+		renderer.BeginDraw();
+		PaintPicture(painter);
 	}
 }
 

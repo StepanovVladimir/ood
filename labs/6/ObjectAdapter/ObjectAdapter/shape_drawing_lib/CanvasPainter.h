@@ -12,6 +12,6 @@ namespace shape_drawing_lib
 		void Draw(const ICanvasDrawable& drawable);
 
 	private:
-
+		graphics_lib::ICanvas& m_canvas;
 	};
 }

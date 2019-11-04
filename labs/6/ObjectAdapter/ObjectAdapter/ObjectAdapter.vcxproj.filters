@@ -17,6 +17,7 @@
     <ClCompile Include="shape_drawing_lib\Triangle.cpp">
       <Filter>shape_drawing_lib</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsAdapter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="graphics_lib">
@@ -57,5 +58,6 @@
     <ClInclude Include="shape_drawing_lib\Triangle.h">
       <Filter>shape_drawing_lib</Filter>
     </ClInclude>
+    <ClInclude Include="GraphicsAdapter.h" />
   </ItemGroup>
 </Project>

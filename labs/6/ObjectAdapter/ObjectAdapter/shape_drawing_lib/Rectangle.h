@@ -13,6 +13,8 @@ namespace shape_drawing_lib
 		void Draw(graphics_lib::ICanvas& canvas) const override;
 
 	private:
-
+		Point m_leftTop;
+		int m_width;
+		int m_height;
 	};
 }
