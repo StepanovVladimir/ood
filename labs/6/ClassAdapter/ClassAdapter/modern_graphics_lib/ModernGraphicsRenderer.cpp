@@ -27,14 +27,17 @@ namespace modern_graphics_lib
 		m_drawing = true;
 	}
 
-	void CModernGraphicsRenderer::DrawLine(const CPoint & start, const CPoint & end)
+	void CModernGraphicsRenderer::DrawLine(const CPoint & start, const CPoint & end, const CRGBAColor& color)
 	{
 		if (!m_drawing)
 		{
 			throw logic_error("DrawLine is allowed between BeginDraw()/EndDraw() only");
 		}
 		m_out << "  <line fromX=\"" << start.x << "\" fromY=\"" << start.y
-			<< "\" toX=\"" << end.x << "\" toY=\"" << end.y << "\"/>" << endl;
+			<< "\" toX=\"" << end.x << "\" toY=\"" << end.y << "\">\n";
+		m_out << "    <color r=\"" << color.r << "\" g=\"" << color.g
+			<< "\" b=\"" << color.b << "\" a=\"" << color.a << "\"/>\n";
+		m_out << "  </line>\n";
 	}
 
 	void CModernGraphicsRenderer::EndDraw()

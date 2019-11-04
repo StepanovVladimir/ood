@@ -12,10 +12,12 @@ namespace app
 	public:
 		CGraphicsAdapter(std::ostream& strm);
 
+		void SetColor(uint32_t argbColor) override;
 		void MoveTo(int x, int y) override;
 		void LineTo(int x, int y) override;
 
 	private:
 		modern_graphics_lib::CPoint m_point;
+		modern_graphics_lib::CRGBAColor m_color;
 	};
 }
