@@ -165,6 +165,7 @@
     <ClInclude Include="graphics_lib\ICanvas.h" />
     <ClInclude Include="modern_graphics_lib\ModernGraphicsRenderer.h" />
     <ClInclude Include="modern_graphics_lib\Point.h" />
+    <ClInclude Include="modern_graphics_lib\RGBAColor.h" />
     <ClInclude Include="shape_drawing_lib\CanvasPainter.h" />
     <ClInclude Include="shape_drawing_lib\ICanvasDrawable.h" />
     <ClInclude Include="shape_drawing_lib\Point.h" />

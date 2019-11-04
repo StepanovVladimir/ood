@@ -14,8 +14,8 @@ namespace app
 {
 	void PaintPicture(CCanvasPainter& painter)
 	{
-		CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
-		CRectangle rectangle({ 30, 40 }, 18, 24);
+		CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 }, 0xf010d020);
+		CRectangle rectangle({ 30, 40 }, 18, 24, 0xa000e0c0);
 
 		painter.Draw(triangle);
 		painter.Draw(rectangle);

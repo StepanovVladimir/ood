@@ -59,5 +59,8 @@
       <Filter>shape_drawing_lib</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsAdapter.h" />
+    <ClInclude Include="modern_graphics_lib\RGBAColor.h">
+      <Filter>modern_graphics_lib</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
