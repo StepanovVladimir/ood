@@ -2,7 +2,6 @@
 #include "shape_drawing_lib/Triangle.h"
 #include "shape_drawing_lib/Rectangle.h"
 #include "shape_drawing_lib/CanvasPainter.h"
-#include "modern_graphics_lib/ModernGraphicsRenderer.h"
 #include "GraphicsAdapter.h"
 #include <string>
 
@@ -34,7 +33,6 @@ namespace app
 		CModernGraphicsRenderer renderer(cout);
 		CGraphicsAdapter adapter(renderer);
 		CCanvasPainter painter(adapter);
-
 		renderer.BeginDraw();
 		PaintPicture(painter);
 	}
