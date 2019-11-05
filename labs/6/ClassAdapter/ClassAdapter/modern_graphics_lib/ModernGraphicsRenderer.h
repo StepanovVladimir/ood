@@ -10,7 +10,7 @@ namespace modern_graphics_lib
 	{
 	public:
 		CModernGraphicsRenderer(std::ostream& strm);
-		~CModernGraphicsRenderer();
+		virtual ~CModernGraphicsRenderer();
 
 		void BeginDraw();
 		void DrawLine(const CPoint& start, const CPoint& end, const CRGBAColor& color);
