@@ -45,7 +45,7 @@ void CTriangle::DoDraw(ICanvas& canvas) const
 	canvas.LineTo(m_p1.x, m_p1.y);
 }
 
-RectD CTriangle::CreateFrame()
+RectD CTriangle::CreateFrame() const
 {
 	double left = min(min(m_p1.x, m_p2.x), m_p3.x);
 	double top = min(min(m_p1.y, m_p2.y), m_p3.y);

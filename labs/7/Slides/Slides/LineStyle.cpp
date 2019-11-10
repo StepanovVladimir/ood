@@ -17,3 +17,9 @@ optional<double> CLineStyle::GetWidth() const
 {
 	return m_width;
 }
+
+bool operator!=(const CLineStyle &rational1, const CLineStyle &rational2)
+{
+	return rational1.IsEnabled() != rational2.IsEnabled() || rational1.GetColor() != rational2.GetColor()
+		|| rational1.GetWidth() != rational2.GetWidth();
+}

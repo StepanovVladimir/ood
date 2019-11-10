@@ -2,6 +2,7 @@
 
 #include "IDrawable.h"
 #include "LineStyle.h"
+#include <memory>
 
 class CGroupShape;
 
@@ -17,6 +18,6 @@ public:
 	virtual const CStyle& GetFillStyle() const = 0;
 	virtual void SetFillStyle(const CStyle& fillStyle) = 0;
 
-	virtual CGroupShape* GetGroup() = 0;
-	virtual const CGroupShape* GetGroup() const = 0;
+	virtual std::shared_ptr<CGroupShape> GetGroup() = 0;
+	virtual const std::shared_ptr<CGroupShape> GetGroup() const = 0;
 };

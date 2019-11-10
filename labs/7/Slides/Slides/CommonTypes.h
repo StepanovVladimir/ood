@@ -19,9 +19,9 @@ public:
 		, m_width(width)
 		, m_height(height)
 	{
-		if (m_width < 1 || m_height < 1)
+		if (m_width <= 0 || m_height <= 0)
 		{
-			throw std::invalid_argument("Width and height cannot be less than 1");
+			throw std::invalid_argument("Width and height must be greater than zero");
 		}
 	}
 

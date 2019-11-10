@@ -13,3 +13,5 @@ public:
 private:
 	std::optional<double> m_width;
 };
+
+bool operator!=(const CLineStyle &rational1, const CLineStyle &rational2);

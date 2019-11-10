@@ -25,5 +25,5 @@ private:
 	PointD m_relativeP2;
 	PointD m_relativeP3;
 	
-	RectD CreateFrame();
+	RectD CreateFrame() const;
 };

@@ -16,3 +16,5 @@ private:
 	std::optional<bool> m_enable;
 	std::optional<RGBAColor> m_color;
 };
+
+bool operator!=(const CStyle &rational1, const CStyle &rational2);

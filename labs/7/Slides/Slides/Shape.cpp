@@ -32,11 +32,11 @@ void CShape::SetFillStyle(const CStyle& fillStyle)
 	m_fillStyle = fillStyle;
 }
 
-CGroupShape* CShape::GetGroup()
+std::shared_ptr<CGroupShape> CShape::GetGroup()
 {
 	return nullptr;
 }
-const CGroupShape* CShape::GetGroup() const
+const std::shared_ptr<CGroupShape> CShape::GetGroup() const
 {
 	return nullptr;
 }

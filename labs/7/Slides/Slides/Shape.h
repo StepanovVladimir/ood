@@ -13,8 +13,8 @@ public:
 	const CStyle& GetFillStyle() const override;
 	void SetFillStyle(const CStyle& fillStyle) override;
 
-	CGroupShape* GetGroup() override;
-	const CGroupShape* GetGroup() const override;
+	std::shared_ptr<CGroupShape> GetGroup() override;
+	const std::shared_ptr<CGroupShape> GetGroup() const override;
 
 	void Draw(ICanvas& canvas) const override;
 
