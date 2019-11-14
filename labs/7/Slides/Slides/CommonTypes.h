@@ -3,14 +3,14 @@
 #include <stdint.h>
 #include <stdexcept>
 
-template <typename T>
+template<typename T>
 struct Point
 {
 	T x;
 	T y;
 };
 
-template <typename T>
+template<typename T>
 struct Rect
 {
 public:

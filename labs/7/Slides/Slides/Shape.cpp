@@ -12,7 +12,7 @@ CShape::CShape(const CLineStyle& outlineStyle, const CStyle& fillStyle)
 	}
 }
 
-const CLineStyle& CShape::GetOutlineStyle() const
+CLineStyle CShape::GetOutlineStyle() const
 {
 	return m_outlineStyle;
 }
@@ -22,7 +22,7 @@ void CShape::SetOutlineStyle(const CLineStyle& outlineStyle)
 	m_outlineStyle = outlineStyle;
 }
 
-const CStyle& CShape::GetFillStyle() const
+CStyle CShape::GetFillStyle() const
 {
 	return m_fillStyle;
 }
@@ -32,11 +32,12 @@ void CShape::SetFillStyle(const CStyle& fillStyle)
 	m_fillStyle = fillStyle;
 }
 
-std::shared_ptr<CGroupShape> CShape::GetGroup()
+CGroupShape* CShape::GetGroup()
 {
 	return nullptr;
 }
-const std::shared_ptr<CGroupShape> CShape::GetGroup() const
+
+const CGroupShape* CShape::GetGroup() const
 {
 	return nullptr;
 }

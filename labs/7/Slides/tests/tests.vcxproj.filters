@@ -15,15 +15,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="tests.cpp">
+    <ClCompile Include="..\Slides\Triangle.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Slides\Canvas.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Slides\Ellipse.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Slides\GroupShape.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Slides\LineStyle.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Slides\Rectangle.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Slides\Shape.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Slides\Style.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

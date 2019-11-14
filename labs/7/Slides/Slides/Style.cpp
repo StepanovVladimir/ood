@@ -19,7 +19,12 @@ optional<RGBAColor> CStyle::GetColor() const
 	return m_color;
 }
 
-bool operator!=(const CStyle &rational1, const CStyle &rational2)
+bool operator==(const CStyle &style1, const CStyle &style2)
 {
-	return rational1.IsEnabled() != rational2.IsEnabled() || rational1.GetColor() != rational2.GetColor();
+	return style1.IsEnabled() == style2.IsEnabled() && style1.GetColor() == style2.GetColor();
+}
+
+bool operator!=(const CStyle &style1, const CStyle &style2)
+{
+	return !(style1 == style2);
 }

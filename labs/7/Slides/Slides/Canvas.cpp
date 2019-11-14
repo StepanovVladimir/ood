@@ -25,7 +25,7 @@ void CCanvas::SetLineColor(RGBAColor color)
 {
 	ostringstream strm;
 	strm << setfill('0') << setw(8) << hex << color;
-	cout << "SetLineColor (#" << strm.str() << ')' << endl;
+	m_strm << "SetLineColor (#" << strm.str() << ')' << endl;
 }
 
 void CCanvas::BeginFill(RGBAColor color)
@@ -34,28 +34,30 @@ void CCanvas::BeginFill(RGBAColor color)
 
 	ostringstream strm;
 	strm << setfill('0') << setw(8) << hex << color;
-	cout << "BeginFill (#" << strm.str() << ')' << endl;
+	m_strm << "BeginFill (#" << strm.str() << ')' << endl;
+	m_fillHasBegin = true;
 }
 
 void CCanvas::EndFill()
 {
 	if (m_fillHasBegin)
 	{
-		cout << "EndFill" << endl;
+		m_strm << "EndFill" << endl;
+		m_fillHasBegin = false;
 	}
 }
 
 void CCanvas::MoveTo(double x, double y)
 {
-	cout << "MoveTo (" << x << ", " << y << ")" << endl;
+	m_strm << "MoveTo (" << x << ", " << y << ")" << endl;
 }
 
 void CCanvas::LineTo(double x, double y)
 {
-	cout << "LineTo (" << x << ", " << y << ")" << endl;
+	m_strm << "LineTo (" << x << ", " << y << ")" << endl;
 }
 
 void CCanvas::DrawEllipse(double left, double top, double width, double height)
 {
-	cout << "DrawEllipse (" << left << ", " << top << ", " << width << ", " << height << ")" << endl;
+	m_strm << "DrawEllipse (" << left << ", " << top << ", " << width << ", " << height << ")" << endl;
 }

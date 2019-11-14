@@ -60,7 +60,7 @@ void CGroupShape::SetFrame(const RectD& newFrame)
 	}
 }
 
-const CLineStyle& CGroupShape::GetOutlineStyle() const
+CLineStyle CGroupShape::GetOutlineStyle() const
 {
 	bool outlineStylesAreEquivalent = true;
 	CLineStyle outlineStyle = m_shapes[0]->GetOutlineStyle();
@@ -90,7 +90,7 @@ void CGroupShape::SetOutlineStyle(const CLineStyle& outlineStyle)
 	}
 }
 
-const CStyle& CGroupShape::GetFillStyle() const
+CStyle CGroupShape::GetFillStyle() const
 {
 	bool fillStylesAreEquivalent = true;
 	CStyle fillStyle = m_shapes[0]->GetFillStyle();
@@ -120,14 +120,14 @@ void CGroupShape::SetFillStyle(const CStyle& fillStyle)
 	}
 }
 
-shared_ptr<CGroupShape> CGroupShape::GetGroup()
+CGroupShape* CGroupShape::GetGroup()
 {
-	return make_shared<CGroupShape>(this);
+	return this;
 }
 
-const shared_ptr<CGroupShape> CGroupShape::GetGroup() const
+const CGroupShape* CGroupShape::GetGroup() const
 {
-	return make_shared<CGroupShape>(this);
+	return this;
 }
 
 void CGroupShape::Draw(ICanvas& canvas) const

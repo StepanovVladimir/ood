@@ -7,14 +7,14 @@ class CShape : public IShape
 public:
 	CShape(const CLineStyle& outlineStyle, const CStyle& fillStyle);
 
-	const CLineStyle& GetOutlineStyle() const override;
+	CLineStyle GetOutlineStyle() const override;
 	void SetOutlineStyle(const CLineStyle& outlineStyle) override;
 
-	const CStyle& GetFillStyle() const override;
+	CStyle GetFillStyle() const override;
 	void SetFillStyle(const CStyle& fillStyle) override;
 
-	std::shared_ptr<CGroupShape> GetGroup() override;
-	const std::shared_ptr<CGroupShape> GetGroup() const override;
+	CGroupShape* GetGroup() override;
+	const CGroupShape* GetGroup() const override;
 
 	void Draw(ICanvas& canvas) const override;
 
