@@ -4,6 +4,7 @@
 #include "../Slides/Rectangle.h"
 #include "../Slides/Ellipse.h"
 #include "../Slides/Canvas.h"
+#include "../Slides/ConstShapes.h"
 #include <sstream>
 
 using namespace std;
@@ -26,22 +27,15 @@ TEST_CASE("Сonstructor group shape")
 
 	CGroupShape group(shapes);
 
-	CHECK(group.GetShapesCount() == 2);
-	CHECK(group.GetShapeAtIndex(0) == rectangle);
-	CHECK(group.GetShapeAtIndex(1) == ellipse);
 	CHECK(group.GetOutlineStyle() == CLineStyle());
 	CHECK(group.GetFillStyle() == CStyle());
 	CHECK(group.GetGroup() == &group);
-}
 
-TEST_CASE("Get shape at index out of range from group shape")
-{
-	vector<shared_ptr<IShape>> shapes;
-	shapes.push_back(make_shared<CRectangle>(RectD({ 2, 3 }, 4, 5), CLineStyle(true), CStyle(true, 0xaa3399dd)));
-	shapes.push_back(make_shared<CEllipse>(RectD({ 10, 14 }, 6, 7), CLineStyle(true, 0x001122ff, 2), CStyle(false)));
-	CGroupShape group(shapes);
+	CConstShapes groupShapes = group.GetShapes();
 
-	CHECK_THROWS_AS(group.GetShapeAtIndex(2), runtime_error);
+	CHECK(groupShapes.GetShapesCount() == 2);
+	CHECK(groupShapes[0] == rectangle);
+	CHECK(groupShapes[1] == ellipse);
 }
 
 TEST_CASE("Set outline style on group shape")

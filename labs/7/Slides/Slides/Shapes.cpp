@@ -3,30 +3,17 @@
 
 using namespace std;
 
-size_t CShapes::GetShapesCount() const
+CShapes::CShapes()
+	: CConstShapes(vector<shared_ptr<IShape>>())
 {
-	return m_shapes.size();
 }
 
-shared_ptr<IShape> CShapes::GetShapeAtIndex(size_t index)
+CShapes::CShapes(const vector<shared_ptr<IShape>>& shapes)
+	: CConstShapes(shapes)
 {
-	if (index >= m_shapes.size())
-	{
-		throw runtime_error("There is no shape with such index");
-	}
-	return m_shapes[index];
 }
 
-const std::shared_ptr<IShape> CShapes::GetShapeAtIndex(size_t index) const
-{
-	if (index >= m_shapes.size())
-	{
-		throw runtime_error("There is no shape with such index");
-	}
-	return m_shapes[index];
-}
-
-void CShapes::InsertShape(const shared_ptr<IShape>& shape, size_t position = numeric_limits<size_t>::max())
+void CShapes::InsertShape(const shared_ptr<IShape>& shape, size_t position)
 {
 	if (position > m_shapes.size())
 	{

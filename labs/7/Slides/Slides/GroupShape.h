@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IShape.h"
+#include "ConstShapes.h"
 #include <vector>
 
 class CGroupShape : public IShape
@@ -8,9 +9,7 @@ class CGroupShape : public IShape
 public:
 	CGroupShape(const std::vector<std::shared_ptr<IShape>>& shapes);
 
-	size_t GetShapesCount() const;
-	std::shared_ptr<IShape> GetShapeAtIndex(size_t index);
-	const std::shared_ptr<IShape> GetShapeAtIndex(size_t index) const;
+	CConstShapes& GetShapes();
 
 	RectD GetFrame() const override;
 	void SetFrame(const RectD& frame) override;
@@ -27,7 +26,7 @@ public:
 	void Draw(ICanvas& canvas) const override;
 
 private:
-	std::vector<std::shared_ptr<IShape>> m_shapes;
+	CConstShapes m_shapes;
 
 	RectD CreateFrame() const;
 

@@ -18,9 +18,6 @@
     <ClCompile Include="tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Slides\Triangle.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\Slides\Canvas.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -40,6 +37,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Slides\Style.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Slides\ConstShapes.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

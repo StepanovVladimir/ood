@@ -5,35 +5,17 @@
 using namespace std;
 
 CGroupShape::CGroupShape(const vector<shared_ptr<IShape>>& shapes)
+	: m_shapes(shapes)
 {
-	if (shapes.size() < 2)
+	if (m_shapes.GetShapesCount() < 2)
 	{
 		throw runtime_error("You cannot create a group of less than two elements");
 	}
-	m_shapes = shapes;	
 }
 
-size_t CGroupShape::GetShapesCount() const
+CConstShapes& CGroupShape::GetShapes()
 {
-	return m_shapes.size();
-}
-
-shared_ptr<IShape> CGroupShape::GetShapeAtIndex(size_t index)
-{
-	if (index >= m_shapes.size())
-	{
-		throw runtime_error("There is no shape with such index");
-	}
-	return m_shapes[index];
-}
-
-const std::shared_ptr<IShape> CGroupShape::GetShapeAtIndex(size_t index) const
-{
-	if (index >= m_shapes.size())
-	{
-		throw runtime_error("There is no shape with such index");
-	}
-	return m_shapes[index];
+	return m_shapes;
 }
 
 RectD CGroupShape::GetFrame() const
@@ -44,7 +26,7 @@ RectD CGroupShape::GetFrame() const
 void CGroupShape::SetFrame(const RectD& newFrame)
 {
 	RectD oldframe = CreateFrame();
-	for (size_t i = 0; i < m_shapes.size(); ++i)
+	for (size_t i = 0; i < m_shapes.GetShapesCount(); ++i)
 	{
 		double relativeLeft = (m_shapes[i]->GetFrame().GetLeftTop().x - oldframe.GetLeftTop().x) / oldframe.GetWidth();
 		double relativeTop = (m_shapes[i]->GetFrame().GetLeftTop().y - oldframe.GetLeftTop().y) / oldframe.GetHeight();
@@ -64,7 +46,7 @@ CLineStyle CGroupShape::GetOutlineStyle() const
 {
 	bool outlineStylesAreEquivalent = true;
 	CLineStyle outlineStyle = m_shapes[0]->GetOutlineStyle();
-	for (size_t i = 1; i < m_shapes.size(); ++i)
+	for (size_t i = 1; i < m_shapes.GetShapesCount(); ++i)
 	{
 		if (outlineStyle != m_shapes[i]->GetOutlineStyle())
 		{
@@ -84,7 +66,7 @@ CLineStyle CGroupShape::GetOutlineStyle() const
 
 void CGroupShape::SetOutlineStyle(const CLineStyle& outlineStyle)
 {
-	for (size_t i = 0; i < m_shapes.size(); ++i)
+	for (size_t i = 0; i < m_shapes.GetShapesCount(); ++i)
 	{
 		m_shapes[i]->SetOutlineStyle(outlineStyle);
 	}
@@ -94,7 +76,7 @@ CStyle CGroupShape::GetFillStyle() const
 {
 	bool fillStylesAreEquivalent = true;
 	CStyle fillStyle = m_shapes[0]->GetFillStyle();
-	for (size_t i = 1; i < m_shapes.size(); ++i)
+	for (size_t i = 1; i < m_shapes.GetShapesCount(); ++i)
 	{
 		if (fillStyle != m_shapes[i]->GetFillStyle())
 		{
@@ -114,7 +96,7 @@ CStyle CGroupShape::GetFillStyle() const
 
 void CGroupShape::SetFillStyle(const CStyle& fillStyle)
 {
-	for (size_t i = 0; i < m_shapes.size(); ++i)
+	for (size_t i = 0; i < m_shapes.GetShapesCount(); ++i)
 	{
 		m_shapes[i]->SetFillStyle(fillStyle);
 	}
@@ -132,7 +114,7 @@ const CGroupShape* CGroupShape::GetGroup() const
 
 void CGroupShape::Draw(ICanvas& canvas) const
 {
-	for (size_t i = 0; i < m_shapes.size(); ++i)
+	for (size_t i = 0; i < m_shapes.GetShapesCount(); ++i)
 	{
 		m_shapes[i]->Draw(canvas);
 	}
