@@ -1,17 +1,13 @@
 #pragma once
 
 #include "IShape.h"
-#include "ConstShapes.h"
+#include "Shapes.h"
 #include <vector>
 
-class CGroupShape : public IShape
+class CGroupShape : public CShapes, public IShape
 {
 public:
-	CGroupShape(const std::vector<std::shared_ptr<IShape>>& shapes);
-
-	CConstShapes& GetShapes();
-
-	RectD GetFrame() const override;
+	std::optional<RectD> GetFrame() const override;
 	void SetFrame(const RectD& frame) override;
 
 	CLineStyle GetOutlineStyle() const override;
@@ -26,10 +22,6 @@ public:
 	void Draw(ICanvas& canvas) const override;
 
 private:
-	CConstShapes m_shapes;
-
-	RectD CreateFrame() const;
-
 	static bool LessLeft(const std::shared_ptr<IShape>& first, const std::shared_ptr<IShape>& second);
 	static bool LessTop(const std::shared_ptr<IShape>& first, const std::shared_ptr<IShape>& second);
 	static bool LessRight(const std::shared_ptr<IShape>& first, const std::shared_ptr<IShape>& second);

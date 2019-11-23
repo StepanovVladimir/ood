@@ -168,12 +168,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Slides\Canvas.cpp" />
-    <ClCompile Include="..\Slides\ConstShapes.cpp" />
     <ClCompile Include="..\Slides\Ellipse.cpp" />
     <ClCompile Include="..\Slides\GroupShape.cpp" />
     <ClCompile Include="..\Slides\LineStyle.cpp" />
     <ClCompile Include="..\Slides\Rectangle.cpp" />
     <ClCompile Include="..\Slides\Shape.cpp" />
+    <ClCompile Include="..\Slides\Shapes.cpp" />
     <ClCompile Include="..\Slides\Style.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>

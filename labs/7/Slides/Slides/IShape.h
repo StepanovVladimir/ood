@@ -9,7 +9,7 @@ class CGroupShape;
 class IShape : public IDrawable
 {
 public:
-	virtual RectD GetFrame() const = 0;
+	virtual std::optional<RectD> GetFrame() const = 0;
 	virtual void SetFrame(const RectD& frame) = 0;
 
 	virtual CLineStyle GetOutlineStyle() const = 0;

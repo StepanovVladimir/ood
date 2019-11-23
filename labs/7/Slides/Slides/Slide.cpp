@@ -31,38 +31,32 @@ void CSlide::SetBackgroundColor(RGBAColor color)
 	m_backgroundColor = color;
 }
 
-CShapes& CSlide::GetShapes()
-{
-	return m_shapes;
-}
-
 void CSlide::CreateGroup(const set<size_t>& indexes)
 {
-	vector<shared_ptr<IShape>> shapes;
+	shared_ptr<CGroupShape> group = make_shared<CGroupShape>();
 	for (auto iter = indexes.rbegin(); iter != indexes.rend(); ++iter)
 	{
-		shapes.push_back(m_shapes[*iter]);
-		m_shapes.RemoveShapeAtIndex(*iter);
+		group->InsertShape(GetShapeAtIndex(*iter), 0);
+		RemoveShapeAtIndex(*iter);
 	}
-	shared_ptr<IShape> group = make_shared<CGroupShape>(shapes);
-	m_shapes.InsertShape(group);
+	InsertShape(group);
 }
 
 void CSlide::Ungroup(size_t index)
 {
-	CGroupShape* group = m_shapes[index]->GetGroup();
+	CGroupShape* group = GetShapeAtIndex(index)->GetGroup();
+
 	if (group == nullptr)
 	{
 		throw runtime_error("This element is not a group");
 	}
 
-	CConstShapes shapes = group->GetShapes();
-	m_shapes.RemoveShapeAtIndex(index);
-
-	for (auto shape : shapes)
+	for (auto shape : *group)
 	{
-		m_shapes.InsertShape(shape);
+		InsertShape(shape);
 	}
+
+	RemoveShapeAtIndex(index);
 }
 
 void CSlide::Draw(ICanvas& canvas) const
@@ -75,8 +69,8 @@ void CSlide::Draw(ICanvas& canvas) const
 	canvas.LineTo(0, m_height);
 	canvas.LineTo(0, 0);
 	canvas.EndFill();
-	for (size_t i = 0; i < m_shapes.GetShapesCount(); ++i)
+	for (size_t i = 0; i < GetShapesCount(); ++i)
 	{
-		m_shapes[i]->Draw(canvas);
+		GetShapeAtIndex(i)->Draw(canvas);
 	}
 }

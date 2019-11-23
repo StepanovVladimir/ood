@@ -4,50 +4,48 @@
 #include "../Slides/Rectangle.h"
 #include "../Slides/Ellipse.h"
 #include "../Slides/Canvas.h"
-#include "../Slides/ConstShapes.h"
+#include "../Slides/Shapes.h"
 #include <sstream>
 
 using namespace std;
 
-TEST_CASE("Exception in constructor on group of less than two elements")
+TEST_CASE("Constructor group shape")
 {
-	vector<shared_ptr<IShape>> shapes;
-	shapes.push_back(make_shared<CRectangle>(RectD({ 2, 3 }, 4, 5), CLineStyle(true), CStyle(true, 0xaa3399dd)));
-
-	CHECK_THROWS_AS(CGroupShape(shapes), runtime_error);
-}
-
-TEST_CASE("Сonstructor group shape")
-{
-	vector<shared_ptr<IShape>> shapes;
-	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 3 }, 4, 5), CLineStyle(true), CStyle(true, 0xaa3399dd));
-	shared_ptr<IShape> ellipse = make_shared<CEllipse>(RectD({ 10, 14 }, 6, 7), CLineStyle(true, 0x001122ff, 2), CStyle(false));
-	shapes.push_back(rectangle);
-	shapes.push_back(ellipse);
-
-	CGroupShape group(shapes);
+	CGroupShape group;
 
 	CHECK(group.GetOutlineStyle() == CLineStyle());
 	CHECK(group.GetFillStyle() == CStyle());
 	CHECK(group.GetGroup() == &group);
 
-	CConstShapes groupShapes = group.GetShapes();
+	CHECK(group.GetShapesCount() == 0);
+}
 
-	CHECK(groupShapes.GetShapesCount() == 2);
-	CHECK(groupShapes[0] == rectangle);
-	CHECK(groupShapes[1] == ellipse);
+TEST_CASE("Insert shape to group")
+{
+	CGroupShape group;
+	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 3 }, 4, 5), CLineStyle(true), CStyle(true, 0xaa3399dd));
+	shared_ptr<IShape> ellipse = make_shared<CEllipse>(RectD({ 10, 14 }, 6, 7), CLineStyle(true, 0x001122ff, 2), CStyle(false));
+	group.InsertShape(rectangle);
+	group.InsertShape(ellipse);
+
+	CHECK(group.GetOutlineStyle() == CLineStyle());
+	CHECK(group.GetFillStyle() == CStyle());
+	CHECK(group.GetGroup() == &group);
+
+	CHECK(group.GetShapesCount() == 2);
+	CHECK(group.GetShapeAtIndex(0) == rectangle);
+	CHECK(group.GetShapeAtIndex(1) == ellipse);
 }
 
 TEST_CASE("Set outline style on group shape")
 {
-	vector<shared_ptr<IShape>> shapes;
+	CGroupShape group;
 	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 3 }, 4, 5), CLineStyle(true), CStyle(true, 0xaa3399dd));
 	shared_ptr<IShape> ellipse = make_shared<CEllipse>(RectD({ 10, 14 }, 6, 7), CLineStyle(true, 0x001122ff, 2), CStyle(false));
-	shapes.push_back(rectangle);
-	shapes.push_back(ellipse);
-	CGroupShape group(shapes);
-	CLineStyle outlineStyle(true, 0x112233aa, 3);
+	group.InsertShape(rectangle);
+	group.InsertShape(ellipse);
 
+	CLineStyle outlineStyle(true, 0x112233aa, 3);
 	group.SetOutlineStyle(outlineStyle);
 
 	CHECK(rectangle->GetOutlineStyle() == outlineStyle);
@@ -58,14 +56,13 @@ TEST_CASE("Set outline style on group shape")
 
 TEST_CASE("Set fill style on group shape")
 {
-	vector<shared_ptr<IShape>> shapes;
+	CGroupShape group;
 	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 3 }, 4, 5), CLineStyle(true), CStyle(true, 0xaa3399dd));
 	shared_ptr<IShape> ellipse = make_shared<CEllipse>(RectD({ 10, 14 }, 6, 7), CLineStyle(true, 0x001122ff, 2), CStyle(false));
-	shapes.push_back(rectangle);
-	shapes.push_back(ellipse);
-	CGroupShape group(shapes);
-	CStyle fillStyle(true, 0x112233aa);
+	group.InsertShape(rectangle);
+	group.InsertShape(ellipse);
 
+	CStyle fillStyle(true, 0x112233aa);
 	group.SetFillStyle(fillStyle);
 
 	CHECK(rectangle->GetFillStyle() == fillStyle);
@@ -76,12 +73,11 @@ TEST_CASE("Set fill style on group shape")
 
 TEST_CASE("Draw group shape")
 {
-	vector<shared_ptr<IShape>> shapes;
+	CGroupShape group;
 	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 3 }, 4, 5), CLineStyle(true), CStyle(true, 0xaa3399dd));
 	shared_ptr<IShape> ellipse = make_shared<CEllipse>(RectD({ 10, 14 }, 6, 7), CLineStyle(true, 0x001122ff, 2), CStyle(false));
-	shapes.push_back(rectangle);
-	shapes.push_back(ellipse);
-	CGroupShape group(shapes);
+	group.InsertShape(rectangle);
+	group.InsertShape(ellipse);
 
 	ostringstream outStrm;
 	CCanvas canvas(outStrm);
@@ -129,24 +125,22 @@ bool operator==(const Rect<T> &rect1, const Rect<T> &rect2)
 
 TEST_CASE("Get frame from group shape")
 {
-	vector<shared_ptr<IShape>> shapes;
+	CGroupShape group;
 	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 4 }, 4, 2), CLineStyle(true), CStyle(true));
 	shared_ptr<IShape> ellipse = make_shared<CEllipse>(RectD({ 8, 0 }, 4, 8), CLineStyle(true), CStyle(true));
-	shapes.push_back(rectangle);
-	shapes.push_back(ellipse);
-	CGroupShape group(shapes);
+	group.InsertShape(rectangle);
+	group.InsertShape(ellipse);
 
 	CHECK(group.GetFrame() == RectD({ 2, 0 }, 10, 8));
 }
 
 TEST_CASE("Set frame to group shape")
 {
-	vector<shared_ptr<IShape>> shapes;
+	CGroupShape group;
 	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 4 }, 4, 2), CLineStyle(true), CStyle(true));
 	shared_ptr<IShape> ellipse = make_shared<CEllipse>(RectD({ 8, 0 }, 4, 8), CLineStyle(true), CStyle(true));
-	shapes.push_back(rectangle);
-	shapes.push_back(ellipse);
-	CGroupShape group(shapes);
+	group.InsertShape(rectangle);
+	group.InsertShape(ellipse);
 
 	group.SetFrame(RectD({ 4, 10 }, 5, 4));
 	
@@ -154,4 +148,36 @@ TEST_CASE("Set frame to group shape")
 	CHECK(ellipse->GetFrame() == RectD({ 7, 10 }, 2, 4));
 
 	CHECK(group.GetFrame() == RectD({ 4, 10 }, 5, 4));
+}
+
+TEST_CASE("Get frame from empty group")
+{
+	CGroupShape group1;
+	CHECK(group1.GetFrame() == nullopt);
+
+	shared_ptr<IShape> group2 = make_shared<CGroupShape>();
+	shared_ptr<IShape> group3 = make_shared<CGroupShape>();
+	group1.InsertShape(group2);
+	group1.InsertShape(group3);
+
+	CHECK(group1.GetFrame() == nullopt);
+
+	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 4 }, 4, 2), CLineStyle(true), CStyle(true));
+	group1.InsertShape(rectangle);
+
+	CHECK(group1.GetFrame() == RectD({ 2, 4 }, 4, 2));
+}
+
+TEST_CASE("Set frame to empty group")
+{
+	CGroupShape group1;
+	shared_ptr<IShape> group2 = make_shared<CGroupShape>();
+	shared_ptr<IShape> rectangle = make_shared<CRectangle>(RectD({ 2, 4 }, 4, 2), CLineStyle(true), CStyle(true));
+	group1.InsertShape(group2);
+	group1.InsertShape(rectangle);
+
+	group1.SetFrame(RectD({ 4, 10 }, 5, 4));
+
+	CHECK(rectangle->GetFrame() == RectD({ 4, 10 }, 5, 4));
+	CHECK(group1.GetFrame() == RectD({ 4, 10 }, 5, 4));
 }

@@ -7,7 +7,7 @@ class CEllipse : public CShape
 public:
 	CEllipse(const RectD& ellipse, const CLineStyle& outlineStyle, const CStyle& fillStyle);
 
-	RectD GetFrame() const override;
+	std::optional<RectD> GetFrame() const override;
 	void SetFrame(const RectD& frame) override;
 
 protected:

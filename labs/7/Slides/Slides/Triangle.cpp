@@ -20,7 +20,7 @@ CTriangle::CTriangle(const PointD& p1, const PointD& p2, const PointD& p3,
 	m_relativeP3.y = (m_p3.y - m_frame.GetLeftTop().y) / m_frame.GetHeight();
 }
 
-RectD CTriangle::GetFrame() const
+optional<RectD> CTriangle::GetFrame() const
 {
 	return m_frame;
 }

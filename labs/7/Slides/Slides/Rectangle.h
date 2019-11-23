@@ -7,7 +7,7 @@ class CRectangle : public CShape
 public:
 	CRectangle(const RectD& rect, const CLineStyle& outlineStyle, const CStyle& fillStyle);
 	
-	RectD GetFrame() const override;
+	std::optional<RectD> GetFrame() const override;
 	void SetFrame(const RectD& frame) override;
 
 protected:

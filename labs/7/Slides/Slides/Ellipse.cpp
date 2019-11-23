@@ -7,7 +7,7 @@ CEllipse::CEllipse(const RectD& ellipse, const CLineStyle& outlineStyle, const C
 {
 }
 
-RectD CEllipse::GetFrame() const
+std::optional<RectD> CEllipse::GetFrame() const
 {
 	return m_ellipse;
 }

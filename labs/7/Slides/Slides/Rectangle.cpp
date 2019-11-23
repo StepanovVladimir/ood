@@ -7,7 +7,7 @@ CRectangle::CRectangle(const RectD& rect, const CLineStyle& outlineStyle, const 
 {
 }
 
-RectD CRectangle::GetFrame() const
+std::optional<RectD> CRectangle::GetFrame() const
 {
 	return m_rect;
 }

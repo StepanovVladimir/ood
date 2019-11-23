@@ -8,7 +8,7 @@ public:
 	CTriangle(const PointD& p1, const PointD& p2, const PointD& p3,
 		const CLineStyle& outlineStyle, const CStyle& fillStyle);
 
-	RectD GetFrame() const override;
+	std::optional<RectD> GetFrame() const override;
 	void SetFrame(const RectD& rect) override;
 
 protected:

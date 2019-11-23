@@ -39,7 +39,7 @@
     <ClCompile Include="..\Slides\Style.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Slides\ConstShapes.cpp">
+    <ClCompile Include="..\Slides\Shapes.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
