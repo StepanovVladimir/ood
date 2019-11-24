@@ -1,34 +1,34 @@
 #include "pch.h"
 #include "HasQuarterState.h"
-#include <iostream>
 
 using namespace std;
 
-CHasQuarterState::CHasQuarterState(IGumballMachine& gumballMachine)
+CHasQuarterState::CHasQuarterState(IGumballMachine& gumballMachine, ostream& strm)
 	: m_gumballMachine(gumballMachine)
+	, m_strm(strm)
 {
 }
 
 void CHasQuarterState::InsertQuarter()
 {
-	cout << "You can't insert another quarter\n";
+	m_strm << "You can't insert another quarter\n";
 }
 
 void CHasQuarterState::EjectQuarter()
 {
-	cout << "Quarter returned\n";
+	m_strm << "Quarter returned\n";
 	m_gumballMachine.SetNoQuarterState();
 }
 
 void CHasQuarterState::TurnCrank()
 {
-	cout << "You turned...\n";
+	m_strm << "You turned...\n";
 	m_gumballMachine.SetSoldState();
 }
 
 void CHasQuarterState::Dispense()
 {
-	cout << "No gumball dispensed\n";
+	m_strm << "No gumball dispensed\n";
 }
 
 string CHasQuarterState::ToString() const

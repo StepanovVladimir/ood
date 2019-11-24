@@ -2,15 +2,15 @@
 
 #include "IGumballMachine.h"
 #include "IState.h"
-#include <string>
+#include <iostream>
 
 class CGumballMachine : private IGumballMachine
 {
 public:
-	CGumballMachine(unsigned numBalls);
+	CGumballMachine(unsigned numBalls, std::ostream& strm = std::cout);
 
-	void EjectQuarter();
 	void InsertQuarter();
+	void EjectQuarter();
 	void TurnCrank();
 	std::string ToString() const;
 
@@ -23,6 +23,7 @@ private:
 	void SetSoldState() override;
 	void SetHasQuarterState() override;
 
-	unsigned m_count = 0;
+	unsigned m_count;
+	std::ostream& m_strm;
 	std::unique_ptr<IState> m_currentState;
 };

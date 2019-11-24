@@ -2,11 +2,12 @@
 
 #include "IState.h"
 #include "IGumballMachine.h"
+#include <iostream>
 
 class CHasQuarterState : public IState
 {
 public:
-	CHasQuarterState(IGumballMachine& gumballMachine);
+	CHasQuarterState(IGumballMachine& gumballMachine, std::ostream& strm = std::cout);
 
 	void InsertQuarter() override;
 	void EjectQuarter() override;
@@ -17,5 +18,6 @@ public:
 
 private:
 	IGumballMachine& m_gumballMachine;
+	std::ostream& m_strm;
 };
 

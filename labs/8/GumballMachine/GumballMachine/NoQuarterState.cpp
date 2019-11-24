@@ -1,33 +1,33 @@
 #include "pch.h"
 #include "NoQuarterState.h"
-#include <iostream>
 
 using namespace std;
 
-CNoQuarterState::CNoQuarterState(IGumballMachine& gumballMachine)
+CNoQuarterState::CNoQuarterState(IGumballMachine& gumballMachine, ostream& strm)
 	: m_gumballMachine(gumballMachine)
+	, m_strm(strm)
 {
 }
 
 void CNoQuarterState::InsertQuarter()
 {
-	cout << "You inserted a quarter\n";
+	m_strm << "You inserted a quarter\n";
 	m_gumballMachine.SetHasQuarterState();
 }
 
 void CNoQuarterState::EjectQuarter()
 {
-	cout << "You haven't inserted a quarter\n";
+	m_strm << "You haven't inserted a quarter\n";
 }
 
 void CNoQuarterState::TurnCrank()
 {
-	cout << "You turned but there's no quarter\n";
+	m_strm << "You turned but there's no quarter\n";
 }
 
 void CNoQuarterState::Dispense()
 {
-	cout << "You need to pay first\n";
+	m_strm << "You need to pay first\n";
 }
 
 string CNoQuarterState::ToString() const

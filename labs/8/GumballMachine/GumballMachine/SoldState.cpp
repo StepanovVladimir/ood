@@ -1,27 +1,27 @@
 #include "pch.h"
 #include "SoldState.h"
-#include <iostream>
 
 using namespace std;
 
-CSoldState::CSoldState(IGumballMachine& gumballMachine)
+CSoldState::CSoldState(IGumballMachine& gumballMachine, ostream& strm)
 	: m_gumballMachine(gumballMachine)
+	, m_strm(strm)
 {
 }
 
 void CSoldState::InsertQuarter()
 {
-	cout << "Please wait, we're already giving you a gumball\n";
+	m_strm << "Please wait, we're already giving you a gumball\n";
 }
 
 void CSoldState::EjectQuarter()
 {
-	cout << "Sorry you already turned the crank\n";
+	m_strm << "Sorry you already turned the crank\n";
 }
 
 void CSoldState::TurnCrank()
 {
-	cout << "Turning twice doesn't get you another gumball\n";
+	m_strm << "Turning twice doesn't get you another gumball\n";
 }
 
 void CSoldState::Dispense()
@@ -29,7 +29,7 @@ void CSoldState::Dispense()
 	m_gumballMachine.ReleaseBall();
 	if (m_gumballMachine.GetBallCount() == 0)
 	{
-		cout << "Oops, out of gumballs\n";
+		m_strm << "Oops, out of gumballs\n";
 		m_gumballMachine.SetSoldOutState();
 	}
 	else

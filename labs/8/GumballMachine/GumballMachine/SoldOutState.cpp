@@ -1,32 +1,32 @@
 #include "pch.h"
 #include "SoldOutState.h"
-#include <iostream>
 
 using namespace std;
 
-CSoldOutState::CSoldOutState(IGumballMachine& gumballMachine)
+CSoldOutState::CSoldOutState(IGumballMachine& gumballMachine, ostream& strm)
 	: m_gumballMachine(gumballMachine)
+	, m_strm(strm)
 {
 }
 
 void CSoldOutState::InsertQuarter()
 {
-	cout << "You can't insert a quarter, the machine is sold out\n";
+	m_strm << "You can't insert a quarter, the machine is sold out\n";
 }
 
 void CSoldOutState::EjectQuarter()
 {
-	cout << "You can't eject, you haven't inserted a quarter yet\n";
+	m_strm << "You can't eject, you haven't inserted a quarter yet\n";
 }
 
 void CSoldOutState::TurnCrank()
 {
-	cout << "You turned but there's no gumballs\n";
+	m_strm << "You turned but there's no gumballs\n";
 }
 
 void CSoldOutState::Dispense()
 {
-	cout << "No gumball dispensed\n";
+	m_strm << "No gumball dispensed\n";
 }
 
 string CSoldOutState::ToString() const
