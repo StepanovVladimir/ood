@@ -42,7 +42,7 @@ string CGumballMachine::ToString() const
 	string str = "Mighty Gumball, Inc.\n";
 	str += "C++-enabled Standing Gumball Model #2016 (with state)\n";
 	str += "Inventory: " + to_string(m_ballsCount) + " gumball" + (m_ballsCount != 1 ? "s, " : ", ");
-	str += to_string(m_quartersCount) + " quarter" + (m_ballsCount != 1 ? "s\n" : "\n");
+	str += to_string(m_quartersCount) + " quarter" + (m_quartersCount != 1 ? "s\n" : "\n");
 	str += "Machine is " + m_currentState->ToString() + '\n';
 	return str;
 }
@@ -68,7 +68,7 @@ unsigned CGumballMachine::GetQuartersCount() const
 
 void CGumballMachine::AddQuarter()
 {
-	cout << "You inserted a quarter\n";
+	m_strm << "You inserted a quarter\n";
 	++m_quartersCount;
 }
 
@@ -79,7 +79,7 @@ void CGumballMachine::RemoveOneQuarter()
 
 void CGumballMachine::RemoveAllQuarters()
 {
-	cout << "Quarters returned\n";
+	m_strm << "Quarters returned\n";
 	m_quartersCount = 0;
 }
 
