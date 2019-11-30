@@ -12,6 +12,7 @@ public:
 	void InsertQuarter();
 	void EjectQuarter();
 	void TurnCrank();
+
 	std::string ToString() const;
 
 private:

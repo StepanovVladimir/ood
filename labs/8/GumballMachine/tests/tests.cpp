@@ -61,14 +61,12 @@ TEST_CASE("Create gumball machine with several gumballs")
 	CHECK(str == "Machine is waiting for quarter");
 }
 
-TEST_CASE("Test gumball machine on sold out state")
+TEST_CASE("Insert quarter on sold out state")
 {
 	ostringstream outStrm;
 	CGumballMachine m(0, outStrm);
 
 	m.InsertQuarter();
-	m.EjectQuarter();
-	m.TurnCrank();
 	outStrm << m.ToString();
 	
 	istringstream result(outStrm.str());
@@ -77,7 +75,45 @@ TEST_CASE("Test gumball machine on sold out state")
 	getline(result, str);
 	CHECK(str == "You can't insert a quarter, the machine is sold out");
 	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "Inventory: 0 gumballs");
+	getline(result, str);
+	CHECK(str == "Machine is sold out");
+}
+
+TEST_CASE("Eject quarter on sold out state")
+{
+	ostringstream outStrm;
+	CGumballMachine m(0, outStrm);
+
+	m.EjectQuarter();
+	outStrm << m.ToString();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
 	CHECK(str == "You can't eject, you haven't inserted a quarter yet");
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "Inventory: 0 gumballs");
+	getline(result, str);
+	CHECK(str == "Machine is sold out");
+}
+
+TEST_CASE("Turn crank on sold out state")
+{
+	ostringstream outStrm;
+	CGumballMachine m(0, outStrm);
+
+	m.TurnCrank();
+	outStrm << m.ToString();
+
+	istringstream result(outStrm.str());
+	string str;
+
 	getline(result, str);
 	CHECK(str == "You turned but there's no gumballs");
 	getline(result, str);
@@ -90,13 +126,12 @@ TEST_CASE("Test gumball machine on sold out state")
 	CHECK(str == "Machine is sold out");
 }
 
-TEST_CASE("Eject quarter and turn crank on no quarter state")
+TEST_CASE("Eject quarter on no quarter state")
 {
 	ostringstream outStrm;
 	CGumballMachine m(2, outStrm);
 
 	m.EjectQuarter();
-	m.TurnCrank();
 	outStrm << m.ToString();
 
 	istringstream result(outStrm.str());
@@ -104,6 +139,25 @@ TEST_CASE("Eject quarter and turn crank on no quarter state")
 
 	getline(result, str);
 	CHECK(str == "You haven't inserted a quarter");
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "Inventory: 2 gumballs");
+	getline(result, str);
+	CHECK(str == "Machine is waiting for quarter");
+}
+
+TEST_CASE("Turn crank on no quarter state")
+{
+	ostringstream outStrm;
+	CGumballMachine m(2, outStrm);
+
+	m.TurnCrank();
+	outStrm << m.ToString();
+
+	istringstream result(outStrm.str());
+	string str;
+
 	getline(result, str);
 	CHECK(str == "You turned but there's no quarter");
 	getline(result, str);
