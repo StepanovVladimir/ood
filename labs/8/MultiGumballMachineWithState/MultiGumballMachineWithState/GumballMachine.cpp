@@ -37,6 +37,11 @@ void CGumballMachine::TurnCrank()
 	m_currentState->Dispense();
 }
 
+void CGumballMachine::Refill(unsigned numBalls)
+{
+	m_currentState->Refill(numBalls);
+}
+
 string CGumballMachine::ToString() const
 {
 	string str = "Mighty Gumball, Inc.\n";
@@ -59,6 +64,12 @@ void CGumballMachine::ReleaseBall()
 		m_strm << "A gumball comes rolling out the slot...\n";
 		--m_ballsCount;
 	}
+}
+
+void CGumballMachine::AddBalls(unsigned numBalls)
+{
+	m_strm << "You added " << numBalls << " gumballs\n";
+	m_ballsCount += numBalls;
 }
 
 unsigned CGumballMachine::GetQuartersCount() const

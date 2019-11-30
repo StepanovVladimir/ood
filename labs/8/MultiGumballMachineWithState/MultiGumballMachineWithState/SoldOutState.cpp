@@ -36,6 +36,16 @@ void CSoldOutState::Dispense()
 	m_strm << "No gumball dispensed\n";
 }
 
+void CSoldOutState::Refill(unsigned numBalls)
+{
+	m_gumballMachine.AddBalls(numBalls);
+	if (m_gumballMachine.GetBallsCount() > 0)
+	{
+		m_gumballMachine.GetQuartersCount() > 0 ? m_gumballMachine.SetHasQuarterState()
+			: m_gumballMachine.SetNoQuarterState();
+	}
+}
+
 string CSoldOutState::ToString() const
 {
 	return "sold out";

@@ -191,6 +191,27 @@ TEST_CASE("Insert quarter on no quarter state")
 	CHECK(str == "Machine is waiting for turn of crank");
 }
 
+TEST_CASE("Refill on no quarter state")
+{
+	ostringstream outStrm;
+	CGumballMachine m(2, outStrm);
+
+	m.Refill(2);
+	outStrm << m.ToString();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
+	CHECK(str == "You added 2 gumballs");
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "Inventory: 4 gumballs, 0 quarters");
+	getline(result, str);
+	CHECK(str == "Machine is waiting for quarter");
+}
+
 TEST_CASE("Insert quarter on has quarter state")
 {
 	ostringstream outStrm;
@@ -331,6 +352,29 @@ TEST_CASE("Turn crank on has quarter state when gumballs ended")
 	CHECK(str == "Machine is sold out");
 }
 
+TEST_CASE("Refill on has quarter state")
+{
+	ostringstream outStrm;
+	CGumballMachine m(2, outStrm);
+
+	m.InsertQuarter();
+	m.Refill(2);
+	outStrm << m.ToString();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "You added 2 gumballs");
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "Inventory: 4 gumballs, 1 quarter");
+	getline(result, str);
+	CHECK(str == "Machine is waiting for turn of crank");
+}
+
 TEST_CASE("Eject quarter on sold out state when quarters remained")
 {
 	ostringstream outStrm;
@@ -358,4 +402,54 @@ TEST_CASE("Eject quarter on sold out state when quarters remained")
 	CHECK(str == "Inventory: 0 gumballs, 0 quarters");
 	getline(result, str);
 	CHECK(str == "Machine is sold out");
+}
+
+TEST_CASE("Refill on sold out state when no quarters")
+{
+	ostringstream outStrm;
+	CGumballMachine m(0, outStrm);
+
+	m.Refill(2);
+	outStrm << m.ToString();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
+	CHECK(str == "You added 2 gumballs");
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "Inventory: 2 gumballs, 0 quarters");
+	getline(result, str);
+	CHECK(str == "Machine is waiting for quarter");
+}
+
+TEST_CASE("Refill on sold out state when there are quarters")
+{
+	ostringstream outStrm;
+	CGumballMachine m(1, outStrm);
+
+	m.InsertQuarter();
+	m.InsertQuarter();
+	m.TurnCrank();
+	m.Refill(2);
+	outStrm << m.ToString();
+
+	istringstream result(outStrm.str());
+	string str;
+
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "You added 2 gumballs");
+	getline(result, str);
+	getline(result, str);
+	getline(result, str);
+	CHECK(str == "Inventory: 2 gumballs, 1 quarter");
+	getline(result, str);
+	CHECK(str == "Machine is waiting for turn of crank");
 }

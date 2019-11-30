@@ -42,6 +42,11 @@ void CSoldState::Dispense()
 	}
 }
 
+void CSoldState::Refill(unsigned numBalls)
+{
+	m_strm << "You can not fill the machine with gumballs during the issuance of gumball";
+}
+
 string CSoldState::ToString() const
 {
 	return "delivering a gumball";

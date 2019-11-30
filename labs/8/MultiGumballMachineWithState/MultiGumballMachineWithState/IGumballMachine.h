@@ -7,6 +7,7 @@ public:
 
 	virtual unsigned GetBallsCount() const = 0;
 	virtual void ReleaseBall() = 0;
+	virtual void AddBalls(unsigned numBalls) = 0;
 
 	virtual unsigned GetQuartersCount() const = 0;
 	virtual void AddQuarter() = 0;

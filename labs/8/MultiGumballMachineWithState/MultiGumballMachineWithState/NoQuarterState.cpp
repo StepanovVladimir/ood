@@ -30,6 +30,11 @@ void CNoQuarterState::Dispense()
 	m_strm << "You need to pay first\n";
 }
 
+void CNoQuarterState::Refill(unsigned numBalls)
+{
+	m_gumballMachine.AddBalls(numBalls);
+}
+
 string CNoQuarterState::ToString() const
 {
 	return "waiting for quarter";

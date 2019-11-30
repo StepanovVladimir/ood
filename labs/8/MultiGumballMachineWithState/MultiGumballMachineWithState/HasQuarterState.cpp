@@ -39,6 +39,11 @@ void CHasQuarterState::Dispense()
 	m_strm << "No gumball dispensed\n";
 }
 
+void CHasQuarterState::Refill(unsigned numBalls)
+{
+	m_gumballMachine.AddBalls(numBalls);
+}
+
 string CHasQuarterState::ToString() const
 {
 	return "waiting for turn of crank";
