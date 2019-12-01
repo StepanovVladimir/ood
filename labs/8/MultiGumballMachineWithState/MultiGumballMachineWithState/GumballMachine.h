@@ -7,7 +7,7 @@
 class CGumballMachine : private IGumballMachine
 {
 public:
-	CGumballMachine(unsigned numBalls, std::ostream& strm = std::cout);
+	CGumballMachine(unsigned numBalls = 0, std::ostream& strm = std::cout);
 
 	void InsertQuarter();
 	void EjectQuarter();
